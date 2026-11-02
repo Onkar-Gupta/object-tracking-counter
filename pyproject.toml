@@ -19,6 +19,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest==9.*", "ruff==0.*"]
+onnx = ["onnxruntime==1.31.*"]
 
 [project.scripts]
 track-counter = "track_counter.cli:main"
