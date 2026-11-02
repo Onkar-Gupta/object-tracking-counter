@@ -20,16 +20,29 @@ class CrossingEvent:
 
 
 class _State:
-    __slots__ = ("flip_frame", "flip_pos", "last_pt", "last_seen", "pending", "side")
+    __slots__ = ("first_frame", "flip_frame", "flip_pos", "last_event", "last_pt", "last_seen",
+                 "pending", "side")
 
     def __init__(self, side, pt, frame):
         self.side, self.last_pt, self.pending = side, pt, 0
         self.flip_frame, self.flip_pos, self.last_seen = frame, 0.0, frame
+        self.first_frame, self.last_event = frame, None
 
 
 class LineCounter:
+    """Counts crossings of one line.
+
+    Optional clean-up rules, all off by default:
+      cooldown_frames: the same track cannot emit another event for this many frames.
+      min_track_frames: a track must be followed this long before it may emit an event.
+      merge_frames, merge_px: drop an event if another event in the same direction was emitted
+        within merge_frames frames and merge_px pixels along the line (duplicates from other IDs).
+    A dropped event still updates the track's side, so it does not flap.
+    """
+
     def __init__(self, line, anchor="bottom_center", min_frames_on_far_side=3,
-                 margin_px=4.0, max_age_frames=60):
+                 margin_px=4.0, max_age_frames=60, cooldown_frames=0, min_track_frames=0,
+                 merge_frames=0, merge_px=0.0):
         if anchor not in ("bottom_center", "center"):
             raise ValueError(f"unknown anchor: {anchor}")
         self.a = np.asarray(line[0], dtype=float)
@@ -40,7 +53,10 @@ class LineCounter:
             raise ValueError("line has zero length")
         self.anchor, self.n, self.margin, self.max_age = (
             anchor, min_frames_on_far_side, margin_px, max_age_frames)
+        self.cooldown, self.min_track = cooldown_frames, min_track_frames
+        self.merge_frames, self.merge_px = merge_frames, merge_px
         self._state = {}
+        self._recent = []  # (direction, confirmed_frame, position) of emitted events
         self.counts = defaultdict(int)  # (class_id, direction) -> count
 
     def _point(self, x1, y1, x2, y2):
@@ -50,6 +66,17 @@ class LineCounter:
     def _dist(self, p):
         v = p - self.a
         return float(self.ab[0] * v[1] - self.ab[1] * v[0]) / self.length
+
+    def _dropped(self, st, frame_idx, direction):
+        if self.cooldown and st.last_event is not None and frame_idx - st.last_event < self.cooldown:
+            return True
+        if frame_idx - st.first_frame < self.min_track:
+            return True
+        if self.merge_frames:
+            self._recent = [r for r in self._recent if frame_idx - r[1] <= self.merge_frames]
+            return any(r[0] == direction and abs(r[2] - st.flip_pos) * self.length <= self.merge_px
+                       for r in self._recent)
+        return False
 
     def update(self, frame_idx, tracks):
         """tracks: rows of [x1, y1, x2, y2, track_id, score, class_id]. Returns new events."""
@@ -83,8 +110,11 @@ class LineCounter:
                 st.pending += 1
                 if st.pending >= self.n:
                     direction = "in" if st.side > 0 else "out"
-                    events.append(CrossingEvent(st.flip_frame, frame_idx, tid, cls,
-                                                direction, st.flip_pos))
-                    self.counts[(cls, direction)] += 1
+                    if not self._dropped(st, frame_idx, direction):
+                        events.append(CrossingEvent(st.flip_frame, frame_idx, tid, cls,
+                                                    direction, st.flip_pos))
+                        self.counts[(cls, direction)] += 1
+                        st.last_event = frame_idx
+                        self._recent.append((direction, frame_idx, st.flip_pos))
                     st.side, st.last_pt, st.pending = side, p, 0
         return events

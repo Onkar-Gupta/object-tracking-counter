@@ -14,6 +14,10 @@ counter:
   min_frames_on_far_side: 3        # the N-frame rule; 1 disables it
   margin_px: 4                     # dead band around the line
   max_age_frames: 60               # forget a track unseen this long
+  cooldown_frames: 0               # a track cannot emit another event for this many frames (0 = off)
+  min_track_frames: 0              # a track must be this old before it can emit an event
+  merge_frames: 0                  # drop an event if another one in the same direction was emitted
+  merge_px: 0                      # within merge_frames frames and this many pixels along the line (0 = off)
 output:
   dir: runs/latest
   save_video: false

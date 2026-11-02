@@ -119,3 +119,53 @@ def test_14_dead_band_does_not_reset_pending():
 
 def test_15_counter_has_no_opencv():
     assert "cv2" not in pathlib.Path(counter.__file__).read_text()
+
+
+# --- optional clean-up rules (all off by default) ---------------------------------------------
+
+def _cross(tid, start, up=True, y_from=150, y_to=50, x=100):
+    """A track that walks from y_from to y_to in steps of 20 starting at frame `start`."""
+    ys = range(y_from, y_to - 1, -20) if up else range(y_from, y_to + 1, 20)
+    return {tid: [(start + i, x, y) for i, y in enumerate(ys)]}
+
+
+def test_defaults_leave_events_unchanged():
+    paths = _cross(1, 0)
+    assert len(run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0), paths)) == 1
+
+
+def test_cooldown_suppresses_an_immediate_second_event_from_the_same_track():
+    # in, then straight back out within 5 frames
+    path = [(0, 100, 150), (1, 100, 130), (2, 100, 70), (3, 100, 50), (4, 100, 70), (5, 100, 130), (6, 100, 150)]
+    free = run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0), {1: path})
+    held = run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, cooldown_frames=30), {1: path})
+    assert [e.direction for e in free] == ["in", "out"]
+    assert [e.direction for e in held] == ["in"]
+
+
+def test_cooldown_still_updates_the_side_so_it_does_not_flap():
+    path = [(0, 100, 150), (1, 100, 70), (2, 100, 130), (3, 100, 70)]
+    lc = LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, cooldown_frames=30)
+    ev = run(lc, {1: path})
+    assert [e.direction for e in ev] == ["in"]      # the later flips are dropped, not queued
+
+
+def test_min_track_frames_blocks_young_tracks():
+    young = _cross(1, 0, y_from=130, y_to=70)          # crosses within 3 frames of birth
+    assert len(run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, min_track_frames=10), young)) == 0
+    old = {1: [(i, 100, 150) for i in range(12)] + [(12 + i, 100, y) for i, y in enumerate((130, 70))]}
+    assert len(run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, min_track_frames=10), old)) == 1
+
+
+def test_merge_drops_a_nearby_duplicate_from_another_id():
+    paths = {**_cross(1, 0, x=100), **_cross(2, 1, x=120)}          # two IDs, same person, 20 px apart
+    merged = run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, merge_frames=15, merge_px=60), paths)
+    assert len(merged) == 1
+    far = {**_cross(1, 0, x=50), **_cross(2, 1, x=350)}              # 300 px apart: two people
+    assert len(run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, merge_frames=15, merge_px=60), far)) == 2
+
+
+def test_merge_ignores_the_opposite_direction():
+    paths = {**_cross(1, 0, up=True, x=100), **_cross(2, 0, up=False, y_from=50, y_to=150, x=120)}
+    ev = run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, merge_frames=15, merge_px=60), paths)
+    assert sorted(e.direction for e in ev) == ["in", "out"]
