@@ -27,3 +27,6 @@ version = { attr = "track_counter.__version__" }
 
 [tool.setuptools.package-data]
 track_counter = ["default_config.yaml"]
+
+[tool.setuptools]
+packages = ["track_counter"]
