@@ -169,3 +169,23 @@ def test_merge_ignores_the_opposite_direction():
     paths = {**_cross(1, 0, up=True, x=100), **_cross(2, 0, up=False, y_from=50, y_to=150, x=120)}
     ev = run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, merge_frames=15, merge_px=60), paths)
     assert sorted(e.direction for e in ev) == ["in", "out"]
+
+
+def test_smoothing_calms_a_wobbling_track_and_is_off_by_default():
+    # A person hovering at the line whose foot point jitters across it every frame.
+    wobble = [(i, 100, 100 + (12 if i % 2 else -12)) for i in range(20)]
+    raw = run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=4), {1: wobble})
+    calm = run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=4, smooth_alpha=0.3), {1: wobble})
+    assert len(raw) >= 10 and len(calm) == 0   # smoothed wobble stays inside the 4 px dead band
+
+
+def test_smoothing_still_counts_a_real_crossing():
+    ev = run(LineCounter(LINE, min_frames_on_far_side=1, margin_px=0, smooth_alpha=0.5), _cross(1, 0, y_from=200, y_to=0))
+    assert [e.direction for e in ev] == ["in"]
+
+
+def test_smooth_alpha_is_validated():
+    import pytest
+    for bad in (0, 1.5, -1):
+        with pytest.raises(ValueError):
+            LineCounter(LINE, smooth_alpha=bad)

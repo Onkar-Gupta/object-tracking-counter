@@ -81,3 +81,14 @@ def test_cli_run_writes_outputs(tmp_path, capsys):
           "--out", str(out)])
     assert "in 1, out 1" in capsys.readouterr().out
     assert (out / "events.csv").exists() and (out / "summary.json").exists()
+
+
+import pytest
+
+
+@pytest.mark.parametrize("name", ["bytetrack", "ocsort", "botsort"])
+def test_every_tracker_gives_the_same_events_on_the_synthetic_video(name):
+    frames = ((i, image(i)) for i in range(N))
+    events, _ = run_pipeline(frames, detect, LINES, fps=10.0, counter_params=COUNTER,
+                             tracker_params={"name": name})
+    assert sorted(e.direction for e in events["mid"]) == ["in", "out"]

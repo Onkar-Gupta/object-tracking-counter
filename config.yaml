@@ -18,6 +18,7 @@ counter:
   min_track_frames: 0              # a track must be this old before it can emit an event
   merge_frames: 0                  # drop an event if another one in the same direction was emitted
   merge_px: 0                      # within merge_frames frames and this many pixels along the line (0 = off)
+  smooth_alpha: 1.0                # smooth each track's anchor point: new weight in (0, 1], 1 = off
 output:
   dir: runs/latest
   save_video: false

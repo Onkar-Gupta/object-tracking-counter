@@ -42,7 +42,7 @@ class LineCounter:
 
     def __init__(self, line, anchor="bottom_center", min_frames_on_far_side=3,
                  margin_px=4.0, max_age_frames=60, cooldown_frames=0, min_track_frames=0,
-                 merge_frames=0, merge_px=0.0):
+                 merge_frames=0, merge_px=0.0, smooth_alpha=1.0):
         if anchor not in ("bottom_center", "center"):
             raise ValueError(f"unknown anchor: {anchor}")
         self.a = np.asarray(line[0], dtype=float)
@@ -55,6 +55,10 @@ class LineCounter:
             anchor, min_frames_on_far_side, margin_px, max_age_frames)
         self.cooldown, self.min_track = cooldown_frames, min_track_frames
         self.merge_frames, self.merge_px = merge_frames, merge_px
+        if not 0 < smooth_alpha <= 1:
+            raise ValueError("smooth_alpha must be in (0, 1]")
+        self.alpha = smooth_alpha
+        self._smooth = {}  # track id -> (smoothed anchor, last frame seen)
         self._state = {}
         self._recent = []  # (direction, confirmed_frame, position) of emitted events
         self.counts = defaultdict(int)  # (class_id, direction) -> count
@@ -82,11 +86,18 @@ class LineCounter:
         """tracks: rows of [x1, y1, x2, y2, track_id, score, class_id]. Returns new events."""
         for tid in [t for t, s in self._state.items() if frame_idx - s.last_seen > self.max_age]:
             del self._state[tid]
+        for tid in [t for t, (_, seen) in self._smooth.items() if frame_idx - seen > self.max_age]:
+            del self._smooth[tid]
         events = []
         for row in tracks:
             x1, y1, x2, y2, tid, _, cls = row[:7]
             tid, cls = int(tid), int(cls)
             p = self._point(x1, y1, x2, y2)
+            if self.alpha < 1.0:  # exponential moving average of the anchor, per track
+                prev = self._smooth.get(tid)
+                if prev is not None:
+                    p = self.alpha * p + (1 - self.alpha) * prev[0]
+                self._smooth[tid] = (p, frame_idx)
             d = self._dist(p)
             st = self._state.get(tid)
             if st:
