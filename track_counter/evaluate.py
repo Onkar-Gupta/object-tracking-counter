@@ -214,6 +214,27 @@ def _person_under_track(by_frame, tracks_by_frame, event, min_iou=0.5):
     return False
 
 
+def paired_recall_difference(report_new, report_base, n_boot=2000, seed=0):
+    """Event recall of new minus base on the same ground truth, with a person-level paired
+    bootstrap interval. Both reports must come from the same ground-truth events."""
+    clusters = defaultdict(lambda: [0, 0])
+    for seq, v in report_new["sequences"].items():
+        for name, line in v["lines"].items():
+            base_line = report_base["sequences"][seq]["lines"][name]
+            new_rows, base_rows = line["gt_event_list"], base_line["gt_event_list"]
+            if [(r["frame"], r["track_id"]) for r in new_rows] != [
+                    (r["frame"], r["track_id"]) for r in base_rows]:
+                raise ValueError("reports use different ground-truth events")
+            for a, b in zip(new_rows, base_rows, strict=True):
+                c = clusters[f"{seq}:{a['track_id']}"]
+                c[0] += int(a["matched"]) - int(b["matched"])
+                c[1] += 1
+    hits = sum(c[0] for c in clusters.values())
+    total = sum(c[1] for c in clusters.values())
+    return {"difference": hits / total if total else None,
+            "ci": cluster_bootstrap_ci(clusters, n_boot, seed), "events": total}
+
+
 def _margin_row(seq_data, margin, anchor, tolerance_s, position_tolerance):
     """Pooled counting metrics when ground truth is rebuilt with dead band `margin`."""
     results, vis = [], []
@@ -237,11 +258,15 @@ def _event_row(e):
 
 
 def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, tracker_params,
-                       tolerance_s, position_tolerance, gt_margin_px=0.5):
+                       tolerance_s, position_tolerance, gt_margin_px=0.5, dets_dir=None,
+                       context_metrics=True):
     """Run detect, track, count on each sequence in lines_cfg and score it against ground truth.
 
     Counting metrics are the headline. HOTA, IDF1 and MOTA come from trackers.eval (it follows
     TrackEval's matching) and are context only. Returns a JSON-ready dict.
+
+    dets_dir: where <sequence>/det/det.txt lives (default: mot_dir, the public detections).
+    context_metrics=False skips HOTA, IDF1 and MOTA, which is faster for threshold searches.
     """
     from trackers.eval import evaluate_mot_sequence
 
@@ -263,10 +288,11 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
         lines = {entry["name"]: entry["line"] for entry in line_list}
         sink = {}
         events, _ = run_pipeline(((i, None) for i in range(1, n + 1)),
-                                 MotFileDetector(d / "det" / "det.txt", min_conf), lines, fps,
+                                 MotFileDetector(Path(dets_dir or mot_dir) / seq / "det" / "det.txt", min_conf), lines, fps,
                                  tracker_params, counter_params, track_sink=sink)
         tracker_file = work / f"{seq}.txt"
-        write_mot(tracker_file, sink)
+        if context_metrics:
+            write_mot(tracker_file, sink)
         gt = load_mot_gt(d / "gt" / "gt.txt")
         seq_data.append((gt, lines, events, fps))
         per_line = {}
@@ -295,11 +321,13 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
             per_line[name] = {"line": line, **res, "gt_event_list": gt_rows,
                               "pred_event_list": pred_rows}
             all_lines.append(res)
-        ctx = evaluate_mot_sequence(d / "gt" / "gt.txt", tracker_file,
-                                    metrics=["CLEAR", "HOTA", "Identity"])
-        report[seq] = {"fps": fps, "frames": n, "lines": per_line,
-                       "context_metrics": {"HOTA": ctx.HOTA.HOTA, "IDF1": ctx.Identity.IDF1,
-                                           "MOTA": ctx.CLEAR.MOTA, "IDSW": ctx.CLEAR.IDSW}}
+        ctx_out = None
+        if context_metrics:
+            ctx = evaluate_mot_sequence(d / "gt" / "gt.txt", tracker_file,
+                                        metrics=["CLEAR", "HOTA", "Identity"])
+            ctx_out = {"HOTA": ctx.HOTA.HOTA, "IDF1": ctx.Identity.IDF1,
+                       "MOTA": ctx.CLEAR.MOTA, "IDSW": ctx.CLEAR.IDSW}
+        report[seq] = {"fps": fps, "frames": n, "lines": per_line, "context_metrics": ctx_out}
     return {
         "settings": {"min_conf": min_conf, "counter": counter_params,
                      "tracker": resolved_params(**tracker_params),

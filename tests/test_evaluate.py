@@ -10,6 +10,7 @@ from track_counter.evaluate import (
     gt_events,
     load_mot_gt,
     match_events,
+    paired_recall_difference,
     pool,
     recall_by_visibility,
     write_mot,
@@ -205,3 +206,24 @@ def test_false_positive_causes():
     assert f(ev(120, "in", 0.5)) == "timing off"            # 2 s from a same-direction event
     assert f(ev(600), person=False) == "no ground-truth person under the track"
     assert f(ev(600), person=True) == "person without a ground-truth crossing here"
+
+
+def _report(matched):
+    rows = [{"frame": i * 10, "track_id": i % 5, "matched": m} for i, m in enumerate(matched)]
+    return {"sequences": {"S": {"lines": {"L": {"gt_event_list": rows}}}}}
+
+
+def test_paired_recall_difference():
+    base = _report([True, False, False, False] * 10)
+    better = _report([True, True, True, False] * 10)
+    d = paired_recall_difference(better, base)
+    assert abs(d["difference"] - 0.5) < 1e-9 and d["ci"][0] > 0
+    same = paired_recall_difference(base, base)
+    assert same["difference"] == 0 and same["ci"] == [0.0, 0.0]
+
+
+def test_paired_recall_difference_rejects_different_ground_truth():
+    import pytest
+    a, b = _report([True] * 4), _report([True] * 5)
+    with pytest.raises(ValueError):
+        paired_recall_difference(a, b)
