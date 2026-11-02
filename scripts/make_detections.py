@@ -29,13 +29,15 @@ def main():
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--score-floor", type=float, default=0.05)
     ap.add_argument("--tiled", action="store_true", help="640 px tiles at native resolution plus a whole-frame pass")
+    ap.add_argument("--device", choices=["cpu", "gpu"], default="cpu", help="gpu needs onnxruntime-directml")
     ap.add_argument("--overlap", type=int, default=128)
     ap.add_argument("--sequences", nargs="*", default=SEQUENCES)
     args = ap.parse_args()
     if args.tiled:
-        det = TiledOnnxYoloxDetector(args.model, overlap=args.overlap, score_floor=args.score_floor)
+        det = TiledOnnxYoloxDetector(args.model, overlap=args.overlap, score_floor=args.score_floor,
+                                  device=args.device)
     else:
-        det = OnnxYoloxDetector(args.model, score_floor=args.score_floor)
+        det = OnnxYoloxDetector(args.model, score_floor=args.score_floor, device=args.device)
     timing = {}
     for seq in args.sequences:
         seq_dir = Path(args.mot_dir) / seq

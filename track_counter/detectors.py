@@ -81,10 +81,13 @@ def nms(boxes, scores, iou_threshold=0.45):
 class OnnxYoloxDetector:
     """Callable detector: (frame_idx, BGR image) -> Nx5 [x1, y1, x2, y2, score], person class only."""
 
-    def __init__(self, model_path, score_floor=0.1, nms_iou=0.45, size=640):
+    def __init__(self, model_path, score_floor=0.1, nms_iou=0.45, size=640, device="cpu"):
         import onnxruntime as ort
 
-        self.session = ort.InferenceSession(str(model_path), providers=["CPUExecutionProvider"])
+        # "gpu" needs the onnxruntime-directml build; it falls back to CPU if that is missing.
+        providers = (["DmlExecutionProvider", "CPUExecutionProvider"] if device == "gpu"
+                     else ["CPUExecutionProvider"])
+        self.session = ort.InferenceSession(str(model_path), providers=providers)
         self.input_name = self.session.get_inputs()[0].name
         self.score_floor, self.nms_iou, self.size = score_floor, nms_iou, size
 
