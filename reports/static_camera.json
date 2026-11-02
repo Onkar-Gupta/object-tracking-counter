@@ -1,0 +1,40 @@
+{
+  "max_shift_pct_threshold": 0.5,
+  "sequences": {
+    "MOT17-02-FRCNN": {
+      "frames_sampled": 24,
+      "max_background_shift_pct": 0.237,
+      "static": true
+    },
+    "MOT17-04-FRCNN": {
+      "frames_sampled": 42,
+      "max_background_shift_pct": 0.117,
+      "static": true
+    },
+    "MOT17-05-FRCNN": {
+      "frames_sampled": 34,
+      "max_background_shift_pct": 149.371,
+      "static": false
+    },
+    "MOT17-09-FRCNN": {
+      "frames_sampled": 21,
+      "max_background_shift_pct": 0.079,
+      "static": true
+    },
+    "MOT17-10-FRCNN": {
+      "frames_sampled": 27,
+      "max_background_shift_pct": 136.276,
+      "static": false
+    },
+    "MOT17-11-FRCNN": {
+      "frames_sampled": 36,
+      "max_background_shift_pct": 115.815,
+      "static": false
+    },
+    "MOT17-13-FRCNN": {
+      "frames_sampled": 30,
+      "max_background_shift_pct": 165.767,
+      "static": false
+    }
+  }
+}
