@@ -18,7 +18,8 @@
     "position_tolerance": 0.1,
     "gt_margin_px": 0.5,
     "context_metric_tool": "trackers.eval (TrackEval-compatible), context only",
-    "detections": "MOT17 public FRCNN detections"
+    "detections": "MOT17 public FRCNN detections",
+    "note": "Visibility is the MOT17 annotation of the crossing person. Matching uses all ground-truth events, so precision is unaffected."
   },
   "pooled_over_all_lines": {
     "gt_events": 146,
@@ -33,6 +34,28 @@
     "double_count_rate": 0.012345679012345678,
     "count_error_total": -65,
     "count_error_pct_total": 44.52054794520548
+  },
+  "recall_by_gt_visibility": {
+    "0.0-0.3": {
+      "events": 50,
+      "found": 3,
+      "recall": 0.06
+    },
+    "0.3-0.5": {
+      "events": 17,
+      "found": 2,
+      "recall": 0.11764705882352941
+    },
+    "0.5-0.7": {
+      "events": 8,
+      "found": 4,
+      "recall": 0.5
+    },
+    "0.7-1.0": {
+      "events": 71,
+      "found": 61,
+      "recall": 0.8591549295774648
+    }
   },
   "sequences": {
     "MOT17-02-FRCNN": {
@@ -71,121 +94,161 @@
               "frame": 41,
               "track_id": 72,
               "direction": "out",
-              "position": 0.3764
+              "position": 0.3764,
+              "visibility": 0.227,
+              "matched": false
             },
             {
               "frame": 129,
               "track_id": 72,
               "direction": "in",
-              "position": 0.4202
+              "position": 0.4202,
+              "visibility": 0.009,
+              "matched": false
             },
             {
               "frame": 137,
               "track_id": 31,
               "direction": "in",
-              "position": 0.2443
+              "position": 0.2443,
+              "visibility": 0.514,
+              "matched": false
             },
             {
               "frame": 139,
               "track_id": 39,
               "direction": "out",
-              "position": 0.5878
+              "position": 0.5878,
+              "visibility": 0.462,
+              "matched": false
             },
             {
               "frame": 151,
               "track_id": 31,
               "direction": "out",
-              "position": 0.2527
+              "position": 0.2527,
+              "visibility": 0.196,
+              "matched": true
             },
             {
               "frame": 190,
               "track_id": 67,
               "direction": "out",
-              "position": 0.5052
+              "position": 0.5052,
+              "visibility": 0.003,
+              "matched": false
             },
             {
               "frame": 229,
               "track_id": 15,
               "direction": "in",
-              "position": 0.5229
+              "position": 0.5229,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 253,
               "track_id": 67,
               "direction": "in",
-              "position": 0.5234
+              "position": 0.5234,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 422,
               "track_id": 54,
               "direction": "in",
-              "position": 0.2605
+              "position": 0.2605,
+              "visibility": 0.136,
+              "matched": false
             },
             {
               "frame": 441,
               "track_id": 40,
               "direction": "in",
-              "position": 0.643
+              "position": 0.643,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 471,
               "track_id": 41,
               "direction": "out",
-              "position": 0.551
+              "position": 0.551,
+              "visibility": 0.164,
+              "matched": false
             },
             {
               "frame": 492,
               "track_id": 42,
               "direction": "out",
-              "position": 0.5589
+              "position": 0.5589,
+              "visibility": 0.24,
+              "matched": false
             },
             {
               "frame": 493,
               "track_id": 43,
               "direction": "out",
-              "position": 0.3353
+              "position": 0.3353,
+              "visibility": 0.669,
+              "matched": true
             },
             {
               "frame": 521,
               "track_id": 44,
               "direction": "out",
-              "position": 0.3837
+              "position": 0.3837,
+              "visibility": 0.741,
+              "matched": false
             },
             {
               "frame": 541,
               "track_id": 79,
               "direction": "in",
-              "position": 0.5551
+              "position": 0.5551,
+              "visibility": 0.039,
+              "matched": false
             },
             {
               "frame": 556,
               "track_id": 79,
               "direction": "out",
-              "position": 0.5539
+              "position": 0.5539,
+              "visibility": 0.198,
+              "matched": true
             },
             {
               "frame": 567,
               "track_id": 15,
               "direction": "out",
-              "position": 0.5203
+              "position": 0.5203,
+              "visibility": 0.001,
+              "matched": false
             },
             {
               "frame": 575,
               "track_id": 49,
               "direction": "out",
-              "position": 0.2944
+              "position": 0.2944,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 577,
               "track_id": 79,
               "direction": "in",
-              "position": 0.5525
+              "position": 0.5525,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 580,
               "track_id": 48,
               "direction": "out",
-              "position": 0.3135
+              "position": 0.3135,
+              "visibility": 1.0,
+              "matched": true
             }
           ],
           "pred_event_list": [
@@ -271,127 +334,169 @@
               "frame": 124,
               "track_id": 18,
               "direction": "in",
-              "position": 0.5102
+              "position": 0.5102,
+              "visibility": 0.406,
+              "matched": false
             },
             {
               "frame": 142,
               "track_id": 71,
               "direction": "out",
-              "position": 0.4796
+              "position": 0.4796,
+              "visibility": 0.05,
+              "matched": false
             },
             {
               "frame": 164,
               "track_id": 37,
               "direction": "in",
-              "position": 0.6407
+              "position": 0.6407,
+              "visibility": 0.567,
+              "matched": true
             },
             {
               "frame": 176,
               "track_id": 67,
               "direction": "in",
-              "position": 0.4981
+              "position": 0.4981,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 183,
               "track_id": 20,
               "direction": "in",
-              "position": 0.6938
+              "position": 0.6938,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 183,
               "track_id": 40,
               "direction": "in",
-              "position": 0.5301
+              "position": 0.5301,
+              "visibility": 0.015,
+              "matched": false
             },
             {
               "frame": 183,
               "track_id": 70,
               "direction": "out",
-              "position": 0.488
+              "position": 0.488,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 223,
               "track_id": 3,
               "direction": "in",
-              "position": 0.7733
+              "position": 0.7733,
+              "visibility": 0.596,
+              "matched": false
             },
             {
               "frame": 246,
               "track_id": 19,
               "direction": "in",
-              "position": 0.9383
+              "position": 0.9383,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 301,
               "track_id": 23,
               "direction": "in",
-              "position": 0.8664
+              "position": 0.8664,
+              "visibility": 0.853,
+              "matched": true
             },
             {
               "frame": 352,
               "track_id": 36,
               "direction": "in",
-              "position": 0.6105
+              "position": 0.6105,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 365,
               "track_id": 15,
               "direction": "out",
-              "position": 0.4852
+              "position": 0.4852,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 378,
               "track_id": 41,
               "direction": "in",
-              "position": 0.4852
+              "position": 0.4852,
+              "visibility": 0.046,
+              "matched": false
             },
             {
               "frame": 392,
               "track_id": 38,
               "direction": "out",
-              "position": 0.5759
+              "position": 0.5759,
+              "visibility": 0.785,
+              "matched": true
             },
             {
               "frame": 407,
               "track_id": 42,
               "direction": "in",
-              "position": 0.488
+              "position": 0.488,
+              "visibility": 0.321,
+              "matched": false
             },
             {
               "frame": 488,
               "track_id": 33,
               "direction": "in",
-              "position": 0.6296
+              "position": 0.6296,
+              "visibility": 0.821,
+              "matched": true
             },
             {
               "frame": 508,
               "track_id": 34,
               "direction": "in",
-              "position": 0.6741
+              "position": 0.6741,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 509,
               "track_id": 15,
               "direction": "in",
-              "position": 0.4843
+              "position": 0.4843,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 532,
               "track_id": 32,
               "direction": "in",
-              "position": 0.6546
+              "position": 0.6546,
+              "visibility": 0.94,
+              "matched": true
             },
             {
               "frame": 550,
               "track_id": 18,
               "direction": "out",
-              "position": 0.5037
+              "position": 0.5037,
+              "visibility": 0.008,
+              "matched": false
             },
             {
               "frame": 564,
               "track_id": 35,
               "direction": "in",
-              "position": 0.6302
+              "position": 0.6302,
+              "visibility": 0.955,
+              "matched": true
             }
           ],
           "pred_event_list": [
@@ -501,199 +606,265 @@
               "frame": 74,
               "track_id": 89,
               "direction": "out",
-              "position": 0.2599
+              "position": 0.2599,
+              "visibility": 0.659,
+              "matched": true
             },
             {
               "frame": 235,
               "track_id": 75,
               "direction": "in",
-              "position": 0.4281
+              "position": 0.4281,
+              "visibility": 0.343,
+              "matched": false
             },
             {
               "frame": 244,
               "track_id": 74,
               "direction": "in",
-              "position": 0.4944
+              "position": 0.4944,
+              "visibility": 0.222,
+              "matched": true
             },
             {
               "frame": 251,
               "track_id": 75,
               "direction": "out",
-              "position": 0.4133
+              "position": 0.4133,
+              "visibility": 0.69,
+              "matched": false
             },
             {
               "frame": 256,
               "track_id": 63,
               "direction": "in",
-              "position": 0.6093
+              "position": 0.6093,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 257,
               "track_id": 75,
               "direction": "in",
-              "position": 0.4105
+              "position": 0.4105,
+              "visibility": 0.76,
+              "matched": false
             },
             {
               "frame": 268,
               "track_id": 75,
               "direction": "out",
-              "position": 0.4052
+              "position": 0.4052,
+              "visibility": 0.819,
+              "matched": false
             },
             {
               "frame": 270,
               "track_id": 67,
               "direction": "in",
-              "position": 0.507
+              "position": 0.507,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 300,
               "track_id": 65,
               "direction": "in",
-              "position": 0.5411
+              "position": 0.5411,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 304,
               "track_id": 75,
               "direction": "in",
-              "position": 0.3964
+              "position": 0.3964,
+              "visibility": 0.774,
+              "matched": true
             },
             {
               "frame": 314,
               "track_id": 66,
               "direction": "in",
-              "position": 0.2775
+              "position": 0.2775,
+              "visibility": 0.734,
+              "matched": false
             },
             {
               "frame": 380,
               "track_id": 2,
               "direction": "in",
-              "position": 0.25
+              "position": 0.25,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 388,
               "track_id": 118,
               "direction": "out",
-              "position": 0.9405
+              "position": 0.9405,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 417,
               "track_id": 98,
               "direction": "out",
-              "position": 0.2349
+              "position": 0.2349,
+              "visibility": 0.933,
+              "matched": true
             },
             {
               "frame": 442,
               "track_id": 121,
               "direction": "out",
-              "position": 0.9006
+              "position": 0.9006,
+              "visibility": 0.823,
+              "matched": true
             },
             {
               "frame": 518,
               "track_id": 86,
               "direction": "out",
-              "position": 0.2831
+              "position": 0.2831,
+              "visibility": 0.829,
+              "matched": true
             },
             {
               "frame": 561,
               "track_id": 99,
               "direction": "in",
-              "position": 0.2582
+              "position": 0.2582,
+              "visibility": 0.799,
+              "matched": true
             },
             {
               "frame": 592,
               "track_id": 80,
               "direction": "in",
-              "position": 0.2581
+              "position": 0.2581,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 642,
               "track_id": 124,
               "direction": "out",
-              "position": 0.2539
+              "position": 0.2539,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 648,
               "track_id": 125,
               "direction": "out",
-              "position": 0.2339
+              "position": 0.2339,
+              "visibility": 0.841,
+              "matched": true
             },
             {
               "frame": 742,
               "track_id": 106,
               "direction": "in",
-              "position": 0.7762
+              "position": 0.7762,
+              "visibility": 0.994,
+              "matched": true
             },
             {
               "frame": 749,
               "track_id": 105,
               "direction": "in",
-              "position": 0.8466
+              "position": 0.8466,
+              "visibility": 0.84,
+              "matched": true
             },
             {
               "frame": 761,
               "track_id": 91,
               "direction": "out",
-              "position": 0.1949
+              "position": 0.1949,
+              "visibility": 0.173,
+              "matched": false
             },
             {
               "frame": 775,
               "track_id": 91,
               "direction": "in",
-              "position": 0.194
+              "position": 0.194,
+              "visibility": 0.193,
+              "matched": false
             },
             {
               "frame": 803,
               "track_id": 132,
               "direction": "out",
-              "position": 0.2654
+              "position": 0.2654,
+              "visibility": 0.931,
+              "matched": true
             },
             {
               "frame": 805,
               "track_id": 133,
               "direction": "out",
-              "position": 0.2344
+              "position": 0.2344,
+              "visibility": 0.771,
+              "matched": true
             },
             {
               "frame": 829,
               "track_id": 134,
               "direction": "out",
-              "position": 0.263
+              "position": 0.263,
+              "visibility": 0.123,
+              "matched": false
             },
             {
               "frame": 871,
               "track_id": 96,
               "direction": "in",
-              "position": 0.1187
+              "position": 0.1187,
+              "visibility": 0.207,
+              "matched": false
             },
             {
               "frame": 922,
               "track_id": 107,
               "direction": "out",
-              "position": 0.9133
+              "position": 0.9133,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 926,
               "track_id": 111,
               "direction": "out",
-              "position": 0.784
+              "position": 0.784,
+              "visibility": 0.824,
+              "matched": true
             },
             {
               "frame": 956,
               "track_id": 108,
               "direction": "out",
-              "position": 0.8686
+              "position": 0.8686,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 972,
               "track_id": 112,
               "direction": "out",
-              "position": 0.6193
+              "position": 0.6193,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 1033,
               "track_id": 117,
               "direction": "out",
-              "position": 0.2682
+              "position": 0.2682,
+              "visibility": 0.32,
+              "matched": true
             }
           ],
           "pred_event_list": [
@@ -899,193 +1070,257 @@
               "frame": 28,
               "track_id": 84,
               "direction": "out",
-              "position": 0.2106
+              "position": 0.2106,
+              "visibility": 0.697,
+              "matched": true
             },
             {
               "frame": 62,
               "track_id": 89,
               "direction": "in",
-              "position": 0.2417
+              "position": 0.2417,
+              "visibility": 0.816,
+              "matched": true
             },
             {
               "frame": 147,
               "track_id": 84,
               "direction": "in",
-              "position": 0.1179
+              "position": 0.1179,
+              "visibility": 0.373,
+              "matched": false
             },
             {
               "frame": 153,
               "track_id": 87,
               "direction": "out",
-              "position": 0.1845
+              "position": 0.1845,
+              "visibility": 0.997,
+              "matched": true
             },
             {
               "frame": 159,
               "track_id": 84,
               "direction": "out",
-              "position": 0.1097
+              "position": 0.1097,
+              "visibility": 0.339,
+              "matched": false
             },
             {
               "frame": 175,
               "track_id": 84,
               "direction": "in",
-              "position": 0.1005
+              "position": 0.1005,
+              "visibility": 0.501,
+              "matched": false
             },
             {
               "frame": 242,
               "track_id": 2,
               "direction": "in",
-              "position": 0.3625
+              "position": 0.3625,
+              "visibility": 0.957,
+              "matched": true
             },
             {
               "frame": 288,
               "track_id": 85,
               "direction": "in",
-              "position": 0.0301
+              "position": 0.0301,
+              "visibility": 0.226,
+              "matched": false
             },
             {
               "frame": 311,
               "track_id": 83,
               "direction": "out",
-              "position": 0.6185
+              "position": 0.6185,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 343,
               "track_id": 3,
               "direction": "in",
-              "position": 0.7625
+              "position": 0.7625,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 350,
               "track_id": 2,
               "direction": "out",
-              "position": 0.2718
+              "position": 0.2718,
+              "visibility": 1.0,
+              "matched": false
             },
             {
               "frame": 373,
               "track_id": 99,
               "direction": "in",
-              "position": 0.481
+              "position": 0.481,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 381,
               "track_id": 2,
               "direction": "in",
-              "position": 0.2509
+              "position": 0.2509,
+              "visibility": 1.0,
+              "matched": false
             },
             {
               "frame": 386,
               "track_id": 82,
               "direction": "out",
-              "position": 0.7373
+              "position": 0.7373,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 541,
               "track_id": 132,
               "direction": "out",
-              "position": 0.0463
+              "position": 0.0463,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 579,
               "track_id": 80,
               "direction": "in",
-              "position": 0.256
+              "position": 0.256,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 586,
               "track_id": 134,
               "direction": "out",
-              "position": 0.069
+              "position": 0.069,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 633,
               "track_id": 124,
               "direction": "in",
-              "position": 0.244
+              "position": 0.244,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 662,
               "track_id": 3,
               "direction": "out",
-              "position": 0.7185
+              "position": 0.7185,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 677,
               "track_id": 2,
               "direction": "out",
-              "position": 0.0662
+              "position": 0.0662,
+              "visibility": 0.012,
+              "matched": false
             },
             {
               "frame": 739,
               "track_id": 3,
               "direction": "in",
-              "position": 0.7458
+              "position": 0.7458,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 745,
               "track_id": 99,
               "direction": "out",
-              "position": 0.0574
+              "position": 0.0574,
+              "visibility": 0.09,
+              "matched": false
             },
             {
               "frame": 757,
               "track_id": 134,
               "direction": "in",
-              "position": 0.1875
+              "position": 0.1875,
+              "visibility": 0.104,
+              "matched": false
             },
             {
               "frame": 758,
               "track_id": 132,
               "direction": "in",
-              "position": 0.215
+              "position": 0.215,
+              "visibility": 0.743,
+              "matched": true
             },
             {
               "frame": 772,
               "track_id": 124,
               "direction": "out",
-              "position": 0.3625
+              "position": 0.3625,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 777,
               "track_id": 80,
               "direction": "out",
-              "position": 0.0972
+              "position": 0.0972,
+              "visibility": 0.486,
+              "matched": false
             },
             {
               "frame": 838,
               "track_id": 80,
               "direction": "in",
-              "position": 0.0602
+              "position": 0.0602,
+              "visibility": 0.464,
+              "matched": false
             },
             {
               "frame": 936,
               "track_id": 132,
               "direction": "out",
-              "position": 0.3787
+              "position": 0.3787,
+              "visibility": 0.963,
+              "matched": true
             },
             {
               "frame": 1001,
               "track_id": 127,
               "direction": "in",
-              "position": 0.169
+              "position": 0.169,
+              "visibility": 0.371,
+              "matched": false
             },
             {
               "frame": 1017,
               "track_id": 69,
               "direction": "in",
-              "position": 0.3324
+              "position": 0.3324,
+              "visibility": 0.826,
+              "matched": true
             },
             {
               "frame": 1042,
               "track_id": 68,
               "direction": "in",
-              "position": 0.3148
+              "position": 0.3148,
+              "visibility": 0.78,
+              "matched": true
             },
             {
               "frame": 1045,
               "track_id": 129,
               "direction": "in",
-              "position": 0.1639
+              "position": 0.1639,
+              "visibility": 0.255,
+              "matched": false
             }
           ],
           "pred_event_list": [
@@ -1237,121 +1472,161 @@
               "frame": 205,
               "track_id": 23,
               "direction": "in",
-              "position": 0.8835
+              "position": 0.8835,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 229,
               "track_id": 18,
               "direction": "in",
-              "position": 0.8848
+              "position": 0.8848,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 366,
               "track_id": 8,
               "direction": "in",
-              "position": 0.9673
+              "position": 0.9673,
+              "visibility": 0.268,
+              "matched": false
             },
             {
               "frame": 374,
               "track_id": 8,
               "direction": "out",
-              "position": 0.9721
+              "position": 0.9721,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 376,
               "track_id": 8,
               "direction": "in",
-              "position": 0.9747
+              "position": 0.9747,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 380,
               "track_id": 10,
               "direction": "in",
-              "position": 0.9405
+              "position": 0.9405,
+              "visibility": 0.347,
+              "matched": false
             },
             {
               "frame": 395,
               "track_id": 7,
               "direction": "in",
-              "position": 0.9347
+              "position": 0.9347,
+              "visibility": 0.335,
+              "matched": false
             },
             {
               "frame": 397,
               "track_id": 7,
               "direction": "out",
-              "position": 0.9344
+              "position": 0.9344,
+              "visibility": 0.333,
+              "matched": false
             },
             {
               "frame": 406,
               "track_id": 1,
               "direction": "in",
-              "position": 0.9181
+              "position": 0.9181,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 422,
               "track_id": 3,
               "direction": "in",
-              "position": 0.6565
+              "position": 0.6565,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 433,
               "track_id": 29,
               "direction": "in",
-              "position": 0.9815
+              "position": 0.9815,
+              "visibility": 0.205,
+              "matched": false
             },
             {
               "frame": 450,
               "track_id": 13,
               "direction": "in",
-              "position": 0.9456
+              "position": 0.9456,
+              "visibility": 0.234,
+              "matched": false
             },
             {
               "frame": 453,
               "track_id": 11,
               "direction": "in",
-              "position": 0.9197
+              "position": 0.9197,
+              "visibility": 0.333,
+              "matched": true
             },
             {
               "frame": 468,
               "track_id": 9,
               "direction": "out",
-              "position": 0.6004
+              "position": 0.6004,
+              "visibility": 0.499,
+              "matched": false
             },
             {
               "frame": 476,
               "track_id": 9,
               "direction": "in",
-              "position": 0.6195
+              "position": 0.6195,
+              "visibility": 0.839,
+              "matched": false
             },
             {
               "frame": 490,
               "track_id": 9,
               "direction": "out",
-              "position": 0.6594
+              "position": 0.6594,
+              "visibility": 1.0,
+              "matched": false
             },
             {
               "frame": 494,
               "track_id": 9,
               "direction": "in",
-              "position": 0.6723
+              "position": 0.6723,
+              "visibility": 1.0,
+              "matched": false
             },
             {
               "frame": 503,
               "track_id": 9,
               "direction": "out",
-              "position": 0.6974
+              "position": 0.6974,
+              "visibility": 0.871,
+              "matched": false
             },
             {
               "frame": 509,
               "track_id": 9,
               "direction": "in",
-              "position": 0.7135
+              "position": 0.7135,
+              "visibility": 0.357,
+              "matched": false
             },
             {
               "frame": 512,
               "track_id": 9,
               "direction": "out",
-              "position": 0.7237
+              "position": 0.7237,
+              "visibility": 0.125,
+              "matched": false
             }
           ],
           "pred_event_list": [
@@ -1431,121 +1706,161 @@
               "frame": 107,
               "track_id": 19,
               "direction": "out",
-              "position": 0.8363
+              "position": 0.8363,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 140,
               "track_id": 23,
               "direction": "in",
-              "position": 0.6522
+              "position": 0.6522,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 143,
               "track_id": 20,
               "direction": "out",
-              "position": 0.943
+              "position": 0.943,
+              "visibility": 0.979,
+              "matched": true
             },
             {
               "frame": 180,
               "track_id": 18,
               "direction": "in",
-              "position": 0.6074
+              "position": 0.6074,
+              "visibility": 0.175,
+              "matched": false
             },
             {
               "frame": 182,
               "track_id": 22,
               "direction": "in",
-              "position": 0.6315
+              "position": 0.6315,
+              "visibility": 0.883,
+              "matched": true
             },
             {
               "frame": 206,
               "track_id": 21,
               "direction": "in",
-              "position": 0.6435
+              "position": 0.6435,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 262,
               "track_id": 8,
               "direction": "in",
-              "position": 0.6776
+              "position": 0.6776,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 280,
               "track_id": 10,
               "direction": "in",
-              "position": 0.6413
+              "position": 0.6413,
+              "visibility": 0.071,
+              "matched": false
             },
             {
               "frame": 297,
               "track_id": 29,
               "direction": "in",
-              "position": 0.6938
+              "position": 0.6938,
+              "visibility": 0.118,
+              "matched": false
             },
             {
               "frame": 300,
               "track_id": 12,
               "direction": "in",
-              "position": 0.7325
+              "position": 0.7325,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 304,
               "track_id": 7,
               "direction": "in",
-              "position": 0.6551
+              "position": 0.6551,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 320,
               "track_id": 1,
               "direction": "in",
-              "position": 0.6412
+              "position": 0.6412,
+              "visibility": 0.0,
+              "matched": false
             },
             {
               "frame": 352,
               "track_id": 11,
               "direction": "in",
-              "position": 0.6486
+              "position": 0.6486,
+              "visibility": 0.054,
+              "matched": false
             },
             {
               "frame": 356,
               "track_id": 13,
               "direction": "in",
-              "position": 0.6577
+              "position": 0.6577,
+              "visibility": 0.792,
+              "matched": true
             },
             {
               "frame": 453,
               "track_id": 3,
               "direction": "in",
-              "position": 0.5976
+              "position": 0.5976,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 480,
               "track_id": 6,
               "direction": "in",
-              "position": 0.6581
+              "position": 0.6581,
+              "visibility": 1.0,
+              "matched": true
             },
             {
               "frame": 486,
               "track_id": 17,
               "direction": "in",
-              "position": 0.5971
+              "position": 0.5971,
+              "visibility": 0.13,
+              "matched": false
             },
             {
               "frame": 504,
               "track_id": 14,
               "direction": "out",
-              "position": 0.6217
+              "position": 0.6217,
+              "visibility": 0.867,
+              "matched": true
             },
             {
               "frame": 514,
               "track_id": 15,
               "direction": "out",
-              "position": 0.6148
+              "position": 0.6148,
+              "visibility": 0.745,
+              "matched": true
             },
             {
               "frame": 520,
               "track_id": 9,
               "direction": "in",
-              "position": 0.6079
+              "position": 0.6079,
+              "visibility": 0.459,
+              "matched": false
             }
           ],
           "pred_event_list": [

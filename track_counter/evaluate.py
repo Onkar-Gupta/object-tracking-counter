@@ -15,14 +15,15 @@ from track_counter.counter import LineCounter
 def load_mot_gt(path):
     """MOT17 gt.txt -> {frame: [[x1, y1, x2, y2, id, score, class_id], ...]}.
 
-    Columns are frame, id, x, y, w, h, consider flag, class, visibility. Keeps pedestrians (class 1)
+    Columns are frame, id, x, y, w, h, consider flag, class, visibility. The visibility (0 to 1)
+    is returned in the score slot. Keeps pedestrians (class 1)
     whose consider flag is 1. Low-visibility rows stay in: a person behind an occluder still crosses.
     """
     g = np.loadtxt(path, delimiter=",", ndmin=2)
     g = g[(g[:, 6] == 1) & (g[:, 7] == 1)]
     by_frame = defaultdict(list)
-    for f, tid, x, y, w, h, *_ in g:
-        by_frame[int(f)].append([x, y, x + w, y + h, tid, 1.0, 0])
+    for f, tid, x, y, w, h, _, _, vis in g:  # visibility rides in the score slot
+        by_frame[int(f)].append([x, y, x + w, y + h, tid, vis, 0])
     return dict(by_frame)
 
 
@@ -128,6 +129,27 @@ def pool(results):
     return t
 
 
+VIS_BINS = ((0.0, 0.3), (0.3, 0.5), (0.5, 0.7), (0.7, 1.01))
+
+
+def event_visibility(by_frame, event, half_window=5):
+    """Mean GT visibility of the crossing person over +/- half_window frames of the crossing."""
+    vals = [row[5] for f in range(event.frame - half_window, event.frame + half_window + 1)
+            for row in by_frame.get(f, []) if int(row[4]) == event.track_id]
+    return float(np.mean(vals)) if vals else float("nan")
+
+
+def recall_by_visibility(rows):
+    """rows: dicts with 'visibility' and 'matched'. Recall per visibility bin of the crossing person."""
+    out = {}
+    for lo, hi in VIS_BINS:
+        sel = [r for r in rows if lo <= r["visibility"] < hi]
+        found = sum(r["matched"] for r in sel)
+        out[f"{lo:.1f}-{min(hi, 1.0):.1f}"] = {"events": len(sel), "found": found,
+                                              "recall": found / len(sel) if sel else None}
+    return out
+
+
 def _event_row(e):
     return {"frame": e.frame, "track_id": e.track_id, "direction": e.direction,
             "position": round(e.position, 4)}
@@ -149,7 +171,7 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
     work = Path(work_dir)
     work.mkdir(parents=True, exist_ok=True)
     anchor = counter_params.get("anchor", "bottom_center")
-    report, all_lines = {}, []
+    report, all_lines, vis_rows = {}, [], []
     for seq, line_list in lines_cfg["sequences"].items():
         d = Path(mot_dir) / seq
         ini = configparser.ConfigParser()
@@ -167,8 +189,13 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
         for name, line in lines.items():
             g = gt_events(gt, line, anchor, gt_margin_px)
             res = evaluate_events(events[name], g, fps, tolerance_s, position_tolerance)
+            pairs, _, _ = match_events(events[name], g, fps, tolerance_s, position_tolerance)
+            found = {gi for _, gi in pairs}
+            gt_rows = [{**_event_row(e), "visibility": round(event_visibility(gt, e), 3),
+                        "matched": i in found} for i, e in enumerate(g)]
+            vis_rows += gt_rows
             per_line[name] = {"line": line, **res,
-                              "gt_event_list": [_event_row(e) for e in g],
+                              "gt_event_list": gt_rows,
                               "pred_event_list": [_event_row(e) for e in events[name]]}
             all_lines.append(res)
         ctx = evaluate_mot_sequence(d / "gt" / "gt.txt", tracker_file,
@@ -182,7 +209,10 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
                      "tolerance_s": tolerance_s, "position_tolerance": position_tolerance,
                      "gt_margin_px": gt_margin_px,
                      "context_metric_tool": "trackers.eval (TrackEval-compatible), context only",
-                     "detections": "MOT17 public FRCNN detections"},
+                     "detections": "MOT17 public FRCNN detections",
+                     "note": "Visibility is the MOT17 annotation of the crossing person. "
+                             "Matching uses all ground-truth events, so precision is unaffected."},
         "pooled_over_all_lines": pool(all_lines),
+        "recall_by_gt_visibility": recall_by_visibility(vis_rows),
         "sequences": report,
     }

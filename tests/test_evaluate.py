@@ -9,6 +9,7 @@ from track_counter.evaluate import (
     load_mot_gt,
     match_events,
     pool,
+    recall_by_visibility,
     write_mot,
 )
 
@@ -164,4 +165,14 @@ def test_evaluate_sequences_end_to_end(tmp_path):
     line = rep["sequences"]["SEQ"]["lines"]["mid"]
     assert (line["gt_events"], line["pred_events"], line["tp"]) == (2, 2, 2)
     assert rep["pooled_over_all_lines"]["f1"] == 1.0
+    vis = rep["recall_by_gt_visibility"]["0.7-1.0"]
+    assert vis["events"] == 2 and vis["recall"] == 1.0
     assert set(rep["sequences"]["SEQ"]["context_metrics"]) == {"HOTA", "IDF1", "MOTA", "IDSW"}
+
+
+def test_recall_by_visibility_bins():
+    rows = [{"visibility": 0.1, "matched": False}, {"visibility": 0.2, "matched": True},
+            {"visibility": 0.9, "matched": True}]
+    r = recall_by_visibility(rows)
+    assert r["0.0-0.3"] == {"events": 2, "found": 1, "recall": 0.5}
+    assert r["0.7-1.0"]["recall"] == 1.0 and r["0.3-0.5"]["recall"] is None
