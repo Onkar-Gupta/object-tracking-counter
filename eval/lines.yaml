@@ -5,7 +5,10 @@
 # N=1, margin 0), scanning full-width horizontal and full-height vertical lines every 5% of the frame.
 # Only sequences that passed the static-camera check (reports/static_camera.json) are used.
 # Two lines per sequence (one horizontal, one vertical). They share the same people, so events are not independent.
-# gt_events is the ground-truth crossing count on that line at the time of choice.
+# gt_events is the ground-truth crossing count on that line at the time of choice. Correction (3 Nov 2026):
+# two of these counts came from a scan with an arbitrary tie rule and are superseded. The counts used in
+# reports/eval.json (0.5 px ground-truth dead band) are 02 mid 20, 02 vert 21, 04 upper 33, 04 vert 32,
+# 09 lower 20, 09 vert 20. The lines themselves have not moved.
 sequences:
   MOT17-02-FRCNN:   # horizontal at 50% height; gt_events 20 (in 8, out 12)
     - {name: mid, line: [[0, 540], [1920, 540]]}
@@ -13,6 +16,6 @@ sequences:
   MOT17-04-FRCNN:   # horizontal at 25% height; gt_events 33 (in 15, out 18)
     - {name: upper, line: [[0, 270], [1920, 270]]}
     - {name: vert, line: [[480, 0], [480, 1080]]}      # gt_events 32 (in 18, out 14)
-  MOT17-09-FRCNN:   # horizontal at 60% height; gt_events 25 (in 16, out 9)
+  MOT17-09-FRCNN:   # horizontal at 60% height; gt_events 25 at scan time, 20 in the report
     - {name: lower, line: [[0, 648], [1920, 648]]}
     - {name: vert, line: [[1440, 0], [1440, 1080]]}    # gt_events 20 (in 16, out 4)
