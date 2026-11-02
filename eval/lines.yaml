@@ -1,0 +1,18 @@
+# Pre-registered counting lines. Committed before any tracker result exists. Never moved after results.
+# Coordinates are pixels in the original 1920x1080 frame: [[x1, y1], [x2, y2]].
+# "in" = moving from the positive side to the negative side (see track_counter/counter.py).
+# Chosen from MOT17 ground truth only (class pedestrian, consider flag set, bottom-centre anchor,
+# N=1, margin 0), scanning full-width horizontal and full-height vertical lines every 5% of the frame.
+# Only sequences that passed the static-camera check (reports/static_camera.json) are used.
+# Two lines per sequence (one horizontal, one vertical). They share the same people, so events are not independent.
+# gt_events is the ground-truth crossing count on that line at the time of choice.
+sequences:
+  MOT17-02-FRCNN:   # horizontal at 50% height; gt_events 20 (in 8, out 12)
+    - {name: mid, line: [[0, 540], [1920, 540]]}
+    - {name: vert, line: [[960, 0], [960, 1080]]}      # gt_events 21 (in 16, out 5)
+  MOT17-04-FRCNN:   # horizontal at 25% height; gt_events 33 (in 15, out 18)
+    - {name: upper, line: [[0, 270], [1920, 270]]}
+    - {name: vert, line: [[480, 0], [480, 1080]]}      # gt_events 32 (in 18, out 14)
+  MOT17-09-FRCNN:   # horizontal at 60% height; gt_events 25 (in 16, out 9)
+    - {name: lower, line: [[0, 648], [1920, 648]]}
+    - {name: vert, line: [[1440, 0], [1440, 1080]]}    # gt_events 20 (in 16, out 4)
