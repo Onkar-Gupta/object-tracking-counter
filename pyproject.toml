@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "track-counter"
+dynamic = ["version"]
+description = "Line-crossing object counter with counting accuracy measured against ground truth."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Onkar Gupta" }]
+keywords = ["object-tracking", "people-counting", "computer-vision"]
+dependencies = [
+    "numpy==2.*",
+    "PyYAML==6.*",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.*", "ruff==0.*"]
+
+[project.scripts]
+track-counter = "track_counter.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "track_counter.__version__" }
+
+[tool.setuptools.package-data]
+track_counter = ["default_config.yaml"]
