@@ -15,6 +15,7 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+from tqdm import tqdm
 
 from track_counter.detectors import OnnxYoloxDetector
 
@@ -37,7 +38,7 @@ def main():
         ini.read(seq_dir / "seqinfo.ini")
         n = int(ini["Sequence"]["seqLength"])
         lines, ms = [], []
-        for f in range(1, n + 1):
+        for f in tqdm(range(1, n + 1), desc=seq, unit="frame"):
             img = cv2.imread(str(seq_dir / "img1" / f"{f:06d}.jpg"))
             t = time.perf_counter()
             d = det(f, img)
@@ -48,7 +49,7 @@ def main():
         out.mkdir(parents=True, exist_ok=True)
         (out / "det.txt").write_text("\n".join(lines))
         timing[seq] = {"frames": n, "median_ms": float(np.median(ms)), "p90_ms": float(np.percentile(ms, 90))}
-        print(seq, timing[seq], flush=True)
+        tqdm.write(f"{seq}: median {timing[seq]['median_ms']:.0f} ms/frame")
     (Path(args.out_dir) / "timing.json").write_text(json.dumps(timing, indent=2))
 
 
