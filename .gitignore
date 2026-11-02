@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+venv/
+.venv/
+
+# Secrets
+.env
+
+# Data and weights (licence/size reasons, never committed)
+data/
+models/
+*.pt
+*.pth
+*.onnx
+*.mp4
+*.avi
+
+# Reports are regenerated; commit only what the README cites
+runs/
+
+# OS
+.DS_Store
+.vibe-wise/
+
+# Vault-only planning docs (not part of the public repo)
+/P2_Excellence_Research.md
+/P2_Object_Tracking_Counter.md
