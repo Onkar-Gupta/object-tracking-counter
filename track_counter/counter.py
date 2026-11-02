@@ -1,0 +1,90 @@
+"""Line-crossing counter. Pure Python and NumPy: no OpenCV, no model.
+
+Side of the line is the sign of the signed distance d = cross(B - A, P - A) / |B - A|.
+A move from the positive side to the negative side is "in", the reverse is "out".
+"""
+from collections import defaultdict
+from dataclasses import dataclass
+
+import numpy as np
+
+
+@dataclass(frozen=True)
+class CrossingEvent:
+    frame: int            # frame where the object flipped sides (not when it was confirmed)
+    confirmed_frame: int  # frame where the N-frame rule was satisfied
+    track_id: int
+    class_id: int
+    direction: str        # "in" or "out"
+    position: float       # where along A->B the path met the line, 0 to 1
+
+
+class _State:
+    __slots__ = ("flip_frame", "flip_pos", "last_pt", "last_seen", "pending", "side")
+
+    def __init__(self, side, pt, frame):
+        self.side, self.last_pt, self.pending = side, pt, 0
+        self.flip_frame, self.flip_pos, self.last_seen = frame, 0.0, frame
+
+
+class LineCounter:
+    def __init__(self, line, anchor="bottom_center", min_frames_on_far_side=3,
+                 margin_px=4.0, max_age_frames=60):
+        if anchor not in ("bottom_center", "center"):
+            raise ValueError(f"unknown anchor: {anchor}")
+        self.a = np.asarray(line[0], dtype=float)
+        self.b = np.asarray(line[1], dtype=float)
+        self.ab = self.b - self.a
+        self.length = float(np.hypot(*self.ab))
+        if self.length == 0:
+            raise ValueError("line has zero length")
+        self.anchor, self.n, self.margin, self.max_age = (
+            anchor, min_frames_on_far_side, margin_px, max_age_frames)
+        self._state = {}
+        self.counts = defaultdict(int)  # (class_id, direction) -> count
+
+    def _point(self, x1, y1, x2, y2):
+        y = y2 if self.anchor == "bottom_center" else (y1 + y2) / 2
+        return np.array([(x1 + x2) / 2, y])
+
+    def _dist(self, p):
+        v = p - self.a
+        return float(self.ab[0] * v[1] - self.ab[1] * v[0]) / self.length
+
+    def update(self, frame_idx, tracks):
+        """tracks: rows of [x1, y1, x2, y2, track_id, score, class_id]. Returns new events."""
+        for tid in [t for t, s in self._state.items() if frame_idx - s.last_seen > self.max_age]:
+            del self._state[tid]
+        events = []
+        for row in tracks:
+            x1, y1, x2, y2, tid, _, cls = row[:7]
+            tid, cls = int(tid), int(cls)
+            p = self._point(x1, y1, x2, y2)
+            d = self._dist(p)
+            st = self._state.get(tid)
+            if st:
+                st.last_seen = frame_idx
+            if abs(d) < self.margin:  # dead band: ignored, resets nothing
+                continue
+            side = 1 if d > 0 else -1
+            if st is None:
+                self._state[tid] = _State(side, p, frame_idx)
+            elif side == st.side:
+                st.pending, st.last_pt = 0, p
+            else:
+                if st.pending == 0:
+                    d0 = self._dist(st.last_pt)
+                    x = st.last_pt + d0 / (d0 - d) * (p - st.last_pt)
+                    t = float(np.dot(x - self.a, self.ab)) / self.length**2
+                    if not 0 <= t <= 1:  # went round the end of the segment
+                        st.side, st.last_pt = side, p
+                        continue
+                    st.flip_frame, st.flip_pos = frame_idx, t
+                st.pending += 1
+                if st.pending >= self.n:
+                    direction = "in" if st.side > 0 else "out"
+                    events.append(CrossingEvent(st.flip_frame, frame_idx, tid, cls,
+                                                direction, st.flip_pos))
+                    self.counts[(cls, direction)] += 1
+                    st.side, st.last_pt, st.pending = side, p, 0
+        return events
