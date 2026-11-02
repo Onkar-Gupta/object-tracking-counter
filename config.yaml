@@ -21,5 +21,7 @@ output:
 evaluation:
   mot17_dir: TBC                   # where MOT17 is stored (never committed)
   lines_file: eval/lines.yaml
+  min_conf: 0.1                    # detection score floor (the ByteTrack paper's low-score floor)
   tolerance_s: 1.0
   position_tolerance: 0.1          # fraction of line length
+  gt_margin_px: 0.5                # ground-truth dead band; removes arbitrary on-the-line ties

@@ -9,10 +9,12 @@ from track_counter.counter import LineCounter
 from track_counter.tracking import Tracker
 
 
-def run_pipeline(frames, detect, lines, fps, tracker_params=None, counter_params=None):
+def run_pipeline(frames, detect, lines, fps, tracker_params=None, counter_params=None,
+                 track_sink=None):
     """frames: iterable of (frame_idx, image). detect(frame_idx, image) -> Nx5 detections.
 
     lines: {name: [[x1, y1], [x2, y2]]}. Returns ({name: [CrossingEvent]}, n_frames).
+    track_sink: optional dict, filled with {frame_idx: tracks} for writing MOT files.
     """
     tracker = Tracker(fps, **(tracker_params or {}))
     counters = {n: LineCounter(line, **(counter_params or {})) for n, line in lines.items()}
@@ -20,6 +22,8 @@ def run_pipeline(frames, detect, lines, fps, tracker_params=None, counter_params
     n_frames = 0
     for idx, image in frames:
         tracks = tracker.update(detect(idx, image))
+        if track_sink is not None:
+            track_sink[idx] = tracks
         for n, counter in counters.items():
             events[n] += counter.update(idx, tracks)
         n_frames += 1

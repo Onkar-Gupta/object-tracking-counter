@@ -1,10 +1,12 @@
 import argparse
+import json
 from pathlib import Path
 
 import yaml
 
 from track_counter import __version__
 from track_counter.detectors import MotFileDetector
+from track_counter.evaluate import evaluate_sequences
 from track_counter.pipeline import run_pipeline, write_outputs
 
 DEFAULT_CONFIG = Path(__file__).parent / "default_config.yaml"
@@ -34,6 +36,25 @@ def run(args):
     print(f"{n_frames} frames: in {c['in']}, out {c['out']}. Wrote {out_dir}/events.csv and summary.json")
 
 
+def evaluate(args):
+    cfg = yaml.safe_load(Path(args.config or DEFAULT_CONFIG).read_text())
+    ev = cfg["evaluation"]
+    mot_dir = args.dir or ev["mot17_dir"]
+    if mot_dir == "TBC":
+        raise SystemExit("Set evaluation.mot17_dir in the config or pass --dir")
+    lines_cfg = yaml.safe_load(Path(args.lines or ev["lines_file"]).read_text())
+    report = evaluate_sequences(
+        mot_dir, lines_cfg, Path(args.work_dir or cfg["output"]["dir"]) / "mot",
+        ev["min_conf"], {k: v for k, v in cfg["counter"].items() if k != "line"},
+        cfg["tracker"].get("params") or {}, ev["tolerance_s"], ev["position_tolerance"], ev["gt_margin_px"])
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    Path(args.out).write_text(json.dumps(report, indent=2))
+    p = report["pooled_over_all_lines"]
+    print(f"{p['gt_events']} ground-truth events, {p['pred_events']} predicted. "
+          f"Precision {p['precision']:.3f}, recall {p['recall']:.3f}, F1 {p['f1']:.3f}. "
+          f"Wrote {args.out}")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="track-counter", description=__doc__)
     parser.add_argument("--version", action="version", version=f"track-counter {__version__}")
@@ -46,8 +67,16 @@ def main(argv=None):
     p.add_argument("--min-conf", type=float, help="score floor (default: detector.confidence)")
     p.add_argument("--frames", type=int, help="default: last frame in the detections file")
     p.add_argument("--out", help="default: output.dir in the config")
+    e = sub.add_parser("evaluate", help="score counting on MOT17 sequences against ground truth")
+    e.add_argument("--dir", help="MOT17 train folder (default: evaluation.mot17_dir)")
+    e.add_argument("--lines", help="default: evaluation.lines_file in the config")
+    e.add_argument("--config", help="default: the packaged default_config.yaml")
+    e.add_argument("--out", default="reports/eval.json")
+    e.add_argument("--work-dir", help="where MOT tracker files go (default: output.dir)")
     args = parser.parse_args(argv)
     if args.command == "run":
         run(args)
+    elif args.command == "evaluate":
+        evaluate(args)
     else:
         parser.print_help()

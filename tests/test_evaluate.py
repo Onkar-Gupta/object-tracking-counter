@@ -4,9 +4,11 @@ import numpy as np
 from track_counter.counter import CrossingEvent
 from track_counter.evaluate import (
     evaluate_events,
+    evaluate_sequences,
     gt_events,
     load_mot_gt,
     match_events,
+    pool,
     write_mot,
 )
 
@@ -118,3 +120,48 @@ def test_write_mot_round_trip(tmp_path):
     assert lines[0].startswith("1,3,") and lines[1] == "2,7,10.00,20.00,20.00,40.00,0.9000,-1,-1,-1"
     arr = np.loadtxt(p, delimiter=",")
     assert arr.shape == (2, 10)
+
+
+def test_gt_events_do_not_depend_on_ties_with_the_line():
+    # Bottom edge sits exactly on y=100 for two frames. Nudging the line by 1e-9 must not change events.
+    path = [(1, 150), (2, 100), (3, 100), (4, 50)]
+    by_frame = {f: [[100, y - 20, 110, y, 1, 1.0, 0]] for f, y in path}
+    a = gt_events(by_frame, [(0, 100), (400, 100)])
+    b = gt_events(by_frame, [(0, 100 + 1e-9), (400, 100 + 1e-9)])
+    c = gt_events(by_frame, [(0, 100 - 1e-9), (400, 100 - 1e-9)])
+    assert [(e.frame, e.direction) for e in a] == [(e.frame, e.direction) for e in b] \
+        == [(e.frame, e.direction) for e in c] == [(4, "in")]
+
+
+def test_pool_sums_counts_and_recomputes_rates():
+    a = evaluate_events([ev(10)], [ev(10)], FPS)                  # tp 1
+    b = evaluate_events([], [ev(10), ev(30)], FPS)                # fn 2
+    p = pool([a, b])
+    assert (p["tp"], p["fp"], p["fn"], p["gt_events"], p["pred_events"]) == (1, 0, 2, 3, 1)
+    assert p["precision"] == 1.0 and abs(p["recall"] - 1 / 3) < 1e-9
+    assert p["count_error_total"] == -2
+
+
+def test_evaluate_sequences_end_to_end(tmp_path):
+    seq = tmp_path / "SEQ"
+    n = 40
+    (seq / "det").mkdir(parents=True)
+    (seq / "gt").mkdir()
+    (seq / "seqinfo.ini").write_text(f"[Sequence]\nframeRate=10\nseqLength={n}\n")
+    det, gt = [], []
+    # Three 20x40 rectangles: one moving up across y=120, one moving down, one still.
+    boxes = (lambda i: (40, 160 - 4 * i), lambda i: (140, 4 + 4 * i), lambda i: (240, 100))
+    for i in range(n):
+        for k, kind in enumerate(boxes):
+            x, y = kind(i)
+            det.append(f"{i + 1},-1,{x},{y},20,40,0.95,-1,-1,-1")
+            gt.append(f"{i + 1},{k + 1},{x},{y},20,40,1,1,1.0")
+    (seq / "det" / "det.txt").write_text("\n".join(det))
+    (seq / "gt" / "gt.txt").write_text("\n".join(gt))
+    cfg = {"sequences": {"SEQ": [{"name": "mid", "line": [[0, 120], [320, 120]]}]}}
+    rep = evaluate_sequences(tmp_path, cfg, tmp_path / "work", 0.1,
+                             {"min_frames_on_far_side": 3, "margin_px": 4.0}, {}, 1.0, 0.1)
+    line = rep["sequences"]["SEQ"]["lines"]["mid"]
+    assert (line["gt_events"], line["pred_events"], line["tp"]) == (2, 2, 2)
+    assert rep["pooled_over_all_lines"]["f1"] == 1.0
+    assert set(rep["sequences"]["SEQ"]["context_metrics"]) == {"HOTA", "IDF1", "MOTA", "IDSW"}
