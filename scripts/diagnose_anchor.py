@@ -54,7 +54,7 @@ def matched_rows(args, ev, lines_cfg, det_dir, counter, tracker):
             pairs, _, _ = match_events(events[lname], g, fps, ev["tolerance_s"],
                                        ev["position_tolerance"])
             for pi, gi in pairs:
-                p, ge = events[pi], g[gi]
+                p, ge = events[lname][pi], g[gi]
                 trk = next((t for t in sink.get(p.frame, []) if int(t[4]) == p.track_id), None)
                 gtr = next((r for r in gt.get(p.frame, []) if int(r[4]) == ge.track_id), None)
                 row = {"vis": event_visibility(gt, ge), "dt_s": (p.frame - ge.frame) / fps,
