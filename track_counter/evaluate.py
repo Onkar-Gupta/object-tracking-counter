@@ -3,7 +3,7 @@
 Events are CrossingEvent objects. Matching, metrics and definitions follow P2_Build_Plan.md.
 """
 import configparser
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import asdict
 from pathlib import Path
 
@@ -150,6 +150,87 @@ def recall_by_visibility(rows):
     return out
 
 
+def cluster_bootstrap_ci(clusters, n_boot=2000, seed=0):
+    """95% percentile interval for sum(hits) / sum(total), resampling whole clusters.
+
+    clusters: {key: (hits, total)}. A cluster is one person, so events by the same person
+    stay together. Fixed seed, so the report is reproducible. None when there is no data.
+    """
+    arr = np.array(list(clusters.values()), dtype=float).reshape(-1, 2)
+    if arr[:, 1].sum() == 0:
+        return None
+    idx = np.random.default_rng(seed).integers(0, len(arr), size=(n_boot, len(arr)))
+    sums = arr[idx].sum(axis=1)
+    ok = sums[:, 1] > 0
+    r = sums[ok, 0] / sums[ok, 1]
+    return [float(np.percentile(r, 2.5)), float(np.percentile(r, 97.5))]
+
+
+def _ci_entry(items, key_of, hit_of):
+    """items -> {"estimate", "ci", "n"} with clusters from key_of and hits from hit_of."""
+    clusters = defaultdict(lambda: [0, 0])
+    for it in items:
+        c = clusters[key_of(it)]
+        c[0] += hit_of(it)
+        c[1] += 1
+    hits = sum(c[0] for c in clusters.values())
+    total = sum(c[1] for c in clusters.values())
+    return {"estimate": hits / total if total else None,
+            "ci": cluster_bootstrap_ci(clusters), "events": total, "clusters": len(clusters)}
+
+
+def false_positive_cause(p, gt, matched_gt, fps, tolerance_s, position_tolerance,
+                         gt_person_under_track):
+    """Why an unmatched predicted event is a false positive. See the categories below."""
+    for gi in matched_gt:
+        if _compatible(p, gt[gi], fps, tolerance_s, position_tolerance):
+            return "double count"
+    near = [g for g in gt if abs(p.frame - g.frame) / fps <= tolerance_s]
+    if any(g.direction == p.direction for g in near):
+        return "position off"
+    if near:
+        return "wrong direction"
+    if any(g.direction == p.direction and abs(p.frame - g.frame) / fps <= 3 * tolerance_s
+           for g in gt):
+        return "timing off"
+    if not gt_person_under_track:
+        return "no ground-truth person under the track"
+    return "person without a ground-truth crossing here"
+
+
+def _person_under_track(by_frame, tracks_by_frame, event, min_iou=0.5):
+    """True if a ground-truth pedestrian overlaps the event's track box at the event frame."""
+    box = next((t[:4] for t in tracks_by_frame.get(event.frame, []) if int(t[4]) == event.track_id),
+               None)
+    if box is None:
+        return False
+    for r in by_frame.get(event.frame, []):
+        iw = min(box[2], r[2]) - max(box[0], r[0])
+        ih = min(box[3], r[3]) - max(box[1], r[1])
+        inter = max(iw, 0) * max(ih, 0)
+        union = ((box[2] - box[0]) * (box[3] - box[1]) + (r[2] - r[0]) * (r[3] - r[1]) - inter)
+        if union > 0 and inter / union >= min_iou:
+            return True
+    return False
+
+
+def _margin_row(seq_data, margin, anchor, tolerance_s, position_tolerance):
+    """Pooled counting metrics when ground truth is rebuilt with dead band `margin`."""
+    results, vis = [], []
+    for gt, lines, events, fps in seq_data:
+        for name, line in lines.items():
+            g = gt_events(gt, line, anchor, margin)
+            results.append(evaluate_events(events[name], g, fps, tolerance_s, position_tolerance))
+            pairs, _, _ = match_events(events[name], g, fps, tolerance_s, position_tolerance)
+            found = {gi for _, gi in pairs}
+            vis += [(event_visibility(gt, e), i in found) for i, e in enumerate(g)]
+    p = pool(results)
+    seen = [m for v, m in vis if v >= 0.7]
+    return {"gt_margin_px": margin, "gt_events": p["gt_events"], "precision": p["precision"],
+            "recall": p["recall"], "f1": p["f1"],
+            "recall_visibility_ge_0.7": sum(seen) / len(seen) if seen else None}
+
+
 def _event_row(e):
     return {"frame": e.frame, "track_id": e.track_id, "direction": e.direction,
             "position": round(e.position, 4)}
@@ -172,6 +253,8 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
     work.mkdir(parents=True, exist_ok=True)
     anchor = counter_params.get("anchor", "bottom_center")
     report, all_lines, vis_rows = {}, [], []
+    recall_items, precision_items, line_data, fp_causes = [], [], [], Counter()
+    seq_data = []
     for seq, line_list in lines_cfg["sequences"].items():
         d = Path(mot_dir) / seq
         ini = configparser.ConfigParser()
@@ -185,6 +268,7 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
         tracker_file = work / f"{seq}.txt"
         write_mot(tracker_file, sink)
         gt = load_mot_gt(d / "gt" / "gt.txt")
+        seq_data.append((gt, lines, events, fps))
         per_line = {}
         for name, line in lines.items():
             g = gt_events(gt, line, anchor, gt_margin_px)
@@ -194,9 +278,22 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
             gt_rows = [{**_event_row(e), "visibility": round(event_visibility(gt, e), 3),
                         "matched": i in found} for i, e in enumerate(g)]
             vis_rows += gt_rows
-            per_line[name] = {"line": line, **res,
-                              "gt_event_list": gt_rows,
-                              "pred_event_list": [_event_row(e) for e in events[name]]}
+            recall_items += [(f"{seq}:{e.track_id}", r["matched"], r["visibility"])
+                             for e, r in zip(g, gt_rows, strict=True)]
+            matched_pred = {pi for pi, _ in pairs}
+            pred_rows = []
+            for i, e in enumerate(events[name]):
+                row = {**_event_row(e), "matched": i in matched_pred}
+                if i not in matched_pred:
+                    row["fp_cause"] = false_positive_cause(
+                        e, g, found, fps, tolerance_s, position_tolerance,
+                        _person_under_track(gt, sink, e))
+                    fp_causes[row["fp_cause"]] += 1
+                pred_rows.append(row)
+                precision_items.append((f"{seq}:{e.track_id}", row["matched"]))
+            line_data.append((events[name], g, fps))
+            per_line[name] = {"line": line, **res, "gt_event_list": gt_rows,
+                              "pred_event_list": pred_rows}
             all_lines.append(res)
         ctx = evaluate_mot_sequence(d / "gt" / "gt.txt", tracker_file,
                                     metrics=["CLEAR", "HOTA", "Identity"])
@@ -214,5 +311,27 @@ def evaluate_sequences(mot_dir, lines_cfg, work_dir, min_conf, counter_params, t
                              "Matching uses all ground-truth events, so precision is unaffected."},
         "pooled_over_all_lines": pool(all_lines),
         "recall_by_gt_visibility": recall_by_visibility(vis_rows),
+        "confidence_intervals_95": {
+            "method": "bootstrap, 2000 resamples, seed 0, resampling people (recall: ground-truth "
+                      "person per sequence; precision: tracker ID per sequence)",
+            "recall": _ci_entry(recall_items, lambda i: i[0], lambda i: int(i[1])),
+            "recall_visibility_ge_0.7": _ci_entry(
+                [i for i in recall_items if i[2] >= 0.7], lambda i: i[0], lambda i: int(i[1])),
+            "recall_visibility_lt_0.5": _ci_entry(
+                [i for i in recall_items if i[2] < 0.5], lambda i: i[0], lambda i: int(i[1])),
+            "precision": _ci_entry(precision_items, lambda i: i[0], lambda i: int(i[1])),
+        },
+        "false_positive_causes": dict(fp_causes),
+        "gt_margin_sensitivity": {
+            "note": "Same tracker output, ground truth rebuilt with a wider dead band. The primary "
+                    "result uses the smallest margin (strictest). A person swaying on the line "
+                    "gives many ground-truth crossings at small margins.",
+            "rows": [_margin_row(seq_data, m, anchor, tolerance_s, position_tolerance)
+                     for m in (gt_margin_px, 2.0, 4.0, 8.0)]},
+        "tolerance_sensitivity": [
+            {"tolerance_s": ts, "position_tolerance": pt,
+             **{k: pool([evaluate_events(p_, g_, f_, ts, pt) for p_, g_, f_ in line_data])[k]
+                for k in ("precision", "recall", "f1")}}
+            for ts in (0.5, 1.0, 2.0) for pt in (0.05, 0.1, 0.2)],
         "sequences": report,
     }

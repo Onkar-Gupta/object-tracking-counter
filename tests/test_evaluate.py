@@ -3,8 +3,10 @@ import numpy as np
 
 from track_counter.counter import CrossingEvent
 from track_counter.evaluate import (
+    cluster_bootstrap_ci,
     evaluate_events,
     evaluate_sequences,
+    false_positive_cause,
     gt_events,
     load_mot_gt,
     match_events,
@@ -176,3 +178,30 @@ def test_recall_by_visibility_bins():
     r = recall_by_visibility(rows)
     assert r["0.0-0.3"] == {"events": 2, "found": 1, "recall": 0.5}
     assert r["0.7-1.0"]["recall"] == 1.0 and r["0.3-0.5"]["recall"] is None
+
+
+def test_bootstrap_ci_is_deterministic_and_brackets_the_estimate():
+    clusters = {i: (1, 1) for i in range(10)} | {i: (0, 1) for i in range(10, 20)}   # 50% hit
+    lo, hi = cluster_bootstrap_ci(clusters)
+    assert (lo, hi) == tuple(cluster_bootstrap_ci(clusters)) and lo < 0.5 < hi
+    assert cluster_bootstrap_ci({i: (1, 1) for i in range(5)}) == [1.0, 1.0]
+    assert cluster_bootstrap_ci({}) is None
+
+
+def test_bootstrap_keeps_a_persons_events_together():
+    # One person with 20 events (all missed) and nine people with one hit each: a person-level
+    # resample must give a much wider interval than an event-level one would.
+    clusters = {"a": (0, 20)} | {i: (1, 1) for i in range(9)}
+    lo, hi = cluster_bootstrap_ci(clusters)
+    assert hi - lo > 0.3
+
+
+def test_false_positive_causes():
+    gt = [ev(100, "in", 0.5), ev(300, "out", 0.5)]
+    f = lambda p, matched=(), person=True: false_positive_cause(p, gt, matched, FPS, 1.0, 0.1, person)
+    assert f(ev(102), matched=(0,)) == "double count"
+    assert f(ev(100, "in", 0.9)) == "position off"
+    assert f(ev(100, "out", 0.5)) == "wrong direction"
+    assert f(ev(120, "in", 0.5)) == "timing off"            # 2 s from a same-direction event
+    assert f(ev(600), person=False) == "no ground-truth person under the track"
+    assert f(ev(600), person=True) == "person without a ground-truth crossing here"
