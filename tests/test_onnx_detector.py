@@ -1,7 +1,17 @@
 """Pre- and post-processing for the ONNX YOLOX adapter. No model file needed."""
+from itertools import pairwise
+
 import numpy as np
 
-from track_counter.detectors import OnnxYoloxDetector, decode_yolox, letterbox, nms
+from track_counter.detectors import (
+    OnnxYoloxDetector,
+    TiledOnnxYoloxDetector,
+    decode_yolox,
+    drop_border_boxes,
+    letterbox,
+    nms,
+    tile_starts,
+)
 
 
 def test_letterbox_keeps_aspect_and_pads_grey():
@@ -37,3 +47,37 @@ def test_postprocess_filters_by_score_and_rescales():
     out = det.postprocess(raw, ratio=0.5)
     assert out.shape == (1, 5) and abs(out[0, 4] - 0.81) < 1e-6
     assert np.allclose(out[0, :4], [(4 - 8) / 0.5, (4 - 16) / 0.5, (4 + 8) / 0.5, (4 + 16) / 0.5])
+
+
+def test_tile_starts_cover_the_frame_with_overlap():
+    assert tile_starts(1920, 640, 128) == [0, 427, 853, 1280]
+    assert tile_starts(1080, 640, 128) == [0, 440]
+    assert tile_starts(500, 640, 128) == [0]
+    for length in (1920, 1080):
+        starts = tile_starts(length, 640, 128)
+        assert starts[-1] + 640 == length and all(b - a <= 640 - 128 for a, b in pairwise(starts))
+
+
+def test_drop_border_boxes_keeps_image_edges_only():
+    dets = np.array([[0, 100, 50, 200, 0.9],      # touches the tile's left edge
+                     [300, 100, 350, 200, 0.9]])  # inside
+    # tile in the middle of the image: the left-edge box is cut by the tile, so it is dropped
+    assert len(drop_border_boxes(dets, 500, 0, 640, 640, 1920, 1080)) == 1
+    # tile at the image's left border: the same box is genuinely at the image edge, so it stays
+    assert len(drop_border_boxes(dets, 0, 0, 640, 640, 1920, 1080)) == 2
+
+
+def test_tiled_detector_merges_duplicates_and_shifts_tiles(monkeypatch):
+    det = TiledOnnxYoloxDetector.__new__(TiledOnnxYoloxDetector)
+    det.tile, det.overlap, det.nms_iou = 640, 128, 0.45
+    calls = []
+
+    def fake_single(self, idx, image):                       # stands in for one model run
+        calls.append(image.shape[:2])
+        if image.shape[:2] == (1080, 1920):
+            return np.array([[10.0, 10, 60, 120, 0.4]])     # whole-frame: a low-score small person
+        return np.array([[10.0, 10, 60, 120, 0.8]]) if len(calls) == 2 else np.zeros((0, 5))
+    monkeypatch.setattr(OnnxYoloxDetector, "__call__", fake_single)
+    out = det(1, np.zeros((1080, 1920, 3), np.uint8))
+    assert len(calls) == 1 + 4 * 2                            # whole frame + 4 x 2 tiles
+    assert out.shape == (1, 5) and out[0, 4] == 0.8           # duplicate merged, higher score kept

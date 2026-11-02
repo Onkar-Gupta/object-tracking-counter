@@ -104,3 +104,54 @@ class OnnxYoloxDetector:
         s = scores[keep]
         idx = nms(xyxy, s, self.nms_iou)
         return np.column_stack([xyxy[idx], s[idx]])
+
+
+def tile_starts(length, tile=640, overlap=128):
+    """Start offsets of tiles of size `tile` covering `length`, spread evenly, last one flush."""
+    if length <= tile:
+        return [0]
+    n = int(np.ceil((length - tile) / (tile - overlap))) + 1
+    return [round(v) for v in np.linspace(0, length - tile, n)]
+
+
+def drop_border_boxes(dets, x0, y0, tile_w, tile_h, image_w, image_h, margin=3):
+    """Drop boxes touching an inner tile edge (a neighbouring tile sees that person whole).
+
+    Edges on the image border are kept. dets are in tile coordinates.
+    """
+    if len(dets) == 0:
+        return dets
+    cut = np.zeros(len(dets), bool)
+    if x0 > 0:
+        cut |= dets[:, 0] < margin
+    if x0 + tile_w < image_w:
+        cut |= dets[:, 2] > tile_w - margin
+    if y0 > 0:
+        cut |= dets[:, 1] < margin
+    if y0 + tile_h < image_h:
+        cut |= dets[:, 3] > tile_h - margin
+    return dets[~cut]
+
+
+class TiledOnnxYoloxDetector(OnnxYoloxDetector):
+    """YOLOX on overlapping native-resolution tiles plus one whole-frame pass, merged with NMS.
+
+    The whole-frame pass finds large people, the tiles find small ones that a 640 px resize loses.
+    About 9 model runs per 1080p frame, so much slower than the single pass.
+    """
+
+    def __init__(self, model_path, tile=640, overlap=128, **kwargs):
+        super().__init__(model_path, size=tile, **kwargs)
+        self.tile, self.overlap = tile, overlap
+
+    def __call__(self, frame_idx, image):
+        h, w = image.shape[:2]
+        parts = [super().__call__(frame_idx, image)]            # whole frame, shrunk to the tile size
+        for y0 in tile_starts(h, self.tile, self.overlap):
+            for x0 in tile_starts(w, self.tile, self.overlap):
+                crop = image[y0:y0 + self.tile, x0:x0 + self.tile]
+                d = drop_border_boxes(super().__call__(frame_idx, crop), x0, y0,
+                                      crop.shape[1], crop.shape[0], w, h)
+                parts.append(d + np.array([x0, y0, x0, y0, 0]))
+        merged = np.vstack(parts)
+        return merged[nms(merged[:, :4], merged[:, 4], self.nms_iou)] if len(merged) else EMPTY

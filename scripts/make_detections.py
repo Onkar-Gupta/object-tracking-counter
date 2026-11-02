@@ -17,7 +17,7 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 
-from track_counter.detectors import OnnxYoloxDetector
+from track_counter.detectors import OnnxYoloxDetector, TiledOnnxYoloxDetector
 
 SEQUENCES = ("MOT17-02-FRCNN", "MOT17-04-FRCNN", "MOT17-09-FRCNN")
 
@@ -28,9 +28,14 @@ def main():
     ap.add_argument("--model", required=True)
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--score-floor", type=float, default=0.05)
+    ap.add_argument("--tiled", action="store_true", help="640 px tiles at native resolution plus a whole-frame pass")
+    ap.add_argument("--overlap", type=int, default=128)
     ap.add_argument("--sequences", nargs="*", default=SEQUENCES)
     args = ap.parse_args()
-    det = OnnxYoloxDetector(args.model, score_floor=args.score_floor)
+    if args.tiled:
+        det = TiledOnnxYoloxDetector(args.model, overlap=args.overlap, score_floor=args.score_floor)
+    else:
+        det = OnnxYoloxDetector(args.model, score_floor=args.score_floor)
     timing = {}
     for seq in args.sequences:
         seq_dir = Path(args.mot_dir) / seq
