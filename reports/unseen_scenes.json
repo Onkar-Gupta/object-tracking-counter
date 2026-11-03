@@ -1,0 +1,381 @@
+{
+  "protocol": "eval/unseen_scenes_protocol.md",
+  "settings": "shipped defaults (config.yaml), YOLOX-s single pass, ByteTrack, CPU, no tuning",
+  "labelling": "by eye from contact sheets (tracked box, feet point and foot trail at the event frame), by the author of the code, not an independent labeller; borderline calls counted as doubtful. Sheets are not committed (regenerated in runs/).",
+  "scenes": {
+    "crosswalk": {
+      "source": "Mixkit 4000, busy crosswalk, 1920x1080, 13 s",
+      "line": [
+        [
+          1100,
+          470
+        ],
+        [
+          1100,
+          740
+        ]
+      ],
+      "line_choice": "before any tracker output",
+      "predicted": 41,
+      "predicted_in": 12,
+      "predicted_out": 29,
+      "judged_correct": 33,
+      "doubtful": 8,
+      "true_crossings": null,
+      "missed": null,
+      "note": "recall not measured: people overlap too much to label every crossing",
+      "events": [
+        {
+          "n": 1,
+          "track": 11,
+          "direction": "in",
+          "frame": 7,
+          "grade": "correct"
+        },
+        {
+          "n": 2,
+          "track": 8,
+          "direction": "in",
+          "frame": 9,
+          "grade": "correct"
+        },
+        {
+          "n": 3,
+          "track": 2,
+          "direction": "out",
+          "frame": 11,
+          "grade": "correct"
+        },
+        {
+          "n": 4,
+          "track": 0,
+          "direction": "in",
+          "frame": 11,
+          "grade": "correct"
+        },
+        {
+          "n": 5,
+          "track": 23,
+          "direction": "out",
+          "frame": 23,
+          "grade": "correct"
+        },
+        {
+          "n": 6,
+          "track": 13,
+          "direction": "in",
+          "frame": 23,
+          "grade": "correct"
+        },
+        {
+          "n": 7,
+          "track": 14,
+          "direction": "in",
+          "frame": 26,
+          "grade": "correct"
+        },
+        {
+          "n": 8,
+          "track": 30,
+          "direction": "out",
+          "frame": 36,
+          "grade": "correct"
+        },
+        {
+          "n": 9,
+          "track": 28,
+          "direction": "out",
+          "frame": 46,
+          "grade": "correct"
+        },
+        {
+          "n": 10,
+          "track": 34,
+          "direction": "out",
+          "frame": 45,
+          "grade": "correct"
+        },
+        {
+          "n": 11,
+          "track": 35,
+          "direction": "out",
+          "frame": 48,
+          "grade": "correct"
+        },
+        {
+          "n": 12,
+          "track": 42,
+          "direction": "out",
+          "frame": 49,
+          "grade": "correct"
+        },
+        {
+          "n": 13,
+          "track": 36,
+          "direction": "out",
+          "frame": 51,
+          "grade": "correct"
+        },
+        {
+          "n": 14,
+          "track": 44,
+          "direction": "out",
+          "frame": 53,
+          "grade": "correct"
+        },
+        {
+          "n": 15,
+          "track": 41,
+          "direction": "out",
+          "frame": 54,
+          "grade": "correct"
+        },
+        {
+          "n": 16,
+          "track": 45,
+          "direction": "out",
+          "frame": 58,
+          "grade": "correct"
+        },
+        {
+          "n": 17,
+          "track": 26,
+          "direction": "out",
+          "frame": 55,
+          "grade": "correct"
+        },
+        {
+          "n": 18,
+          "track": 51,
+          "direction": "in",
+          "frame": 68,
+          "grade": "correct"
+        },
+        {
+          "n": 19,
+          "track": 55,
+          "direction": "in",
+          "frame": 76,
+          "grade": "correct"
+        },
+        {
+          "n": 20,
+          "track": 56,
+          "direction": "out",
+          "frame": 80,
+          "grade": "correct"
+        },
+        {
+          "n": 21,
+          "track": 64,
+          "direction": "out",
+          "frame": 103,
+          "grade": "correct"
+        },
+        {
+          "n": 22,
+          "track": 63,
+          "direction": "out",
+          "frame": 107,
+          "grade": "correct"
+        },
+        {
+          "n": 23,
+          "track": 66,
+          "direction": "out",
+          "frame": 110,
+          "grade": "correct"
+        },
+        {
+          "n": 24,
+          "track": 95,
+          "direction": "in",
+          "frame": 235,
+          "grade": "doubtful",
+          "reason": "box covers two people, feet far from the line"
+        },
+        {
+          "n": 25,
+          "track": 96,
+          "direction": "in",
+          "frame": 241,
+          "grade": "correct"
+        },
+        {
+          "n": 26,
+          "track": 94,
+          "direction": "in",
+          "frame": 245,
+          "grade": "doubtful",
+          "reason": "box covers two overlapping people"
+        },
+        {
+          "n": 27,
+          "track": 113,
+          "direction": "out",
+          "frame": 257,
+          "grade": "doubtful",
+          "reason": "box covers two overlapping people"
+        },
+        {
+          "n": 28,
+          "track": 106,
+          "direction": "out",
+          "frame": 256,
+          "grade": "doubtful",
+          "reason": "box covers two overlapping people (wide box)"
+        },
+        {
+          "n": 29,
+          "track": 97,
+          "direction": "out",
+          "frame": 268,
+          "grade": "correct"
+        },
+        {
+          "n": 30,
+          "track": 120,
+          "direction": "out",
+          "frame": 271,
+          "grade": "correct"
+        },
+        {
+          "n": 31,
+          "track": 126,
+          "direction": "out",
+          "frame": 274,
+          "grade": "correct"
+        },
+        {
+          "n": 32,
+          "track": 124,
+          "direction": "out",
+          "frame": 276,
+          "grade": "correct"
+        },
+        {
+          "n": 33,
+          "track": 133,
+          "direction": "in",
+          "frame": 292,
+          "grade": "correct"
+        },
+        {
+          "n": 34,
+          "track": 132,
+          "direction": "out",
+          "frame": 295,
+          "grade": "doubtful",
+          "reason": "feet far from the line at the event frame"
+        },
+        {
+          "n": 35,
+          "track": 143,
+          "direction": "out",
+          "frame": 304,
+          "grade": "correct"
+        },
+        {
+          "n": 36,
+          "track": 154,
+          "direction": "in",
+          "frame": 317,
+          "grade": "correct"
+        },
+        {
+          "n": 37,
+          "track": 150,
+          "direction": "out",
+          "frame": 322,
+          "grade": "correct"
+        },
+        {
+          "n": 38,
+          "track": 151,
+          "direction": "out",
+          "frame": 328,
+          "grade": "doubtful",
+          "reason": "feet far from the line at the event frame"
+        },
+        {
+          "n": 39,
+          "track": 166,
+          "direction": "out",
+          "frame": 331,
+          "grade": "doubtful",
+          "reason": "feet far from the line at the event frame"
+        },
+        {
+          "n": 40,
+          "track": 171,
+          "direction": "out",
+          "frame": 333,
+          "grade": "correct"
+        },
+        {
+          "n": 41,
+          "track": 170,
+          "direction": "out",
+          "frame": 335,
+          "grade": "doubtful",
+          "reason": "probable duplicate of #40 (same spot, two frames later, new ID)"
+        }
+      ]
+    },
+    "campus": {
+      "source": "Pexels 7969488 (George Pak), 1920x1080, 10 s",
+      "line": [
+        [
+          0,
+          930
+        ],
+        [
+          1920,
+          930
+        ]
+      ],
+      "line_choice": "AFTER looking at where the walkers' feet travel, so not a held-out choice",
+      "predicted": 2,
+      "judged_correct": 2,
+      "doubtful": 0,
+      "true_crossings": 2,
+      "missed": 0
+    },
+    "corridor": {
+      "source": "Pexels 11903990, 1920x1080, 20 s",
+      "line": [
+        [
+          0,
+          700
+        ],
+        [
+          1920,
+          700
+        ]
+      ],
+      "line_choice": "from a still frame only",
+      "predicted": 0,
+      "true_crossings": 0,
+      "missed": 0,
+      "note": "the one walker's feet approach the line but never cross it; an uninformative scene (a correct zero)"
+    },
+    "paris": {
+      "source": "Mixkit 4348, 1280x720, 22 s",
+      "line": [
+        [
+          0,
+          360
+        ],
+        [
+          1280,
+          360
+        ]
+      ],
+      "line_choice": "from a still frame only",
+      "predicted": 0,
+      "true_crossings": 0,
+      "missed": 0,
+      "note": "the line sat at the horizon above everyone's feet, a poor choice that was not moved after the result; an uninformative scene (a correct zero)"
+    }
+  }
+}

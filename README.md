@@ -98,6 +98,19 @@ Tracking and counting add under 1 ms per frame. Video decoding is about 4 ms per
 3. **Fine-tuning helped but did not pass the mark.** Training YOLOX-s for 20 epochs on four other MOT17 scenes cut false counts a lot (centre-anchor precision 0.69 to 0.85) and kept most of the extra recall. It did not beat the tuned public detections under the rule above. MOT17 is non-commercial, so those weights are not published. The scripts are in [training/](training/).
 4. **Things that did not help:** smoothing the anchor point, and a higher non-maximum suppression threshold (recall at 90% precision fell from 0.434 to 0.386). The clean-up rules (cooldown, event merging) and the tracker choice trade recall for precision: for YOLOX-s tiled, precision went from 0.48 to 0.66 while recall went from 0.60 to 0.50, and it still did not reach the pass mark. Details are in [eval/](eval/) and [reports/](reports/).
 
+### Unseen scenes: a small hand check
+
+A real held-out test needs a new, labelled scene, and none exists yet. As a smaller step, the shipped defaults (no tuning) were run on four stock clips and every predicted crossing was reviewed by eye ([protocol](eval/unseen_scenes_protocol.md), [results](reports/unseen_scenes.json)).
+
+| Scene | Predicted | Judged correct | Doubtful | True crossings | Missed |
+|---|---|---|---|---|---|
+| Busy crosswalk (Mixkit) | 41 | 33 | 8 | not counted | not measured |
+| Campus steps (Pexels) | 2 | 2 | 0 | 2 | 0 |
+| Corridor (Pexels) | 0 | n/a | n/a | 0 | 0 |
+| Quiet Paris street (Mixkit) | 0 | n/a | n/a | 0 | 0 |
+
+On the crowded crosswalk, 33 of 41 predicted crossings looked like one real pedestrian crossing in the reported direction. The 8 doubtful ones are boxes covering two overlapping people, feet far from the line, and one likely duplicate after an ID switch. On the one clean scene with crossings, both students were counted and nothing else. The corridor and Paris lines sat where nobody crosses (my pre-registered choices, not moved afterwards), so those zeros only show there were no false alarms. This is a sanity check, not a benchmark: the reviewer is the author, not an independent labeller, the samples are tiny, and the campus line was chosen after seeing where the walkers go.
+
 ### Limits to know about
 
 - Only 146 true crossings (112 at the centre anchor) on 3 static scenes, so the intervals are wide. Most differences between detectors are inside them.
@@ -179,7 +192,7 @@ The image is 1.48 GB (measured), mostly OpenCV and SciPy pulled in by the tracki
 - [ ] Host the browser demo on a Hugging Face Space
 - [ ] Count other classes (cars, buses), the counter already does not care
 - [ ] Try crowd-aware box filtering (Soft-NMS, Set-NMS)
-- [ ] Fine-tune and test on a new, labelled scene, as a true held-out check
+- [ ] Test on a new scene labelled by someone else, as a true held-out check (the small hand check above is not one)
 
 ## Licence
 
