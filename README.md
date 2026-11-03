@@ -18,7 +18,18 @@ track-counter run --video my_video.mp4 --line X1,Y1,X2,Y2 --save-video counted.m
 
 ![Demo: people crossing a line, with boxes, track IDs and a running count](docs/demo.gif)
 
-*Demo only. The counts in this clip are not checked against ground truth. Footage: "Busy street in the city" from Mixkit, see [docs/demo_credit.md](docs/demo_credit.md).*
+*A crowded scene, which is the hard case: boxes overlap in about 64% of the frames, and the count is not checked against ground truth. Footage: "Busy street in the city" from Mixkit, see [docs/demo_credit.md](docs/demo_credit.md).*
+
+## Try it in your browser
+
+```bash
+pip install -e ".[onnx]" gradio==6.31.0
+python demo/app.py        # then open http://127.0.0.1:7860
+```
+
+![The Gradio demo: a frame with the counting line, the annotated result and the counts](docs/gradio_demo.png)
+
+Upload a short clip (first 10 seconds, up to 50 MB), click two points to draw the line, press Count. You get the annotated video, the in and out counts and `events.csv`. It runs on the CPU: 300 frames took 24 s on the test laptop. This screenshot is the easy case, two students who never overlap, counted in 2, out 0. It works best when people are separate. When they overlap, the detector misses more of them, as in the crowded GIF above (many people in the left crowd have no box). These counts show what the tool does, not how accurate it is. Footage credit: [docs/demo_credit.md](docs/demo_credit.md). More in [demo/README.md](demo/README.md).
 
 ## What it does
 
@@ -112,7 +123,8 @@ eval/            lines.yaml and the pre-registered protocols
 reports/         every measured result, as JSON
 training/        recipe to fine-tune YOLOX on MOT17 tiles (research only)
 tests/           72 tests
-docs/            demo GIF and its credit
+docs/            demo GIF, demo screenshot and their credits
+demo/            Gradio browser demo (app.py)
 ```
 
 ## Configuration
@@ -162,6 +174,8 @@ The image is 1.48 GB (measured), mostly OpenCV and SciPy pulled in by the tracki
 - [x] Counter with synthetic-track tests, MOT17 evaluation with intervals, pre-registered ablations
 - [x] Video input, `draw-line`, annotated video, CPU benchmark, demo GIF
 - [x] Docker image
+- [x] Browser demo (Gradio), runs locally
+- [ ] Host the browser demo on a Hugging Face Space
 - [ ] Count other classes (cars, buses), the counter already does not care
 - [ ] Try crowd-aware box filtering (Soft-NMS, Set-NMS)
 - [ ] Fine-tune and test on a new, labelled scene, as a true held-out check

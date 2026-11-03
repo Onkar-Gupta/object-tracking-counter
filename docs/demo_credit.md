@@ -17,3 +17,13 @@ Reproduce it (download the clip from the Mixkit page first):
 
     track-counter run --video 4000-1080.mp4 --model models/yolox_s.onnx --line 1100,470,1100,740 --save-video demo.mp4
     python scripts/make_gif.py --video demo.mp4 --out docs/demo.gif --width 560 --fps 8 --colours 48
+
+## Browser demo screenshot (docs/gradio_demo.png)
+
+The screenshot of the Gradio demo shows a result on "Students Walking in the Campus" by George Pak on
+Pexels: https://www.pexels.com/video/students-walking-in-the-campus-7969488/
+
+Licence: the Pexels License, https://www.pexels.com/license/ (free to use, copy and modify for
+commercial and non-commercial purposes, attribution not required but given here). The screenshot is a
+modified work: the footage is processed by this project and annotated with boxes, track IDs, a counting
+line and counts, inside the demo interface. The original clip is not in this repository.
