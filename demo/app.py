@@ -9,6 +9,7 @@ not a measure of its accuracy: that is measured on MOT17 and reported in the REA
 import csv
 import tempfile
 import time
+import urllib.request
 from pathlib import Path
 
 import av
@@ -17,21 +18,34 @@ import gradio as gr
 import numpy as np
 import yaml
 
-from track_counter.cli import open_video, render_video, video_frames
+from track_counter.cli import DEFAULT_CONFIG, open_video, render_video, video_frames
 from track_counter.detectors import OnnxYoloxDetector
 from track_counter.pipeline import run_pipeline
 
-ROOT = Path(__file__).resolve().parent.parent
-CFG = yaml.safe_load((ROOT / "config.yaml").read_text())
-MODEL = ROOT / CFG["detector"]["model"]
+HERE = Path(__file__).resolve().parent
+CFG = yaml.safe_load(DEFAULT_CONFIG.read_text())  # the packaged defaults, the same as config.yaml
+MODEL_URL = "https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.onnx"  # Apache-2.0
+MODEL_CANDIDATES = [HERE.parent / "models" / "yolox_s.onnx", HERE / "models" / "yolox_s.onnx"]
+ASSETS = next((p for p in (HERE / "assets", HERE.parent / "docs") if p.is_dir()), None)
 MAX_SECONDS, MAX_MB, SHOW_WIDTH = 10, 50, 960
 _detector = None
+
+
+def model_path():
+    """The YOLOX-s ONNX file: use a local copy, or download the official one once (about 36 MB)."""
+    for p in MODEL_CANDIDATES:
+        if p.exists():
+            return p
+    target = MODEL_CANDIDATES[-1]
+    target.parent.mkdir(parents=True, exist_ok=True)
+    urllib.request.urlretrieve(MODEL_URL, target)
+    return target
 
 
 def detector():
     global _detector
     if _detector is None:
-        _detector = OnnxYoloxDetector(MODEL, score_floor=CFG["detector"]["confidence"])
+        _detector = OnnxYoloxDetector(model_path(), score_floor=CFG["detector"]["confidence"])
     return _detector
 
 
@@ -149,7 +163,7 @@ def count(path, state, progress=gr.Progress()):  # noqa: B008 (Gradio injects th
 
 EXAMPLES = sorted(str(p) for p in (Path(__file__).parent / "examples").glob("*.mp4"))
 
-with gr.Blocks(title="track-counter demo") as demo:
+with gr.Blocks(title="track-counter demo", delete_cache=(3600, 3600)) as demo:
     gr.Markdown(
         "# track-counter\n"
         "Count people crossing a line in a short video. YOLOX-s detects, ByteTrack follows, "
@@ -157,7 +171,10 @@ with gr.Blocks(title="track-counter demo") as demo:
         f"Only the first {MAX_SECONDS} seconds are used (up to {MAX_MB} MB). "
         "The counts here show what the tool does, **not how accurate it is**: accuracy is measured on "
         "MOT17 and reported in the [README](https://github.com/Onkar-Gupta/object-tracking-counter). "
-        "The fast single-pass detector misses small and mostly hidden people."
+        "The fast single-pass detector misses small and mostly hidden people, and works best when people "
+        "do not overlap.\n\n"
+        "Videos are processed on the server and deleted within an hour. Please only upload footage you "
+        "have the right to share, and nothing that shows people who have not agreed to it."
     )
     state = gr.State({"pts": [], "scale": 1.0, "frame": None})
     with gr.Row():
@@ -175,6 +192,12 @@ with gr.Blocks(title="track-counter demo") as demo:
             events_file = gr.File(label="events.csv")
     if EXAMPLES:
         gr.Examples(EXAMPLES, inputs=video, label="Example clips")
+    if ASSETS and (ASSETS / "gradio_demo.png").exists() and (ASSETS / "demo.gif").exists():
+        with gr.Accordion("What to expect: a clean scene and a crowded scene", open=False):
+            gr.Image(str(ASSETS / "gradio_demo.png"), label="Clean scene: two people who never overlap, counted in 2, out 0",
+                     interactive=False)
+            gr.Image(str(ASSETS / "demo.gif"), label="Crowded scene: boxes overlap and many people are missed",
+                     interactive=False)
     video.change(load_frame, video, [frame, state, line_box])
     frame.select(click, state, [frame, state, line_box])
     clear.click(reset, state, [frame, state, line_box])
