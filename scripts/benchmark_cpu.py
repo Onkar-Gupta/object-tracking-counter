@@ -21,7 +21,7 @@ from tqdm import tqdm
 
 from track_counter.cli import open_video, video_frames
 from track_counter.counter import LineCounter
-from track_counter.detectors import OnnxYoloxDetector
+from track_counter.detectors import OnnxYoloxDetector, TiledOnnxYoloxDetector
 from track_counter.tracking import Tracker
 
 
@@ -29,9 +29,9 @@ def ms_stats(values):
     return {"median_ms": float(np.median(values)), "p90_ms": float(np.percentile(values, 90))}
 
 
-def bench(model, video, line, frames, warmup, score_floor):
+def bench(model, video, line, frames, warmup, score_floor, tiled=False):
     cap, fps, _ = open_video(video)
-    detect = OnnxYoloxDetector(model, score_floor=score_floor, device="cpu")
+    detect = (TiledOnnxYoloxDetector if tiled else OnnxYoloxDetector)(model, score_floor=score_floor, device="cpu")
     tracker, counter = Tracker(fps), LineCounter(line)
     rows = {"decode": [], "detect": [], "track": [], "count": []}
     t = time.perf_counter()
@@ -49,7 +49,7 @@ def bench(model, video, line, frames, warmup, score_floor):
                 rows[k].append(v * 1000)
         t = time.perf_counter()
     total = np.array(rows["detect"]) + rows["track"] + rows["count"]
-    return {"model": Path(model).name, "timed_frames": len(total), "frame_size": list(image.shape[1::-1]),
+    return {"model": Path(model).name + (" (tiled)" if tiled else ""), "timed_frames": len(total), "frame_size": list(image.shape[1::-1]),
             "fps": float(1000 / np.median(total)), "chain": ms_stats(total),
             **{k: ms_stats(v) for k, v in rows.items()}}
 
@@ -62,11 +62,12 @@ def main():
     ap.add_argument("--frames", type=int, default=150)
     ap.add_argument("--warmup", type=int, default=10)
     ap.add_argument("--score-floor", type=float, default=0.4)
+    ap.add_argument("--tiled", action="store_true", help="time the tiled detector (about 9 model runs per frame)")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
     x1, y1, x2, y2 = (float(v) for v in args.line.split(","))
     import onnxruntime as ort
-    results = [bench(m, args.video, [[x1, y1], [x2, y2]], args.frames, args.warmup, args.score_floor)
+    results = [bench(m, args.video, [[x1, y1], [x2, y2]], args.frames, args.warmup, args.score_floor, args.tiled)
                for m in args.model]
     report = {"video": Path(args.video).name, "provider": "CPUExecutionProvider",
               "onnxruntime": ort.__version__, "machine": platform.processor(),

@@ -1,0 +1,39 @@
+{
+  "video": "DiagonalCrosswalkYongeDundas.webm",
+  "provider": "CPUExecutionProvider",
+  "onnxruntime": "1.24.4",
+  "machine": "Intel64 Family 6 Model 170 Stepping 4, GenuineIntel",
+  "logical_cpus": 22,
+  "os": "Windows-10-10.0.26200-SP0",
+  "results": [
+    {
+      "model": "yolox_s.onnx (tiled)",
+      "timed_frames": 40,
+      "frame_size": [
+        1920,
+        1080
+      ],
+      "fps": 2.0863087137796708,
+      "chain": {
+        "median_ms": 479.3154500075616,
+        "p90_ms": 495.8895300049335
+      },
+      "decode": {
+        "median_ms": 5.360949988244101,
+        "p90_ms": 5.88873999658972
+      },
+      "detect": {
+        "median_ms": 477.7168499713298,
+        "p90_ms": 493.3915299945511
+      },
+      "track": {
+        "median_ms": 1.48610002361238,
+        "p90_ms": 2.426720008952543
+      },
+      "count": {
+        "median_ms": 0.09940000018104911,
+        "p90_ms": 0.13258001417852938
+      }
+    }
+  ]
+}

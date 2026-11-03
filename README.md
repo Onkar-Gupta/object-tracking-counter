@@ -87,8 +87,9 @@ Full chain (detect, track, count) on 1080p video, single pass at 640 x 640, ONNX
 | **YOLOX-s (default)** | **19.1** | 51 ms |
 | YOLOX-m | 8.6 | 116 ms |
 | YOLOX-l | 4.4 | 226 ms |
+| YOLOX-s tiled (`--tiled`, 40 timed frames) | 2.1 | 478 ms |
 
-Tracking and counting add under 1 ms per frame. Video decoding is about 4 ms per frame. Tiled detection (`--tiled`) runs the model about 9 times per frame and is for accuracy, not speed. Its CPU speed is TBC.
+Tracking and counting add under 1 ms per frame. Video decoding is about 4 ms per frame. Tiled detection (`--tiled`) runs the model about 9 times per frame, so it is about 9 times slower than the default and is for accuracy, not speed. Its row uses 40 timed frames from [reports/cpu_benchmark_tiled.json](reports/cpu_benchmark_tiled.json), the same clip, line and machine as the rest.
 
 ### What we found
 
