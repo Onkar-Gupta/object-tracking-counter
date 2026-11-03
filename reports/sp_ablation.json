@@ -1,0 +1,5038 @@
+{
+  "protocol": "eval/ablation_protocol.md",
+  "detectors": {
+    "public FRCNN": {
+      "t": 0.3,
+      "grid_on_02_04": [
+        {
+          "n": 3,
+          "margin_px": 4,
+          "min_consecutive": 2,
+          "precision": 0.8888888888888888,
+          "recall": 0.5283018867924528,
+          "f1": 0.6627218934911243,
+          "pred_events": 63
+        },
+        {
+          "n": 3,
+          "margin_px": 4,
+          "min_consecutive": 4,
+          "precision": 0.859375,
+          "recall": 0.5188679245283019,
+          "f1": 0.6470588235294117,
+          "pred_events": 64
+        },
+        {
+          "n": 3,
+          "margin_px": 8,
+          "min_consecutive": 2,
+          "precision": 0.9454545454545454,
+          "recall": 0.49056603773584906,
+          "f1": 0.6459627329192547,
+          "pred_events": 55
+        },
+        {
+          "n": 3,
+          "margin_px": 8,
+          "min_consecutive": 4,
+          "precision": 0.9444444444444444,
+          "recall": 0.4811320754716981,
+          "f1": 0.6375000000000001,
+          "pred_events": 54
+        },
+        {
+          "n": 3,
+          "margin_px": 12,
+          "min_consecutive": 2,
+          "precision": 0.92,
+          "recall": 0.4339622641509434,
+          "f1": 0.5897435897435898,
+          "pred_events": 50
+        },
+        {
+          "n": 3,
+          "margin_px": 12,
+          "min_consecutive": 4,
+          "precision": 0.9019607843137255,
+          "recall": 0.4339622641509434,
+          "f1": 0.5859872611464968,
+          "pred_events": 51
+        },
+        {
+          "n": 5,
+          "margin_px": 4,
+          "min_consecutive": 2,
+          "precision": 0.9032258064516129,
+          "recall": 0.5283018867924528,
+          "f1": 0.6666666666666666,
+          "pred_events": 62
+        },
+        {
+          "n": 5,
+          "margin_px": 4,
+          "min_consecutive": 4,
+          "precision": 0.873015873015873,
+          "recall": 0.5188679245283019,
+          "f1": 0.650887573964497,
+          "pred_events": 63
+        },
+        {
+          "n": 5,
+          "margin_px": 8,
+          "min_consecutive": 2,
+          "precision": 0.9454545454545454,
+          "recall": 0.49056603773584906,
+          "f1": 0.6459627329192547,
+          "pred_events": 55
+        },
+        {
+          "n": 5,
+          "margin_px": 8,
+          "min_consecutive": 4,
+          "precision": 0.9444444444444444,
+          "recall": 0.4811320754716981,
+          "f1": 0.6375000000000001,
+          "pred_events": 54
+        },
+        {
+          "n": 5,
+          "margin_px": 12,
+          "min_consecutive": 2,
+          "precision": 0.92,
+          "recall": 0.4339622641509434,
+          "f1": 0.5897435897435898,
+          "pred_events": 50
+        },
+        {
+          "n": 5,
+          "margin_px": 12,
+          "min_consecutive": 4,
+          "precision": 0.9019607843137255,
+          "recall": 0.4339622641509434,
+          "f1": 0.5859872611464968,
+          "pred_events": 51
+        },
+        {
+          "n": 8,
+          "margin_px": 4,
+          "min_consecutive": 2,
+          "precision": 0.9016393442622951,
+          "recall": 0.5188679245283019,
+          "f1": 0.6586826347305389,
+          "pred_events": 61
+        },
+        {
+          "n": 8,
+          "margin_px": 4,
+          "min_consecutive": 4,
+          "precision": 0.8709677419354839,
+          "recall": 0.5094339622641509,
+          "f1": 0.6428571428571428,
+          "pred_events": 62
+        },
+        {
+          "n": 8,
+          "margin_px": 8,
+          "min_consecutive": 2,
+          "precision": 0.9629629629629629,
+          "recall": 0.49056603773584906,
+          "f1": 0.65,
+          "pred_events": 54
+        },
+        {
+          "n": 8,
+          "margin_px": 8,
+          "min_consecutive": 4,
+          "precision": 0.9433962264150944,
+          "recall": 0.4716981132075472,
+          "f1": 0.628930817610063,
+          "pred_events": 53
+        },
+        {
+          "n": 8,
+          "margin_px": 12,
+          "min_consecutive": 2,
+          "precision": 0.9333333333333333,
+          "recall": 0.39622641509433965,
+          "f1": 0.5562913907284769,
+          "pred_events": 45
+        },
+        {
+          "n": 8,
+          "margin_px": 12,
+          "min_consecutive": 4,
+          "precision": 0.9130434782608695,
+          "recall": 0.39622641509433965,
+          "f1": 0.5526315789473684,
+          "pred_events": 46
+        },
+        {
+          "n": 12,
+          "margin_px": 4,
+          "min_consecutive": 2,
+          "precision": 0.9629629629629629,
+          "recall": 0.49056603773584906,
+          "f1": 0.65,
+          "pred_events": 54
+        },
+        {
+          "n": 12,
+          "margin_px": 4,
+          "min_consecutive": 4,
+          "precision": 0.9272727272727272,
+          "recall": 0.4811320754716981,
+          "f1": 0.6335403726708074,
+          "pred_events": 55
+        },
+        {
+          "n": 12,
+          "margin_px": 8,
+          "min_consecutive": 2,
+          "precision": 0.98,
+          "recall": 0.46226415094339623,
+          "f1": 0.6282051282051282,
+          "pred_events": 50
+        },
+        {
+          "n": 12,
+          "margin_px": 8,
+          "min_consecutive": 4,
+          "precision": 0.9591836734693877,
+          "recall": 0.44339622641509435,
+          "f1": 0.6064516129032258,
+          "pred_events": 49
+        },
+        {
+          "n": 12,
+          "margin_px": 12,
+          "min_consecutive": 2,
+          "precision": 0.9302325581395349,
+          "recall": 0.37735849056603776,
+          "f1": 0.5369127516778524,
+          "pred_events": 43
+        },
+        {
+          "n": 12,
+          "margin_px": 12,
+          "min_consecutive": 4,
+          "precision": 0.9090909090909091,
+          "recall": 0.37735849056603776,
+          "f1": 0.5333333333333334,
+          "pred_events": 44
+        }
+      ],
+      "chosen": {
+        "n": 5,
+        "margin_px": 4,
+        "min_consecutive": 2,
+        "precision": 0.9032258064516129,
+        "recall": 0.5283018867924528,
+        "f1": 0.6666666666666666,
+        "pred_events": 62
+      },
+      "result": {
+        "settings": {
+          "min_conf": 0.1,
+          "counter": {
+            "anchor": "bottom_center",
+            "min_frames_on_far_side": 5,
+            "margin_px": 4,
+            "max_age_frames": 60,
+            "cooldown_frames": 0,
+            "min_track_frames": 0,
+            "merge_frames": 0,
+            "merge_px": 0,
+            "smooth_alpha": 1.0
+          },
+          "tracker": {
+            "lost_track_buffer": 30,
+            "track_activation_threshold": 0.3,
+            "minimum_consecutive_frames": 2,
+            "minimum_iou_threshold": 0.1,
+            "high_conf_det_threshold": 0.3
+          },
+          "tolerance_s": 1.0,
+          "position_tolerance": 0.1,
+          "gt_margin_px": 0.5,
+          "context_metric_tool": "trackers.eval (TrackEval-compatible), context only",
+          "detections": "MOT17 public FRCNN detections",
+          "note": "Visibility is the MOT17 annotation of the crossing person. Matching uses all ground-truth events, so precision is unaffected."
+        },
+        "pooled_over_all_lines": {
+          "gt_events": 146,
+          "pred_events": 80,
+          "tp": 71,
+          "fp": 9,
+          "fn": 75,
+          "double_count": 1,
+          "precision": 0.8875,
+          "recall": 0.4863013698630137,
+          "f1": 0.6283185840707964,
+          "double_count_rate": 0.0125,
+          "count_error_total": -66,
+          "count_error_pct_total": 45.20547945205479
+        },
+        "recall_by_gt_visibility": {
+          "0.0-0.3": {
+            "events": 50,
+            "found": 4,
+            "recall": 0.08
+          },
+          "0.3-0.5": {
+            "events": 17,
+            "found": 2,
+            "recall": 0.11764705882352941
+          },
+          "0.5-0.7": {
+            "events": 8,
+            "found": 4,
+            "recall": 0.5
+          },
+          "0.7-1.0": {
+            "events": 71,
+            "found": 61,
+            "recall": 0.8591549295774648
+          }
+        },
+        "confidence_intervals_95": {
+          "method": "bootstrap, 2000 resamples, seed 0, resampling people (recall: ground-truth person per sequence; precision: tracker ID per sequence)",
+          "recall": {
+            "estimate": 0.4863013698630137,
+            "ci": [
+              0.3873134641180416,
+              0.593761322463768
+            ],
+            "events": 146,
+            "clusters": 86
+          },
+          "recall_visibility_ge_0.7": {
+            "estimate": 0.8591549295774648,
+            "ci": [
+              0.7356148732862484,
+              0.9714386317907444
+            ],
+            "events": 71,
+            "clusters": 54
+          },
+          "recall_visibility_lt_0.5": {
+            "estimate": 0.08955223880597014,
+            "ci": [
+              0.029411764705882353,
+              0.16424129353233796
+            ],
+            "events": 67,
+            "clusters": 39
+          },
+          "precision": {
+            "estimate": 0.8875,
+            "ci": [
+              0.8160919540229885,
+              0.9506172839506173
+            ],
+            "events": 80,
+            "clusters": 61
+          }
+        },
+        "false_positive_causes": {
+          "double count": 1,
+          "wrong direction": 3,
+          "position off": 4,
+          "timing off": 1
+        },
+        "gt_margin_sensitivity": {
+          "note": "Same tracker output, ground truth rebuilt with a wider dead band. The primary result uses the smallest margin (strictest). A person swaying on the line gives many ground-truth crossings at small margins.",
+          "rows": [
+            {
+              "gt_margin_px": 0.5,
+              "gt_events": 146,
+              "precision": 0.8875,
+              "recall": 0.4863013698630137,
+              "f1": 0.6283185840707964,
+              "recall_visibility_ge_0.7": 0.8591549295774648
+            },
+            {
+              "gt_margin_px": 2.0,
+              "gt_events": 132,
+              "precision": 0.875,
+              "recall": 0.5303030303030303,
+              "f1": 0.660377358490566,
+              "recall_visibility_ge_0.7": 0.875
+            },
+            {
+              "gt_margin_px": 4.0,
+              "gt_events": 118,
+              "precision": 0.875,
+              "recall": 0.5932203389830508,
+              "f1": 0.707070707070707,
+              "recall_visibility_ge_0.7": 0.9552238805970149
+            },
+            {
+              "gt_margin_px": 8.0,
+              "gt_events": 105,
+              "precision": 0.825,
+              "recall": 0.6285714285714286,
+              "f1": 0.7135135135135136,
+              "recall_visibility_ge_0.7": 0.9365079365079365
+            }
+          ]
+        },
+        "tolerance_sensitivity": [
+          {
+            "tolerance_s": 0.5,
+            "position_tolerance": 0.05,
+            "precision": 0.8375,
+            "recall": 0.4589041095890411,
+            "f1": 0.5929203539823009
+          },
+          {
+            "tolerance_s": 0.5,
+            "position_tolerance": 0.1,
+            "precision": 0.8375,
+            "recall": 0.4589041095890411,
+            "f1": 0.5929203539823009
+          },
+          {
+            "tolerance_s": 0.5,
+            "position_tolerance": 0.2,
+            "precision": 0.8625,
+            "recall": 0.4726027397260274,
+            "f1": 0.6106194690265486
+          },
+          {
+            "tolerance_s": 1.0,
+            "position_tolerance": 0.05,
+            "precision": 0.8625,
+            "recall": 0.4726027397260274,
+            "f1": 0.6106194690265486
+          },
+          {
+            "tolerance_s": 1.0,
+            "position_tolerance": 0.1,
+            "precision": 0.8875,
+            "recall": 0.4863013698630137,
+            "f1": 0.6283185840707964
+          },
+          {
+            "tolerance_s": 1.0,
+            "position_tolerance": 0.2,
+            "precision": 0.9125,
+            "recall": 0.5,
+            "f1": 0.6460176991150441
+          },
+          {
+            "tolerance_s": 2.0,
+            "position_tolerance": 0.05,
+            "precision": 0.875,
+            "recall": 0.4794520547945205,
+            "f1": 0.6194690265486725
+          },
+          {
+            "tolerance_s": 2.0,
+            "position_tolerance": 0.1,
+            "precision": 0.925,
+            "recall": 0.5068493150684932,
+            "f1": 0.6548672566371682
+          },
+          {
+            "tolerance_s": 2.0,
+            "position_tolerance": 0.2,
+            "precision": 0.925,
+            "recall": 0.5068493150684932,
+            "f1": 0.6548672566371682
+          }
+        ],
+        "sequences": {
+          "MOT17-02-FRCNN": {
+            "fps": 30.0,
+            "frames": 600,
+            "lines": {
+              "mid": {
+                "line": [
+                  [
+                    0,
+                    540
+                  ],
+                  [
+                    1920,
+                    540
+                  ]
+                ],
+                "gt_events": 20,
+                "pred_events": 8,
+                "tp": 6,
+                "fp": 2,
+                "fn": 14,
+                "precision": 0.75,
+                "recall": 0.3,
+                "f1": 0.4285714285714285,
+                "double_count": 1,
+                "double_count_rate": 0.125,
+                "count_error_in": -8,
+                "count_error_pct_in": 100.0,
+                "count_error_out": -4,
+                "count_error_pct_out": 33.33333333333333,
+                "count_error_total": -12,
+                "count_error_pct_total": 60.0,
+                "gt_event_list": [
+                  {
+                    "frame": 41,
+                    "track_id": 72,
+                    "direction": "out",
+                    "position": 0.3764,
+                    "visibility": 0.227,
+                    "matched": false
+                  },
+                  {
+                    "frame": 129,
+                    "track_id": 72,
+                    "direction": "in",
+                    "position": 0.4202,
+                    "visibility": 0.009,
+                    "matched": false
+                  },
+                  {
+                    "frame": 137,
+                    "track_id": 31,
+                    "direction": "in",
+                    "position": 0.2443,
+                    "visibility": 0.514,
+                    "matched": false
+                  },
+                  {
+                    "frame": 139,
+                    "track_id": 39,
+                    "direction": "out",
+                    "position": 0.5878,
+                    "visibility": 0.462,
+                    "matched": false
+                  },
+                  {
+                    "frame": 151,
+                    "track_id": 31,
+                    "direction": "out",
+                    "position": 0.2527,
+                    "visibility": 0.196,
+                    "matched": true
+                  },
+                  {
+                    "frame": 190,
+                    "track_id": 67,
+                    "direction": "out",
+                    "position": 0.5052,
+                    "visibility": 0.003,
+                    "matched": false
+                  },
+                  {
+                    "frame": 229,
+                    "track_id": 15,
+                    "direction": "in",
+                    "position": 0.5229,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 253,
+                    "track_id": 67,
+                    "direction": "in",
+                    "position": 0.5234,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 422,
+                    "track_id": 54,
+                    "direction": "in",
+                    "position": 0.2605,
+                    "visibility": 0.136,
+                    "matched": false
+                  },
+                  {
+                    "frame": 441,
+                    "track_id": 40,
+                    "direction": "in",
+                    "position": 0.643,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 471,
+                    "track_id": 41,
+                    "direction": "out",
+                    "position": 0.551,
+                    "visibility": 0.164,
+                    "matched": true
+                  },
+                  {
+                    "frame": 492,
+                    "track_id": 42,
+                    "direction": "out",
+                    "position": 0.5589,
+                    "visibility": 0.24,
+                    "matched": false
+                  },
+                  {
+                    "frame": 493,
+                    "track_id": 43,
+                    "direction": "out",
+                    "position": 0.3353,
+                    "visibility": 0.669,
+                    "matched": true
+                  },
+                  {
+                    "frame": 521,
+                    "track_id": 44,
+                    "direction": "out",
+                    "position": 0.3837,
+                    "visibility": 0.741,
+                    "matched": false
+                  },
+                  {
+                    "frame": 541,
+                    "track_id": 79,
+                    "direction": "in",
+                    "position": 0.5551,
+                    "visibility": 0.039,
+                    "matched": false
+                  },
+                  {
+                    "frame": 556,
+                    "track_id": 79,
+                    "direction": "out",
+                    "position": 0.5539,
+                    "visibility": 0.198,
+                    "matched": true
+                  },
+                  {
+                    "frame": 567,
+                    "track_id": 15,
+                    "direction": "out",
+                    "position": 0.5203,
+                    "visibility": 0.001,
+                    "matched": false
+                  },
+                  {
+                    "frame": 575,
+                    "track_id": 49,
+                    "direction": "out",
+                    "position": 0.2944,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 577,
+                    "track_id": 79,
+                    "direction": "in",
+                    "position": 0.5525,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 580,
+                    "track_id": 48,
+                    "direction": "out",
+                    "position": 0.3135,
+                    "visibility": 1.0,
+                    "matched": true
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 148,
+                    "track_id": 21,
+                    "direction": "out",
+                    "position": 0.2757,
+                    "matched": false,
+                    "fp_cause": "double count"
+                  },
+                  {
+                    "frame": 151,
+                    "track_id": 19,
+                    "direction": "out",
+                    "position": 0.2816,
+                    "matched": true
+                  },
+                  {
+                    "frame": 458,
+                    "track_id": 73,
+                    "direction": "out",
+                    "position": 0.5548,
+                    "matched": true
+                  },
+                  {
+                    "frame": 439,
+                    "track_id": 65,
+                    "direction": "out",
+                    "position": 0.2844,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 494,
+                    "track_id": 81,
+                    "direction": "out",
+                    "position": 0.3377,
+                    "matched": true
+                  },
+                  {
+                    "frame": 540,
+                    "track_id": 82,
+                    "direction": "out",
+                    "position": 0.6212,
+                    "matched": true
+                  },
+                  {
+                    "frame": 578,
+                    "track_id": 77,
+                    "direction": "out",
+                    "position": 0.3088,
+                    "matched": true
+                  },
+                  {
+                    "frame": 587,
+                    "track_id": 79,
+                    "direction": "out",
+                    "position": 0.2925,
+                    "matched": true
+                  }
+                ]
+              },
+              "vert": {
+                "line": [
+                  [
+                    960,
+                    0
+                  ],
+                  [
+                    960,
+                    1080
+                  ]
+                ],
+                "gt_events": 21,
+                "pred_events": 10,
+                "tp": 9,
+                "fp": 1,
+                "fn": 12,
+                "precision": 0.9,
+                "recall": 0.42857142857142855,
+                "f1": 0.5806451612903225,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -8,
+                "count_error_pct_in": 50.0,
+                "count_error_out": -3,
+                "count_error_pct_out": 60.0,
+                "count_error_total": -11,
+                "count_error_pct_total": 52.38095238095239,
+                "gt_event_list": [
+                  {
+                    "frame": 124,
+                    "track_id": 18,
+                    "direction": "in",
+                    "position": 0.5102,
+                    "visibility": 0.406,
+                    "matched": false
+                  },
+                  {
+                    "frame": 142,
+                    "track_id": 71,
+                    "direction": "out",
+                    "position": 0.4796,
+                    "visibility": 0.05,
+                    "matched": false
+                  },
+                  {
+                    "frame": 164,
+                    "track_id": 37,
+                    "direction": "in",
+                    "position": 0.6407,
+                    "visibility": 0.567,
+                    "matched": true
+                  },
+                  {
+                    "frame": 176,
+                    "track_id": 67,
+                    "direction": "in",
+                    "position": 0.4981,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 183,
+                    "track_id": 20,
+                    "direction": "in",
+                    "position": 0.6938,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 183,
+                    "track_id": 40,
+                    "direction": "in",
+                    "position": 0.5301,
+                    "visibility": 0.015,
+                    "matched": false
+                  },
+                  {
+                    "frame": 183,
+                    "track_id": 70,
+                    "direction": "out",
+                    "position": 0.488,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 223,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.7733,
+                    "visibility": 0.596,
+                    "matched": false
+                  },
+                  {
+                    "frame": 246,
+                    "track_id": 19,
+                    "direction": "in",
+                    "position": 0.9383,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 301,
+                    "track_id": 23,
+                    "direction": "in",
+                    "position": 0.8664,
+                    "visibility": 0.853,
+                    "matched": true
+                  },
+                  {
+                    "frame": 352,
+                    "track_id": 36,
+                    "direction": "in",
+                    "position": 0.6105,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 365,
+                    "track_id": 15,
+                    "direction": "out",
+                    "position": 0.4852,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 378,
+                    "track_id": 41,
+                    "direction": "in",
+                    "position": 0.4852,
+                    "visibility": 0.046,
+                    "matched": false
+                  },
+                  {
+                    "frame": 392,
+                    "track_id": 38,
+                    "direction": "out",
+                    "position": 0.5759,
+                    "visibility": 0.785,
+                    "matched": true
+                  },
+                  {
+                    "frame": 407,
+                    "track_id": 42,
+                    "direction": "in",
+                    "position": 0.488,
+                    "visibility": 0.321,
+                    "matched": false
+                  },
+                  {
+                    "frame": 488,
+                    "track_id": 33,
+                    "direction": "in",
+                    "position": 0.6296,
+                    "visibility": 0.821,
+                    "matched": true
+                  },
+                  {
+                    "frame": 508,
+                    "track_id": 34,
+                    "direction": "in",
+                    "position": 0.6741,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 509,
+                    "track_id": 15,
+                    "direction": "in",
+                    "position": 0.4843,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 532,
+                    "track_id": 32,
+                    "direction": "in",
+                    "position": 0.6546,
+                    "visibility": 0.94,
+                    "matched": true
+                  },
+                  {
+                    "frame": 550,
+                    "track_id": 18,
+                    "direction": "out",
+                    "position": 0.5037,
+                    "visibility": 0.008,
+                    "matched": false
+                  },
+                  {
+                    "frame": 564,
+                    "track_id": 35,
+                    "direction": "in",
+                    "position": 0.6302,
+                    "visibility": 0.955,
+                    "matched": true
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 175,
+                    "track_id": 0,
+                    "direction": "in",
+                    "position": 0.6527,
+                    "matched": true
+                  },
+                  {
+                    "frame": 184,
+                    "track_id": 16,
+                    "direction": "in",
+                    "position": 0.6933,
+                    "matched": true
+                  },
+                  {
+                    "frame": 247,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.9509,
+                    "matched": true
+                  },
+                  {
+                    "frame": 303,
+                    "track_id": 4,
+                    "direction": "in",
+                    "position": 0.8685,
+                    "matched": true
+                  },
+                  {
+                    "frame": 394,
+                    "track_id": 59,
+                    "direction": "out",
+                    "position": 0.5741,
+                    "matched": true
+                  },
+                  {
+                    "frame": 476,
+                    "track_id": 62,
+                    "direction": "out",
+                    "position": 0.5676,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 488,
+                    "track_id": 62,
+                    "direction": "in",
+                    "position": 0.6349,
+                    "matched": true
+                  },
+                  {
+                    "frame": 508,
+                    "track_id": 52,
+                    "direction": "in",
+                    "position": 0.6746,
+                    "matched": true
+                  },
+                  {
+                    "frame": 534,
+                    "track_id": 90,
+                    "direction": "in",
+                    "position": 0.6602,
+                    "matched": true
+                  },
+                  {
+                    "frame": 565,
+                    "track_id": 58,
+                    "direction": "in",
+                    "position": 0.6313,
+                    "matched": true
+                  }
+                ]
+              }
+            },
+            "context_metrics": {
+              "HOTA": 0.3325455618384412,
+              "IDF1": 0.3805481734163659,
+              "MOTA": 0.3244712340562941,
+              "IDSW": 87
+            }
+          },
+          "MOT17-04-FRCNN": {
+            "fps": 30.0,
+            "frames": 1050,
+            "lines": {
+              "upper": {
+                "line": [
+                  [
+                    0,
+                    270
+                  ],
+                  [
+                    1920,
+                    270
+                  ]
+                ],
+                "gt_events": 33,
+                "pred_events": 27,
+                "tp": 24,
+                "fp": 3,
+                "fn": 9,
+                "precision": 0.8888888888888888,
+                "recall": 0.7272727272727273,
+                "f1": 0.7999999999999999,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -3,
+                "count_error_pct_in": 20.0,
+                "count_error_out": -3,
+                "count_error_pct_out": 16.666666666666664,
+                "count_error_total": -6,
+                "count_error_pct_total": 18.181818181818183,
+                "gt_event_list": [
+                  {
+                    "frame": 74,
+                    "track_id": 89,
+                    "direction": "out",
+                    "position": 0.2599,
+                    "visibility": 0.659,
+                    "matched": true
+                  },
+                  {
+                    "frame": 235,
+                    "track_id": 75,
+                    "direction": "in",
+                    "position": 0.4281,
+                    "visibility": 0.343,
+                    "matched": false
+                  },
+                  {
+                    "frame": 244,
+                    "track_id": 74,
+                    "direction": "in",
+                    "position": 0.4944,
+                    "visibility": 0.222,
+                    "matched": true
+                  },
+                  {
+                    "frame": 251,
+                    "track_id": 75,
+                    "direction": "out",
+                    "position": 0.4133,
+                    "visibility": 0.69,
+                    "matched": false
+                  },
+                  {
+                    "frame": 256,
+                    "track_id": 63,
+                    "direction": "in",
+                    "position": 0.6093,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 257,
+                    "track_id": 75,
+                    "direction": "in",
+                    "position": 0.4105,
+                    "visibility": 0.76,
+                    "matched": false
+                  },
+                  {
+                    "frame": 268,
+                    "track_id": 75,
+                    "direction": "out",
+                    "position": 0.4052,
+                    "visibility": 0.819,
+                    "matched": false
+                  },
+                  {
+                    "frame": 270,
+                    "track_id": 67,
+                    "direction": "in",
+                    "position": 0.507,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 300,
+                    "track_id": 65,
+                    "direction": "in",
+                    "position": 0.5411,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 304,
+                    "track_id": 75,
+                    "direction": "in",
+                    "position": 0.3964,
+                    "visibility": 0.774,
+                    "matched": true
+                  },
+                  {
+                    "frame": 314,
+                    "track_id": 66,
+                    "direction": "in",
+                    "position": 0.2775,
+                    "visibility": 0.734,
+                    "matched": false
+                  },
+                  {
+                    "frame": 380,
+                    "track_id": 2,
+                    "direction": "in",
+                    "position": 0.25,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 388,
+                    "track_id": 118,
+                    "direction": "out",
+                    "position": 0.9405,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 417,
+                    "track_id": 98,
+                    "direction": "out",
+                    "position": 0.2349,
+                    "visibility": 0.933,
+                    "matched": true
+                  },
+                  {
+                    "frame": 442,
+                    "track_id": 121,
+                    "direction": "out",
+                    "position": 0.9006,
+                    "visibility": 0.823,
+                    "matched": true
+                  },
+                  {
+                    "frame": 518,
+                    "track_id": 86,
+                    "direction": "out",
+                    "position": 0.2831,
+                    "visibility": 0.829,
+                    "matched": true
+                  },
+                  {
+                    "frame": 561,
+                    "track_id": 99,
+                    "direction": "in",
+                    "position": 0.2582,
+                    "visibility": 0.799,
+                    "matched": true
+                  },
+                  {
+                    "frame": 592,
+                    "track_id": 80,
+                    "direction": "in",
+                    "position": 0.2581,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 642,
+                    "track_id": 124,
+                    "direction": "out",
+                    "position": 0.2539,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 648,
+                    "track_id": 125,
+                    "direction": "out",
+                    "position": 0.2339,
+                    "visibility": 0.841,
+                    "matched": true
+                  },
+                  {
+                    "frame": 742,
+                    "track_id": 106,
+                    "direction": "in",
+                    "position": 0.7762,
+                    "visibility": 0.994,
+                    "matched": true
+                  },
+                  {
+                    "frame": 749,
+                    "track_id": 105,
+                    "direction": "in",
+                    "position": 0.8466,
+                    "visibility": 0.84,
+                    "matched": true
+                  },
+                  {
+                    "frame": 761,
+                    "track_id": 91,
+                    "direction": "out",
+                    "position": 0.1949,
+                    "visibility": 0.173,
+                    "matched": false
+                  },
+                  {
+                    "frame": 775,
+                    "track_id": 91,
+                    "direction": "in",
+                    "position": 0.194,
+                    "visibility": 0.193,
+                    "matched": false
+                  },
+                  {
+                    "frame": 803,
+                    "track_id": 132,
+                    "direction": "out",
+                    "position": 0.2654,
+                    "visibility": 0.931,
+                    "matched": true
+                  },
+                  {
+                    "frame": 805,
+                    "track_id": 133,
+                    "direction": "out",
+                    "position": 0.2344,
+                    "visibility": 0.771,
+                    "matched": true
+                  },
+                  {
+                    "frame": 829,
+                    "track_id": 134,
+                    "direction": "out",
+                    "position": 0.263,
+                    "visibility": 0.123,
+                    "matched": false
+                  },
+                  {
+                    "frame": 871,
+                    "track_id": 96,
+                    "direction": "in",
+                    "position": 0.1187,
+                    "visibility": 0.207,
+                    "matched": false
+                  },
+                  {
+                    "frame": 922,
+                    "track_id": 107,
+                    "direction": "out",
+                    "position": 0.9133,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 926,
+                    "track_id": 111,
+                    "direction": "out",
+                    "position": 0.784,
+                    "visibility": 0.824,
+                    "matched": true
+                  },
+                  {
+                    "frame": 956,
+                    "track_id": 108,
+                    "direction": "out",
+                    "position": 0.8686,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 972,
+                    "track_id": 112,
+                    "direction": "out",
+                    "position": 0.6193,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1033,
+                    "track_id": 117,
+                    "direction": "out",
+                    "position": 0.2682,
+                    "visibility": 0.32,
+                    "matched": true
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 70,
+                    "track_id": 18,
+                    "direction": "out",
+                    "position": 0.2567,
+                    "matched": true
+                  },
+                  {
+                    "frame": 77,
+                    "track_id": 33,
+                    "direction": "out",
+                    "position": 0.1472,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  },
+                  {
+                    "frame": 249,
+                    "track_id": 22,
+                    "direction": "in",
+                    "position": 0.4992,
+                    "matched": true
+                  },
+                  {
+                    "frame": 262,
+                    "track_id": 40,
+                    "direction": "in",
+                    "position": 0.6063,
+                    "matched": true
+                  },
+                  {
+                    "frame": 276,
+                    "track_id": 6,
+                    "direction": "in",
+                    "position": 0.5077,
+                    "matched": true
+                  },
+                  {
+                    "frame": 302,
+                    "track_id": 28,
+                    "direction": "in",
+                    "position": 0.5418,
+                    "matched": true
+                  },
+                  {
+                    "frame": 333,
+                    "track_id": 26,
+                    "direction": "in",
+                    "position": 0.3905,
+                    "matched": true
+                  },
+                  {
+                    "frame": 347,
+                    "track_id": 41,
+                    "direction": "in",
+                    "position": 0.279,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 391,
+                    "track_id": 14,
+                    "direction": "in",
+                    "position": 0.253,
+                    "matched": true
+                  },
+                  {
+                    "frame": 391,
+                    "track_id": 47,
+                    "direction": "out",
+                    "position": 0.9412,
+                    "matched": true
+                  },
+                  {
+                    "frame": 420,
+                    "track_id": 60,
+                    "direction": "out",
+                    "position": 0.236,
+                    "matched": true
+                  },
+                  {
+                    "frame": 444,
+                    "track_id": 51,
+                    "direction": "out",
+                    "position": 0.9017,
+                    "matched": true
+                  },
+                  {
+                    "frame": 456,
+                    "track_id": 51,
+                    "direction": "in",
+                    "position": 0.9071,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 517,
+                    "track_id": 41,
+                    "direction": "out",
+                    "position": 0.2831,
+                    "matched": true
+                  },
+                  {
+                    "frame": 561,
+                    "track_id": 4,
+                    "direction": "in",
+                    "position": 0.2573,
+                    "matched": true
+                  },
+                  {
+                    "frame": 593,
+                    "track_id": 72,
+                    "direction": "in",
+                    "position": 0.2599,
+                    "matched": true
+                  },
+                  {
+                    "frame": 643,
+                    "track_id": 62,
+                    "direction": "out",
+                    "position": 0.2543,
+                    "matched": true
+                  },
+                  {
+                    "frame": 643,
+                    "track_id": 73,
+                    "direction": "out",
+                    "position": 0.2323,
+                    "matched": true
+                  },
+                  {
+                    "frame": 743,
+                    "track_id": 79,
+                    "direction": "in",
+                    "position": 0.7768,
+                    "matched": true
+                  },
+                  {
+                    "frame": 758,
+                    "track_id": 65,
+                    "direction": "in",
+                    "position": 0.8437,
+                    "matched": true
+                  },
+                  {
+                    "frame": 803,
+                    "track_id": 75,
+                    "direction": "out",
+                    "position": 0.2649,
+                    "matched": true
+                  },
+                  {
+                    "frame": 809,
+                    "track_id": 87,
+                    "direction": "out",
+                    "position": 0.2355,
+                    "matched": true
+                  },
+                  {
+                    "frame": 923,
+                    "track_id": 65,
+                    "direction": "out",
+                    "position": 0.9124,
+                    "matched": true
+                  },
+                  {
+                    "frame": 923,
+                    "track_id": 67,
+                    "direction": "out",
+                    "position": 0.7852,
+                    "matched": true
+                  },
+                  {
+                    "frame": 952,
+                    "track_id": 91,
+                    "direction": "out",
+                    "position": 0.8664,
+                    "matched": true
+                  },
+                  {
+                    "frame": 978,
+                    "track_id": 89,
+                    "direction": "out",
+                    "position": 0.6222,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1017,
+                    "track_id": 101,
+                    "direction": "out",
+                    "position": 0.2109,
+                    "matched": true
+                  }
+                ]
+              },
+              "vert": {
+                "line": [
+                  [
+                    480,
+                    0
+                  ],
+                  [
+                    480,
+                    1080
+                  ]
+                ],
+                "gt_events": 32,
+                "pred_events": 17,
+                "tp": 17,
+                "fp": 0,
+                "fn": 15,
+                "precision": 1.0,
+                "recall": 0.53125,
+                "f1": 0.6938775510204082,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -8,
+                "count_error_pct_in": 44.44444444444444,
+                "count_error_out": -7,
+                "count_error_pct_out": 50.0,
+                "count_error_total": -15,
+                "count_error_pct_total": 46.875,
+                "gt_event_list": [
+                  {
+                    "frame": 28,
+                    "track_id": 84,
+                    "direction": "out",
+                    "position": 0.2106,
+                    "visibility": 0.697,
+                    "matched": true
+                  },
+                  {
+                    "frame": 62,
+                    "track_id": 89,
+                    "direction": "in",
+                    "position": 0.2417,
+                    "visibility": 0.816,
+                    "matched": true
+                  },
+                  {
+                    "frame": 147,
+                    "track_id": 84,
+                    "direction": "in",
+                    "position": 0.1179,
+                    "visibility": 0.373,
+                    "matched": false
+                  },
+                  {
+                    "frame": 153,
+                    "track_id": 87,
+                    "direction": "out",
+                    "position": 0.1845,
+                    "visibility": 0.997,
+                    "matched": true
+                  },
+                  {
+                    "frame": 159,
+                    "track_id": 84,
+                    "direction": "out",
+                    "position": 0.1097,
+                    "visibility": 0.339,
+                    "matched": false
+                  },
+                  {
+                    "frame": 175,
+                    "track_id": 84,
+                    "direction": "in",
+                    "position": 0.1005,
+                    "visibility": 0.501,
+                    "matched": false
+                  },
+                  {
+                    "frame": 242,
+                    "track_id": 2,
+                    "direction": "in",
+                    "position": 0.3625,
+                    "visibility": 0.957,
+                    "matched": true
+                  },
+                  {
+                    "frame": 288,
+                    "track_id": 85,
+                    "direction": "in",
+                    "position": 0.0301,
+                    "visibility": 0.226,
+                    "matched": false
+                  },
+                  {
+                    "frame": 311,
+                    "track_id": 83,
+                    "direction": "out",
+                    "position": 0.6185,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 343,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.7625,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 350,
+                    "track_id": 2,
+                    "direction": "out",
+                    "position": 0.2718,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 373,
+                    "track_id": 99,
+                    "direction": "in",
+                    "position": 0.481,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 381,
+                    "track_id": 2,
+                    "direction": "in",
+                    "position": 0.2509,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 386,
+                    "track_id": 82,
+                    "direction": "out",
+                    "position": 0.7373,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 541,
+                    "track_id": 132,
+                    "direction": "out",
+                    "position": 0.0463,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 579,
+                    "track_id": 80,
+                    "direction": "in",
+                    "position": 0.256,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 586,
+                    "track_id": 134,
+                    "direction": "out",
+                    "position": 0.069,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 633,
+                    "track_id": 124,
+                    "direction": "in",
+                    "position": 0.244,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 662,
+                    "track_id": 3,
+                    "direction": "out",
+                    "position": 0.7185,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 677,
+                    "track_id": 2,
+                    "direction": "out",
+                    "position": 0.0662,
+                    "visibility": 0.012,
+                    "matched": false
+                  },
+                  {
+                    "frame": 739,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.7458,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 745,
+                    "track_id": 99,
+                    "direction": "out",
+                    "position": 0.0574,
+                    "visibility": 0.09,
+                    "matched": false
+                  },
+                  {
+                    "frame": 757,
+                    "track_id": 134,
+                    "direction": "in",
+                    "position": 0.1875,
+                    "visibility": 0.104,
+                    "matched": false
+                  },
+                  {
+                    "frame": 758,
+                    "track_id": 132,
+                    "direction": "in",
+                    "position": 0.215,
+                    "visibility": 0.743,
+                    "matched": true
+                  },
+                  {
+                    "frame": 772,
+                    "track_id": 124,
+                    "direction": "out",
+                    "position": 0.3625,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 777,
+                    "track_id": 80,
+                    "direction": "out",
+                    "position": 0.0972,
+                    "visibility": 0.486,
+                    "matched": false
+                  },
+                  {
+                    "frame": 838,
+                    "track_id": 80,
+                    "direction": "in",
+                    "position": 0.0602,
+                    "visibility": 0.464,
+                    "matched": false
+                  },
+                  {
+                    "frame": 936,
+                    "track_id": 132,
+                    "direction": "out",
+                    "position": 0.3787,
+                    "visibility": 0.963,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1001,
+                    "track_id": 127,
+                    "direction": "in",
+                    "position": 0.169,
+                    "visibility": 0.371,
+                    "matched": false
+                  },
+                  {
+                    "frame": 1017,
+                    "track_id": 69,
+                    "direction": "in",
+                    "position": 0.3324,
+                    "visibility": 0.826,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1042,
+                    "track_id": 68,
+                    "direction": "in",
+                    "position": 0.3148,
+                    "visibility": 0.78,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1045,
+                    "track_id": 129,
+                    "direction": "in",
+                    "position": 0.1639,
+                    "visibility": 0.255,
+                    "matched": false
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 34,
+                    "track_id": 20,
+                    "direction": "out",
+                    "position": 0.2119,
+                    "matched": true
+                  },
+                  {
+                    "frame": 64,
+                    "track_id": 18,
+                    "direction": "in",
+                    "position": 0.2429,
+                    "matched": true
+                  },
+                  {
+                    "frame": 156,
+                    "track_id": 36,
+                    "direction": "out",
+                    "position": 0.1847,
+                    "matched": true
+                  },
+                  {
+                    "frame": 243,
+                    "track_id": 14,
+                    "direction": "in",
+                    "position": 0.3636,
+                    "matched": true
+                  },
+                  {
+                    "frame": 315,
+                    "track_id": 4,
+                    "direction": "out",
+                    "position": 0.6218,
+                    "matched": true
+                  },
+                  {
+                    "frame": 344,
+                    "track_id": 11,
+                    "direction": "in",
+                    "position": 0.766,
+                    "matched": true
+                  },
+                  {
+                    "frame": 376,
+                    "track_id": 4,
+                    "direction": "in",
+                    "position": 0.4861,
+                    "matched": true
+                  },
+                  {
+                    "frame": 389,
+                    "track_id": 46,
+                    "direction": "out",
+                    "position": 0.744,
+                    "matched": true
+                  },
+                  {
+                    "frame": 581,
+                    "track_id": 72,
+                    "direction": "in",
+                    "position": 0.2613,
+                    "matched": true
+                  },
+                  {
+                    "frame": 635,
+                    "track_id": 62,
+                    "direction": "in",
+                    "position": 0.2411,
+                    "matched": true
+                  },
+                  {
+                    "frame": 662,
+                    "track_id": 11,
+                    "direction": "out",
+                    "position": 0.7186,
+                    "matched": true
+                  },
+                  {
+                    "frame": 741,
+                    "track_id": 11,
+                    "direction": "in",
+                    "position": 0.7471,
+                    "matched": true
+                  },
+                  {
+                    "frame": 760,
+                    "track_id": 75,
+                    "direction": "in",
+                    "position": 0.2168,
+                    "matched": true
+                  },
+                  {
+                    "frame": 779,
+                    "track_id": 62,
+                    "direction": "out",
+                    "position": 0.3626,
+                    "matched": true
+                  },
+                  {
+                    "frame": 941,
+                    "track_id": 75,
+                    "direction": "out",
+                    "position": 0.3789,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1019,
+                    "track_id": 102,
+                    "direction": "in",
+                    "position": 0.3338,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1041,
+                    "track_id": 104,
+                    "direction": "in",
+                    "position": 0.3163,
+                    "matched": true
+                  }
+                ]
+              }
+            },
+            "context_metrics": {
+              "HOTA": 0.5168369915614862,
+              "IDF1": 0.5934508268059182,
+              "MOTA": 0.5429274344470846,
+              "IDSW": 49
+            }
+          },
+          "MOT17-09-FRCNN": {
+            "fps": 30.0,
+            "frames": 525,
+            "lines": {
+              "lower": {
+                "line": [
+                  [
+                    0,
+                    648
+                  ],
+                  [
+                    1920,
+                    648
+                  ]
+                ],
+                "gt_events": 20,
+                "pred_events": 7,
+                "tp": 4,
+                "fp": 3,
+                "fn": 16,
+                "precision": 0.5714285714285714,
+                "recall": 0.2,
+                "f1": 0.29629629629629634,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -9,
+                "count_error_pct_in": 64.28571428571429,
+                "count_error_out": -4,
+                "count_error_pct_out": 66.66666666666666,
+                "count_error_total": -13,
+                "count_error_pct_total": 65.0,
+                "gt_event_list": [
+                  {
+                    "frame": 205,
+                    "track_id": 23,
+                    "direction": "in",
+                    "position": 0.8835,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 229,
+                    "track_id": 18,
+                    "direction": "in",
+                    "position": 0.8848,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 366,
+                    "track_id": 8,
+                    "direction": "in",
+                    "position": 0.9673,
+                    "visibility": 0.268,
+                    "matched": false
+                  },
+                  {
+                    "frame": 374,
+                    "track_id": 8,
+                    "direction": "out",
+                    "position": 0.9721,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 376,
+                    "track_id": 8,
+                    "direction": "in",
+                    "position": 0.9747,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 380,
+                    "track_id": 10,
+                    "direction": "in",
+                    "position": 0.9405,
+                    "visibility": 0.347,
+                    "matched": false
+                  },
+                  {
+                    "frame": 395,
+                    "track_id": 7,
+                    "direction": "in",
+                    "position": 0.9347,
+                    "visibility": 0.335,
+                    "matched": false
+                  },
+                  {
+                    "frame": 397,
+                    "track_id": 7,
+                    "direction": "out",
+                    "position": 0.9344,
+                    "visibility": 0.333,
+                    "matched": false
+                  },
+                  {
+                    "frame": 406,
+                    "track_id": 1,
+                    "direction": "in",
+                    "position": 0.9181,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 422,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.6565,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 433,
+                    "track_id": 29,
+                    "direction": "in",
+                    "position": 0.9815,
+                    "visibility": 0.205,
+                    "matched": false
+                  },
+                  {
+                    "frame": 450,
+                    "track_id": 13,
+                    "direction": "in",
+                    "position": 0.9456,
+                    "visibility": 0.234,
+                    "matched": false
+                  },
+                  {
+                    "frame": 453,
+                    "track_id": 11,
+                    "direction": "in",
+                    "position": 0.9197,
+                    "visibility": 0.333,
+                    "matched": true
+                  },
+                  {
+                    "frame": 468,
+                    "track_id": 9,
+                    "direction": "out",
+                    "position": 0.6004,
+                    "visibility": 0.499,
+                    "matched": false
+                  },
+                  {
+                    "frame": 476,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.6195,
+                    "visibility": 0.839,
+                    "matched": false
+                  },
+                  {
+                    "frame": 490,
+                    "track_id": 9,
+                    "direction": "out",
+                    "position": 0.6594,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 494,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.6723,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 503,
+                    "track_id": 9,
+                    "direction": "out",
+                    "position": 0.6974,
+                    "visibility": 0.871,
+                    "matched": false
+                  },
+                  {
+                    "frame": 509,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.7135,
+                    "visibility": 0.357,
+                    "matched": false
+                  },
+                  {
+                    "frame": 512,
+                    "track_id": 9,
+                    "direction": "out",
+                    "position": 0.7237,
+                    "visibility": 0.125,
+                    "matched": false
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 217,
+                    "track_id": 8,
+                    "direction": "in",
+                    "position": 0.8915,
+                    "matched": true
+                  },
+                  {
+                    "frame": 236,
+                    "track_id": 14,
+                    "direction": "in",
+                    "position": 0.9085,
+                    "matched": true
+                  },
+                  {
+                    "frame": 436,
+                    "track_id": 27,
+                    "direction": "in",
+                    "position": 0.7035,
+                    "matched": true
+                  },
+                  {
+                    "frame": 470,
+                    "track_id": 27,
+                    "direction": "out",
+                    "position": 0.7819,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  },
+                  {
+                    "frame": 472,
+                    "track_id": 31,
+                    "direction": "in",
+                    "position": 0.9663,
+                    "matched": true
+                  },
+                  {
+                    "frame": 505,
+                    "track_id": 32,
+                    "direction": "in",
+                    "position": 0.8535,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  },
+                  {
+                    "frame": 519,
+                    "track_id": 31,
+                    "direction": "out",
+                    "position": 0.9792,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  }
+                ]
+              },
+              "vert": {
+                "line": [
+                  [
+                    1440,
+                    0
+                  ],
+                  [
+                    1440,
+                    1080
+                  ]
+                ],
+                "gt_events": 20,
+                "pred_events": 11,
+                "tp": 11,
+                "fp": 0,
+                "fn": 9,
+                "precision": 1.0,
+                "recall": 0.55,
+                "f1": 0.7096774193548387,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -9,
+                "count_error_pct_in": 56.25,
+                "count_error_out": 0,
+                "count_error_pct_out": 0.0,
+                "count_error_total": -9,
+                "count_error_pct_total": 45.0,
+                "gt_event_list": [
+                  {
+                    "frame": 107,
+                    "track_id": 19,
+                    "direction": "out",
+                    "position": 0.8363,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 140,
+                    "track_id": 23,
+                    "direction": "in",
+                    "position": 0.6522,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 143,
+                    "track_id": 20,
+                    "direction": "out",
+                    "position": 0.943,
+                    "visibility": 0.979,
+                    "matched": true
+                  },
+                  {
+                    "frame": 180,
+                    "track_id": 18,
+                    "direction": "in",
+                    "position": 0.6074,
+                    "visibility": 0.175,
+                    "matched": false
+                  },
+                  {
+                    "frame": 182,
+                    "track_id": 22,
+                    "direction": "in",
+                    "position": 0.6315,
+                    "visibility": 0.883,
+                    "matched": true
+                  },
+                  {
+                    "frame": 206,
+                    "track_id": 21,
+                    "direction": "in",
+                    "position": 0.6435,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 262,
+                    "track_id": 8,
+                    "direction": "in",
+                    "position": 0.6776,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 280,
+                    "track_id": 10,
+                    "direction": "in",
+                    "position": 0.6413,
+                    "visibility": 0.071,
+                    "matched": false
+                  },
+                  {
+                    "frame": 297,
+                    "track_id": 29,
+                    "direction": "in",
+                    "position": 0.6938,
+                    "visibility": 0.118,
+                    "matched": false
+                  },
+                  {
+                    "frame": 300,
+                    "track_id": 12,
+                    "direction": "in",
+                    "position": 0.7325,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 304,
+                    "track_id": 7,
+                    "direction": "in",
+                    "position": 0.6551,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 320,
+                    "track_id": 1,
+                    "direction": "in",
+                    "position": 0.6412,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 352,
+                    "track_id": 11,
+                    "direction": "in",
+                    "position": 0.6486,
+                    "visibility": 0.054,
+                    "matched": false
+                  },
+                  {
+                    "frame": 356,
+                    "track_id": 13,
+                    "direction": "in",
+                    "position": 0.6577,
+                    "visibility": 0.792,
+                    "matched": true
+                  },
+                  {
+                    "frame": 453,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.5976,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 480,
+                    "track_id": 6,
+                    "direction": "in",
+                    "position": 0.6581,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 486,
+                    "track_id": 17,
+                    "direction": "in",
+                    "position": 0.5971,
+                    "visibility": 0.13,
+                    "matched": false
+                  },
+                  {
+                    "frame": 504,
+                    "track_id": 14,
+                    "direction": "out",
+                    "position": 0.6217,
+                    "visibility": 0.867,
+                    "matched": true
+                  },
+                  {
+                    "frame": 514,
+                    "track_id": 15,
+                    "direction": "out",
+                    "position": 0.6148,
+                    "visibility": 0.745,
+                    "matched": true
+                  },
+                  {
+                    "frame": 520,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.6079,
+                    "visibility": 0.459,
+                    "matched": false
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 108,
+                    "track_id": 0,
+                    "direction": "out",
+                    "position": 0.8379,
+                    "matched": true
+                  },
+                  {
+                    "frame": 144,
+                    "track_id": 5,
+                    "direction": "out",
+                    "position": 0.9408,
+                    "matched": true
+                  },
+                  {
+                    "frame": 185,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.6339,
+                    "matched": true
+                  },
+                  {
+                    "frame": 206,
+                    "track_id": 10,
+                    "direction": "in",
+                    "position": 0.6459,
+                    "matched": true
+                  },
+                  {
+                    "frame": 262,
+                    "track_id": 12,
+                    "direction": "in",
+                    "position": 0.675,
+                    "matched": true
+                  },
+                  {
+                    "frame": 301,
+                    "track_id": 17,
+                    "direction": "in",
+                    "position": 0.7351,
+                    "matched": true
+                  },
+                  {
+                    "frame": 357,
+                    "track_id": 20,
+                    "direction": "in",
+                    "position": 0.6618,
+                    "matched": true
+                  },
+                  {
+                    "frame": 453,
+                    "track_id": 27,
+                    "direction": "in",
+                    "position": 0.5964,
+                    "matched": true
+                  },
+                  {
+                    "frame": 480,
+                    "track_id": 28,
+                    "direction": "in",
+                    "position": 0.6603,
+                    "matched": true
+                  },
+                  {
+                    "frame": 505,
+                    "track_id": 17,
+                    "direction": "out",
+                    "position": 0.6228,
+                    "matched": true
+                  },
+                  {
+                    "frame": 515,
+                    "track_id": 35,
+                    "direction": "out",
+                    "position": 0.6204,
+                    "matched": true
+                  }
+                ]
+              }
+            },
+            "context_metrics": {
+              "HOTA": 0.4837226640308875,
+              "IDF1": 0.5790108564535585,
+              "MOTA": 0.547981220657277,
+              "IDSW": 25
+            }
+          }
+        }
+      }
+    },
+    "YOLOX-s single pass": {
+      "t": 0.5,
+      "grid_on_02_04": [
+        {
+          "n": 3,
+          "margin_px": 4,
+          "min_consecutive": 2,
+          "precision": 0.49572649572649574,
+          "recall": 0.5471698113207547,
+          "f1": 0.5201793721973094,
+          "pred_events": 117
+        },
+        {
+          "n": 3,
+          "margin_px": 4,
+          "min_consecutive": 4,
+          "precision": 0.49572649572649574,
+          "recall": 0.5471698113207547,
+          "f1": 0.5201793721973094,
+          "pred_events": 117
+        },
+        {
+          "n": 3,
+          "margin_px": 8,
+          "min_consecutive": 2,
+          "precision": 0.5196078431372549,
+          "recall": 0.5,
+          "f1": 0.5096153846153847,
+          "pred_events": 102
+        },
+        {
+          "n": 3,
+          "margin_px": 8,
+          "min_consecutive": 4,
+          "precision": 0.5148514851485149,
+          "recall": 0.49056603773584906,
+          "f1": 0.5024154589371981,
+          "pred_events": 101
+        },
+        {
+          "n": 3,
+          "margin_px": 12,
+          "min_consecutive": 2,
+          "precision": 0.4883720930232558,
+          "recall": 0.39622641509433965,
+          "f1": 0.4375,
+          "pred_events": 86
+        },
+        {
+          "n": 3,
+          "margin_px": 12,
+          "min_consecutive": 4,
+          "precision": 0.4883720930232558,
+          "recall": 0.39622641509433965,
+          "f1": 0.4375,
+          "pred_events": 86
+        },
+        {
+          "n": 5,
+          "margin_px": 4,
+          "min_consecutive": 2,
+          "precision": 0.5824175824175825,
+          "recall": 0.5,
+          "f1": 0.5380710659898477,
+          "pred_events": 91
+        },
+        {
+          "n": 5,
+          "margin_px": 4,
+          "min_consecutive": 4,
+          "precision": 0.5824175824175825,
+          "recall": 0.5,
+          "f1": 0.5380710659898477,
+          "pred_events": 91
+        },
+        {
+          "n": 5,
+          "margin_px": 8,
+          "min_consecutive": 2,
+          "precision": 0.573170731707317,
+          "recall": 0.44339622641509435,
+          "f1": 0.5,
+          "pred_events": 82
+        },
+        {
+          "n": 5,
+          "margin_px": 8,
+          "min_consecutive": 4,
+          "precision": 0.5679012345679012,
+          "recall": 0.4339622641509434,
+          "f1": 0.4919786096256684,
+          "pred_events": 81
+        },
+        {
+          "n": 5,
+          "margin_px": 12,
+          "min_consecutive": 2,
+          "precision": 0.5540540540540541,
+          "recall": 0.3867924528301887,
+          "f1": 0.4555555555555556,
+          "pred_events": 74
+        },
+        {
+          "n": 5,
+          "margin_px": 12,
+          "min_consecutive": 4,
+          "precision": 0.5540540540540541,
+          "recall": 0.3867924528301887,
+          "f1": 0.4555555555555556,
+          "pred_events": 74
+        },
+        {
+          "n": 8,
+          "margin_px": 4,
+          "min_consecutive": 2,
+          "precision": 0.6623376623376623,
+          "recall": 0.4811320754716981,
+          "f1": 0.5573770491803279,
+          "pred_events": 77
+        },
+        {
+          "n": 8,
+          "margin_px": 4,
+          "min_consecutive": 4,
+          "precision": 0.6623376623376623,
+          "recall": 0.4811320754716981,
+          "f1": 0.5573770491803279,
+          "pred_events": 77
+        },
+        {
+          "n": 8,
+          "margin_px": 8,
+          "min_consecutive": 2,
+          "precision": 0.625,
+          "recall": 0.42452830188679247,
+          "f1": 0.5056179775280899,
+          "pred_events": 72
+        },
+        {
+          "n": 8,
+          "margin_px": 8,
+          "min_consecutive": 4,
+          "precision": 0.6197183098591549,
+          "recall": 0.41509433962264153,
+          "f1": 0.4971751412429378,
+          "pred_events": 71
+        },
+        {
+          "n": 8,
+          "margin_px": 12,
+          "min_consecutive": 2,
+          "precision": 0.6379310344827587,
+          "recall": 0.3490566037735849,
+          "f1": 0.4512195121951219,
+          "pred_events": 58
+        },
+        {
+          "n": 8,
+          "margin_px": 12,
+          "min_consecutive": 4,
+          "precision": 0.6379310344827587,
+          "recall": 0.3490566037735849,
+          "f1": 0.4512195121951219,
+          "pred_events": 58
+        },
+        {
+          "n": 12,
+          "margin_px": 4,
+          "min_consecutive": 2,
+          "precision": 0.6716417910447762,
+          "recall": 0.42452830188679247,
+          "f1": 0.5202312138728324,
+          "pred_events": 67
+        },
+        {
+          "n": 12,
+          "margin_px": 4,
+          "min_consecutive": 4,
+          "precision": 0.6716417910447762,
+          "recall": 0.42452830188679247,
+          "f1": 0.5202312138728324,
+          "pred_events": 67
+        },
+        {
+          "n": 12,
+          "margin_px": 8,
+          "min_consecutive": 2,
+          "precision": 0.6612903225806451,
+          "recall": 0.3867924528301887,
+          "f1": 0.48809523809523814,
+          "pred_events": 62
+        },
+        {
+          "n": 12,
+          "margin_px": 8,
+          "min_consecutive": 4,
+          "precision": 0.6557377049180327,
+          "recall": 0.37735849056603776,
+          "f1": 0.47904191616766467,
+          "pred_events": 61
+        },
+        {
+          "n": 12,
+          "margin_px": 12,
+          "min_consecutive": 2,
+          "precision": 0.6923076923076923,
+          "recall": 0.33962264150943394,
+          "f1": 0.4556962025316456,
+          "pred_events": 52
+        },
+        {
+          "n": 12,
+          "margin_px": 12,
+          "min_consecutive": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.33962264150943394,
+          "f1": 0.4556962025316456,
+          "pred_events": 52
+        }
+      ],
+      "chosen": {
+        "n": 8,
+        "margin_px": 4,
+        "min_consecutive": 2,
+        "precision": 0.6623376623376623,
+        "recall": 0.4811320754716981,
+        "f1": 0.5573770491803279,
+        "pred_events": 77
+      },
+      "result": {
+        "settings": {
+          "min_conf": 0.1,
+          "counter": {
+            "anchor": "bottom_center",
+            "min_frames_on_far_side": 8,
+            "margin_px": 4,
+            "max_age_frames": 60,
+            "cooldown_frames": 0,
+            "min_track_frames": 0,
+            "merge_frames": 0,
+            "merge_px": 0,
+            "smooth_alpha": 1.0
+          },
+          "tracker": {
+            "lost_track_buffer": 30,
+            "track_activation_threshold": 0.5,
+            "minimum_consecutive_frames": 2,
+            "minimum_iou_threshold": 0.1,
+            "high_conf_det_threshold": 0.5
+          },
+          "tolerance_s": 1.0,
+          "position_tolerance": 0.1,
+          "gt_margin_px": 0.5,
+          "context_metric_tool": "trackers.eval (TrackEval-compatible), context only",
+          "detections": "MOT17 public FRCNN detections",
+          "note": "Visibility is the MOT17 annotation of the crossing person. Matching uses all ground-truth events, so precision is unaffected."
+        },
+        "pooled_over_all_lines": {
+          "gt_events": 146,
+          "pred_events": 105,
+          "tp": 72,
+          "fp": 33,
+          "fn": 74,
+          "double_count": 3,
+          "precision": 0.6857142857142857,
+          "recall": 0.4931506849315068,
+          "f1": 0.5737051792828685,
+          "double_count_rate": 0.02857142857142857,
+          "count_error_total": -41,
+          "count_error_pct_total": 28.08219178082192
+        },
+        "recall_by_gt_visibility": {
+          "0.0-0.3": {
+            "events": 50,
+            "found": 14,
+            "recall": 0.28
+          },
+          "0.3-0.5": {
+            "events": 17,
+            "found": 4,
+            "recall": 0.23529411764705882
+          },
+          "0.5-0.7": {
+            "events": 8,
+            "found": 3,
+            "recall": 0.375
+          },
+          "0.7-1.0": {
+            "events": 71,
+            "found": 51,
+            "recall": 0.7183098591549296
+          }
+        },
+        "confidence_intervals_95": {
+          "method": "bootstrap, 2000 resamples, seed 0, resampling people (recall: ground-truth person per sequence; precision: tracker ID per sequence)",
+          "recall": {
+            "estimate": 0.4931506849315068,
+            "ci": [
+              0.3866551724137931,
+              0.6074249249249248
+            ],
+            "events": 146,
+            "clusters": 86
+          },
+          "recall_visibility_ge_0.7": {
+            "estimate": 0.7183098591549296,
+            "ci": [
+              0.5599880952380953,
+              0.8611217948717949
+            ],
+            "events": 71,
+            "clusters": 54
+          },
+          "recall_visibility_lt_0.5": {
+            "estimate": 0.26865671641791045,
+            "ci": [
+              0.14705882352941177,
+              0.4029910929224843
+            ],
+            "events": 67,
+            "clusters": 39
+          },
+          "precision": {
+            "estimate": 0.6857142857142857,
+            "ci": [
+              0.583266129032258,
+              0.782608695652174
+            ],
+            "events": 105,
+            "clusters": 66
+          }
+        },
+        "false_positive_causes": {
+          "position off": 5,
+          "person without a ground-truth crossing here": 4,
+          "timing off": 9,
+          "wrong direction": 11,
+          "double count": 3,
+          "no ground-truth person under the track": 1
+        },
+        "gt_margin_sensitivity": {
+          "note": "Same tracker output, ground truth rebuilt with a wider dead band. The primary result uses the smallest margin (strictest). A person swaying on the line gives many ground-truth crossings at small margins.",
+          "rows": [
+            {
+              "gt_margin_px": 0.5,
+              "gt_events": 146,
+              "precision": 0.6857142857142857,
+              "recall": 0.4931506849315068,
+              "f1": 0.5737051792828685,
+              "recall_visibility_ge_0.7": 0.7183098591549296
+            },
+            {
+              "gt_margin_px": 2.0,
+              "gt_events": 132,
+              "precision": 0.6666666666666666,
+              "recall": 0.5303030303030303,
+              "f1": 0.5907172995780591,
+              "recall_visibility_ge_0.7": 0.7222222222222222
+            },
+            {
+              "gt_margin_px": 4.0,
+              "gt_events": 118,
+              "precision": 0.6190476190476191,
+              "recall": 0.5508474576271186,
+              "f1": 0.5829596412556054,
+              "recall_visibility_ge_0.7": 0.746268656716418
+            },
+            {
+              "gt_margin_px": 8.0,
+              "gt_events": 105,
+              "precision": 0.5904761904761905,
+              "recall": 0.5904761904761905,
+              "f1": 0.5904761904761905,
+              "recall_visibility_ge_0.7": 0.746031746031746
+            }
+          ]
+        },
+        "tolerance_sensitivity": [
+          {
+            "tolerance_s": 0.5,
+            "position_tolerance": 0.05,
+            "precision": 0.6095238095238096,
+            "recall": 0.4383561643835616,
+            "f1": 0.5099601593625498
+          },
+          {
+            "tolerance_s": 0.5,
+            "position_tolerance": 0.1,
+            "precision": 0.6476190476190476,
+            "recall": 0.4657534246575342,
+            "f1": 0.5418326693227092
+          },
+          {
+            "tolerance_s": 0.5,
+            "position_tolerance": 0.2,
+            "precision": 0.6571428571428571,
+            "recall": 0.4726027397260274,
+            "f1": 0.549800796812749
+          },
+          {
+            "tolerance_s": 1.0,
+            "position_tolerance": 0.05,
+            "precision": 0.638095238095238,
+            "recall": 0.4589041095890411,
+            "f1": 0.5338645418326693
+          },
+          {
+            "tolerance_s": 1.0,
+            "position_tolerance": 0.1,
+            "precision": 0.6857142857142857,
+            "recall": 0.4931506849315068,
+            "f1": 0.5737051792828685
+          },
+          {
+            "tolerance_s": 1.0,
+            "position_tolerance": 0.2,
+            "precision": 0.6857142857142857,
+            "recall": 0.4931506849315068,
+            "f1": 0.5737051792828685
+          },
+          {
+            "tolerance_s": 2.0,
+            "position_tolerance": 0.05,
+            "precision": 0.6571428571428571,
+            "recall": 0.4726027397260274,
+            "f1": 0.549800796812749
+          },
+          {
+            "tolerance_s": 2.0,
+            "position_tolerance": 0.1,
+            "precision": 0.7714285714285715,
+            "recall": 0.5547945205479452,
+            "f1": 0.6454183266932271
+          },
+          {
+            "tolerance_s": 2.0,
+            "position_tolerance": 0.2,
+            "precision": 0.7714285714285715,
+            "recall": 0.5547945205479452,
+            "f1": 0.6454183266932271
+          }
+        ],
+        "sequences": {
+          "MOT17-02-FRCNN": {
+            "fps": 30.0,
+            "frames": 600,
+            "lines": {
+              "mid": {
+                "line": [
+                  [
+                    0,
+                    540
+                  ],
+                  [
+                    1920,
+                    540
+                  ]
+                ],
+                "gt_events": 20,
+                "pred_events": 11,
+                "tp": 5,
+                "fp": 6,
+                "fn": 15,
+                "precision": 0.45454545454545453,
+                "recall": 0.25,
+                "f1": 0.3225806451612903,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -2,
+                "count_error_pct_in": 25.0,
+                "count_error_out": -7,
+                "count_error_pct_out": 58.333333333333336,
+                "count_error_total": -9,
+                "count_error_pct_total": 45.0,
+                "gt_event_list": [
+                  {
+                    "frame": 41,
+                    "track_id": 72,
+                    "direction": "out",
+                    "position": 0.3764,
+                    "visibility": 0.227,
+                    "matched": false
+                  },
+                  {
+                    "frame": 129,
+                    "track_id": 72,
+                    "direction": "in",
+                    "position": 0.4202,
+                    "visibility": 0.009,
+                    "matched": false
+                  },
+                  {
+                    "frame": 137,
+                    "track_id": 31,
+                    "direction": "in",
+                    "position": 0.2443,
+                    "visibility": 0.514,
+                    "matched": true
+                  },
+                  {
+                    "frame": 139,
+                    "track_id": 39,
+                    "direction": "out",
+                    "position": 0.5878,
+                    "visibility": 0.462,
+                    "matched": false
+                  },
+                  {
+                    "frame": 151,
+                    "track_id": 31,
+                    "direction": "out",
+                    "position": 0.2527,
+                    "visibility": 0.196,
+                    "matched": true
+                  },
+                  {
+                    "frame": 190,
+                    "track_id": 67,
+                    "direction": "out",
+                    "position": 0.5052,
+                    "visibility": 0.003,
+                    "matched": false
+                  },
+                  {
+                    "frame": 229,
+                    "track_id": 15,
+                    "direction": "in",
+                    "position": 0.5229,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 253,
+                    "track_id": 67,
+                    "direction": "in",
+                    "position": 0.5234,
+                    "visibility": 0.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 422,
+                    "track_id": 54,
+                    "direction": "in",
+                    "position": 0.2605,
+                    "visibility": 0.136,
+                    "matched": true
+                  },
+                  {
+                    "frame": 441,
+                    "track_id": 40,
+                    "direction": "in",
+                    "position": 0.643,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 471,
+                    "track_id": 41,
+                    "direction": "out",
+                    "position": 0.551,
+                    "visibility": 0.164,
+                    "matched": false
+                  },
+                  {
+                    "frame": 492,
+                    "track_id": 42,
+                    "direction": "out",
+                    "position": 0.5589,
+                    "visibility": 0.24,
+                    "matched": false
+                  },
+                  {
+                    "frame": 493,
+                    "track_id": 43,
+                    "direction": "out",
+                    "position": 0.3353,
+                    "visibility": 0.669,
+                    "matched": false
+                  },
+                  {
+                    "frame": 521,
+                    "track_id": 44,
+                    "direction": "out",
+                    "position": 0.3837,
+                    "visibility": 0.741,
+                    "matched": false
+                  },
+                  {
+                    "frame": 541,
+                    "track_id": 79,
+                    "direction": "in",
+                    "position": 0.5551,
+                    "visibility": 0.039,
+                    "matched": false
+                  },
+                  {
+                    "frame": 556,
+                    "track_id": 79,
+                    "direction": "out",
+                    "position": 0.5539,
+                    "visibility": 0.198,
+                    "matched": false
+                  },
+                  {
+                    "frame": 567,
+                    "track_id": 15,
+                    "direction": "out",
+                    "position": 0.5203,
+                    "visibility": 0.001,
+                    "matched": false
+                  },
+                  {
+                    "frame": 575,
+                    "track_id": 49,
+                    "direction": "out",
+                    "position": 0.2944,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 577,
+                    "track_id": 79,
+                    "direction": "in",
+                    "position": 0.5525,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 580,
+                    "track_id": 48,
+                    "direction": "out",
+                    "position": 0.3135,
+                    "visibility": 1.0,
+                    "matched": true
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 45,
+                    "track_id": 10,
+                    "direction": "out",
+                    "position": 0.793,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  },
+                  {
+                    "frame": 118,
+                    "track_id": 13,
+                    "direction": "in",
+                    "position": 0.3009,
+                    "matched": true
+                  },
+                  {
+                    "frame": 165,
+                    "track_id": 13,
+                    "direction": "out",
+                    "position": 0.273,
+                    "matched": true
+                  },
+                  {
+                    "frame": 275,
+                    "track_id": 25,
+                    "direction": "in",
+                    "position": 0.6015,
+                    "matched": true
+                  },
+                  {
+                    "frame": 284,
+                    "track_id": 25,
+                    "direction": "out",
+                    "position": 0.6087,
+                    "matched": false,
+                    "fp_cause": "person without a ground-truth crossing here"
+                  },
+                  {
+                    "frame": 339,
+                    "track_id": 5,
+                    "direction": "in",
+                    "position": 0.6319,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 361,
+                    "track_id": 17,
+                    "direction": "in",
+                    "position": 0.2633,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 388,
+                    "track_id": 25,
+                    "direction": "in",
+                    "position": 0.6636,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 421,
+                    "track_id": 25,
+                    "direction": "out",
+                    "position": 0.6462,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 426,
+                    "track_id": 41,
+                    "direction": "in",
+                    "position": 0.2524,
+                    "matched": true
+                  },
+                  {
+                    "frame": 582,
+                    "track_id": 55,
+                    "direction": "out",
+                    "position": 0.3112,
+                    "matched": true
+                  }
+                ]
+              },
+              "vert": {
+                "line": [
+                  [
+                    960,
+                    0
+                  ],
+                  [
+                    960,
+                    1080
+                  ]
+                ],
+                "gt_events": 21,
+                "pred_events": 12,
+                "tp": 10,
+                "fp": 2,
+                "fn": 11,
+                "precision": 0.8333333333333334,
+                "recall": 0.47619047619047616,
+                "f1": 0.6060606060606061,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -6,
+                "count_error_pct_in": 37.5,
+                "count_error_out": -3,
+                "count_error_pct_out": 60.0,
+                "count_error_total": -9,
+                "count_error_pct_total": 42.857142857142854,
+                "gt_event_list": [
+                  {
+                    "frame": 124,
+                    "track_id": 18,
+                    "direction": "in",
+                    "position": 0.5102,
+                    "visibility": 0.406,
+                    "matched": true
+                  },
+                  {
+                    "frame": 142,
+                    "track_id": 71,
+                    "direction": "out",
+                    "position": 0.4796,
+                    "visibility": 0.05,
+                    "matched": false
+                  },
+                  {
+                    "frame": 164,
+                    "track_id": 37,
+                    "direction": "in",
+                    "position": 0.6407,
+                    "visibility": 0.567,
+                    "matched": true
+                  },
+                  {
+                    "frame": 176,
+                    "track_id": 67,
+                    "direction": "in",
+                    "position": 0.4981,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 183,
+                    "track_id": 20,
+                    "direction": "in",
+                    "position": 0.6938,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 183,
+                    "track_id": 40,
+                    "direction": "in",
+                    "position": 0.5301,
+                    "visibility": 0.015,
+                    "matched": false
+                  },
+                  {
+                    "frame": 183,
+                    "track_id": 70,
+                    "direction": "out",
+                    "position": 0.488,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 223,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.7733,
+                    "visibility": 0.596,
+                    "matched": true
+                  },
+                  {
+                    "frame": 246,
+                    "track_id": 19,
+                    "direction": "in",
+                    "position": 0.9383,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 301,
+                    "track_id": 23,
+                    "direction": "in",
+                    "position": 0.8664,
+                    "visibility": 0.853,
+                    "matched": false
+                  },
+                  {
+                    "frame": 352,
+                    "track_id": 36,
+                    "direction": "in",
+                    "position": 0.6105,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 365,
+                    "track_id": 15,
+                    "direction": "out",
+                    "position": 0.4852,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 378,
+                    "track_id": 41,
+                    "direction": "in",
+                    "position": 0.4852,
+                    "visibility": 0.046,
+                    "matched": false
+                  },
+                  {
+                    "frame": 392,
+                    "track_id": 38,
+                    "direction": "out",
+                    "position": 0.5759,
+                    "visibility": 0.785,
+                    "matched": false
+                  },
+                  {
+                    "frame": 407,
+                    "track_id": 42,
+                    "direction": "in",
+                    "position": 0.488,
+                    "visibility": 0.321,
+                    "matched": false
+                  },
+                  {
+                    "frame": 488,
+                    "track_id": 33,
+                    "direction": "in",
+                    "position": 0.6296,
+                    "visibility": 0.821,
+                    "matched": true
+                  },
+                  {
+                    "frame": 508,
+                    "track_id": 34,
+                    "direction": "in",
+                    "position": 0.6741,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 509,
+                    "track_id": 15,
+                    "direction": "in",
+                    "position": 0.4843,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 532,
+                    "track_id": 32,
+                    "direction": "in",
+                    "position": 0.6546,
+                    "visibility": 0.94,
+                    "matched": true
+                  },
+                  {
+                    "frame": 550,
+                    "track_id": 18,
+                    "direction": "out",
+                    "position": 0.5037,
+                    "visibility": 0.008,
+                    "matched": true
+                  },
+                  {
+                    "frame": 564,
+                    "track_id": 35,
+                    "direction": "in",
+                    "position": 0.6302,
+                    "visibility": 0.955,
+                    "matched": true
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 130,
+                    "track_id": 16,
+                    "direction": "in",
+                    "position": 0.5121,
+                    "matched": true
+                  },
+                  {
+                    "frame": 166,
+                    "track_id": 18,
+                    "direction": "in",
+                    "position": 0.6388,
+                    "matched": true
+                  },
+                  {
+                    "frame": 184,
+                    "track_id": 6,
+                    "direction": "in",
+                    "position": 0.6904,
+                    "matched": true
+                  },
+                  {
+                    "frame": 224,
+                    "track_id": 2,
+                    "direction": "in",
+                    "position": 0.7745,
+                    "matched": true
+                  },
+                  {
+                    "frame": 246,
+                    "track_id": 1,
+                    "direction": "in",
+                    "position": 0.9403,
+                    "matched": true
+                  },
+                  {
+                    "frame": 332,
+                    "track_id": 26,
+                    "direction": "in",
+                    "position": 0.8724,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  },
+                  {
+                    "frame": 448,
+                    "track_id": 6,
+                    "direction": "out",
+                    "position": 0.9363,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 488,
+                    "track_id": 53,
+                    "direction": "in",
+                    "position": 0.6306,
+                    "matched": true
+                  },
+                  {
+                    "frame": 508,
+                    "track_id": 35,
+                    "direction": "in",
+                    "position": 0.6706,
+                    "matched": true
+                  },
+                  {
+                    "frame": 534,
+                    "track_id": 61,
+                    "direction": "in",
+                    "position": 0.6569,
+                    "matched": true
+                  },
+                  {
+                    "frame": 565,
+                    "track_id": 50,
+                    "direction": "in",
+                    "position": 0.6326,
+                    "matched": true
+                  },
+                  {
+                    "frame": 554,
+                    "track_id": 60,
+                    "direction": "out",
+                    "position": 0.5262,
+                    "matched": true
+                  }
+                ]
+              }
+            },
+            "context_metrics": {
+              "HOTA": 0.2791790549580814,
+              "IDF1": 0.3328865410391863,
+              "MOTA": 0.21538130348205156,
+              "IDSW": 71
+            }
+          },
+          "MOT17-04-FRCNN": {
+            "fps": 30.0,
+            "frames": 1050,
+            "lines": {
+              "upper": {
+                "line": [
+                  [
+                    0,
+                    270
+                  ],
+                  [
+                    1920,
+                    270
+                  ]
+                ],
+                "gt_events": 33,
+                "pred_events": 37,
+                "tp": 22,
+                "fp": 15,
+                "fn": 11,
+                "precision": 0.5945945945945946,
+                "recall": 0.6666666666666666,
+                "f1": 0.6285714285714286,
+                "double_count": 2,
+                "double_count_rate": 0.05405405405405406,
+                "count_error_in": 4,
+                "count_error_pct_in": 26.666666666666668,
+                "count_error_out": 0,
+                "count_error_pct_out": 0.0,
+                "count_error_total": 4,
+                "count_error_pct_total": 12.121212121212121,
+                "gt_event_list": [
+                  {
+                    "frame": 74,
+                    "track_id": 89,
+                    "direction": "out",
+                    "position": 0.2599,
+                    "visibility": 0.659,
+                    "matched": false
+                  },
+                  {
+                    "frame": 235,
+                    "track_id": 75,
+                    "direction": "in",
+                    "position": 0.4281,
+                    "visibility": 0.343,
+                    "matched": true
+                  },
+                  {
+                    "frame": 244,
+                    "track_id": 74,
+                    "direction": "in",
+                    "position": 0.4944,
+                    "visibility": 0.222,
+                    "matched": false
+                  },
+                  {
+                    "frame": 251,
+                    "track_id": 75,
+                    "direction": "out",
+                    "position": 0.4133,
+                    "visibility": 0.69,
+                    "matched": false
+                  },
+                  {
+                    "frame": 256,
+                    "track_id": 63,
+                    "direction": "in",
+                    "position": 0.6093,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 257,
+                    "track_id": 75,
+                    "direction": "in",
+                    "position": 0.4105,
+                    "visibility": 0.76,
+                    "matched": false
+                  },
+                  {
+                    "frame": 268,
+                    "track_id": 75,
+                    "direction": "out",
+                    "position": 0.4052,
+                    "visibility": 0.819,
+                    "matched": false
+                  },
+                  {
+                    "frame": 270,
+                    "track_id": 67,
+                    "direction": "in",
+                    "position": 0.507,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 300,
+                    "track_id": 65,
+                    "direction": "in",
+                    "position": 0.5411,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 304,
+                    "track_id": 75,
+                    "direction": "in",
+                    "position": 0.3964,
+                    "visibility": 0.774,
+                    "matched": false
+                  },
+                  {
+                    "frame": 314,
+                    "track_id": 66,
+                    "direction": "in",
+                    "position": 0.2775,
+                    "visibility": 0.734,
+                    "matched": true
+                  },
+                  {
+                    "frame": 380,
+                    "track_id": 2,
+                    "direction": "in",
+                    "position": 0.25,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 388,
+                    "track_id": 118,
+                    "direction": "out",
+                    "position": 0.9405,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 417,
+                    "track_id": 98,
+                    "direction": "out",
+                    "position": 0.2349,
+                    "visibility": 0.933,
+                    "matched": true
+                  },
+                  {
+                    "frame": 442,
+                    "track_id": 121,
+                    "direction": "out",
+                    "position": 0.9006,
+                    "visibility": 0.823,
+                    "matched": true
+                  },
+                  {
+                    "frame": 518,
+                    "track_id": 86,
+                    "direction": "out",
+                    "position": 0.2831,
+                    "visibility": 0.829,
+                    "matched": true
+                  },
+                  {
+                    "frame": 561,
+                    "track_id": 99,
+                    "direction": "in",
+                    "position": 0.2582,
+                    "visibility": 0.799,
+                    "matched": true
+                  },
+                  {
+                    "frame": 592,
+                    "track_id": 80,
+                    "direction": "in",
+                    "position": 0.2581,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 642,
+                    "track_id": 124,
+                    "direction": "out",
+                    "position": 0.2539,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 648,
+                    "track_id": 125,
+                    "direction": "out",
+                    "position": 0.2339,
+                    "visibility": 0.841,
+                    "matched": true
+                  },
+                  {
+                    "frame": 742,
+                    "track_id": 106,
+                    "direction": "in",
+                    "position": 0.7762,
+                    "visibility": 0.994,
+                    "matched": true
+                  },
+                  {
+                    "frame": 749,
+                    "track_id": 105,
+                    "direction": "in",
+                    "position": 0.8466,
+                    "visibility": 0.84,
+                    "matched": false
+                  },
+                  {
+                    "frame": 761,
+                    "track_id": 91,
+                    "direction": "out",
+                    "position": 0.1949,
+                    "visibility": 0.173,
+                    "matched": true
+                  },
+                  {
+                    "frame": 775,
+                    "track_id": 91,
+                    "direction": "in",
+                    "position": 0.194,
+                    "visibility": 0.193,
+                    "matched": true
+                  },
+                  {
+                    "frame": 803,
+                    "track_id": 132,
+                    "direction": "out",
+                    "position": 0.2654,
+                    "visibility": 0.931,
+                    "matched": false
+                  },
+                  {
+                    "frame": 805,
+                    "track_id": 133,
+                    "direction": "out",
+                    "position": 0.2344,
+                    "visibility": 0.771,
+                    "matched": true
+                  },
+                  {
+                    "frame": 829,
+                    "track_id": 134,
+                    "direction": "out",
+                    "position": 0.263,
+                    "visibility": 0.123,
+                    "matched": false
+                  },
+                  {
+                    "frame": 871,
+                    "track_id": 96,
+                    "direction": "in",
+                    "position": 0.1187,
+                    "visibility": 0.207,
+                    "matched": true
+                  },
+                  {
+                    "frame": 922,
+                    "track_id": 107,
+                    "direction": "out",
+                    "position": 0.9133,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 926,
+                    "track_id": 111,
+                    "direction": "out",
+                    "position": 0.784,
+                    "visibility": 0.824,
+                    "matched": true
+                  },
+                  {
+                    "frame": 956,
+                    "track_id": 108,
+                    "direction": "out",
+                    "position": 0.8686,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 972,
+                    "track_id": 112,
+                    "direction": "out",
+                    "position": 0.6193,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1033,
+                    "track_id": 117,
+                    "direction": "out",
+                    "position": 0.2682,
+                    "visibility": 0.32,
+                    "matched": false
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 37,
+                    "track_id": 12,
+                    "direction": "in",
+                    "position": 0.2681,
+                    "matched": false,
+                    "fp_cause": "person without a ground-truth crossing here"
+                  },
+                  {
+                    "frame": 119,
+                    "track_id": 13,
+                    "direction": "in",
+                    "position": 0.4259,
+                    "matched": false,
+                    "fp_cause": "person without a ground-truth crossing here"
+                  },
+                  {
+                    "frame": 137,
+                    "track_id": 13,
+                    "direction": "out",
+                    "position": 0.4273,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 189,
+                    "track_id": 21,
+                    "direction": "in",
+                    "position": 0.4936,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 202,
+                    "track_id": 21,
+                    "direction": "out",
+                    "position": 0.4718,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 223,
+                    "track_id": 15,
+                    "direction": "in",
+                    "position": 0.5278,
+                    "matched": true
+                  },
+                  {
+                    "frame": 259,
+                    "track_id": 34,
+                    "direction": "in",
+                    "position": 0.6069,
+                    "matched": true
+                  },
+                  {
+                    "frame": 272,
+                    "track_id": 5,
+                    "direction": "in",
+                    "position": 0.5065,
+                    "matched": true
+                  },
+                  {
+                    "frame": 296,
+                    "track_id": 25,
+                    "direction": "in",
+                    "position": 0.5445,
+                    "matched": true
+                  },
+                  {
+                    "frame": 315,
+                    "track_id": 30,
+                    "direction": "in",
+                    "position": 0.2787,
+                    "matched": true
+                  },
+                  {
+                    "frame": 375,
+                    "track_id": 0,
+                    "direction": "in",
+                    "position": 0.2477,
+                    "matched": true
+                  },
+                  {
+                    "frame": 400,
+                    "track_id": 31,
+                    "direction": "out",
+                    "position": 0.9387,
+                    "matched": true
+                  },
+                  {
+                    "frame": 430,
+                    "track_id": 12,
+                    "direction": "out",
+                    "position": 0.2356,
+                    "matched": true
+                  },
+                  {
+                    "frame": 443,
+                    "track_id": 37,
+                    "direction": "out",
+                    "position": 0.8975,
+                    "matched": true
+                  },
+                  {
+                    "frame": 457,
+                    "track_id": 37,
+                    "direction": "in",
+                    "position": 0.9022,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 471,
+                    "track_id": 14,
+                    "direction": "in",
+                    "position": 0.1739,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 540,
+                    "track_id": 30,
+                    "direction": "out",
+                    "position": 0.2847,
+                    "matched": true
+                  },
+                  {
+                    "frame": 548,
+                    "track_id": 17,
+                    "direction": "in",
+                    "position": 0.2019,
+                    "matched": false,
+                    "fp_cause": "double count"
+                  },
+                  {
+                    "frame": 559,
+                    "track_id": 24,
+                    "direction": "in",
+                    "position": 0.2543,
+                    "matched": true
+                  },
+                  {
+                    "frame": 583,
+                    "track_id": 17,
+                    "direction": "out",
+                    "position": 0.1994,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 644,
+                    "track_id": 0,
+                    "direction": "out",
+                    "position": 0.2541,
+                    "matched": true
+                  },
+                  {
+                    "frame": 656,
+                    "track_id": 57,
+                    "direction": "out",
+                    "position": 0.2351,
+                    "matched": true
+                  },
+                  {
+                    "frame": 658,
+                    "track_id": 40,
+                    "direction": "in",
+                    "position": 0.1309,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 668,
+                    "track_id": 49,
+                    "direction": "in",
+                    "position": 0.1637,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 706,
+                    "track_id": 40,
+                    "direction": "out",
+                    "position": 0.1332,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 736,
+                    "track_id": 49,
+                    "direction": "out",
+                    "position": 0.1622,
+                    "matched": true
+                  },
+                  {
+                    "frame": 744,
+                    "track_id": 44,
+                    "direction": "in",
+                    "position": 0.8469,
+                    "matched": true
+                  },
+                  {
+                    "frame": 788,
+                    "track_id": 17,
+                    "direction": "in",
+                    "position": 0.2005,
+                    "matched": true
+                  },
+                  {
+                    "frame": 817,
+                    "track_id": 59,
+                    "direction": "out",
+                    "position": 0.2367,
+                    "matched": true
+                  },
+                  {
+                    "frame": 864,
+                    "track_id": 17,
+                    "direction": "out",
+                    "position": 0.2046,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 879,
+                    "track_id": 47,
+                    "direction": "in",
+                    "position": 0.1934,
+                    "matched": true
+                  },
+                  {
+                    "frame": 896,
+                    "track_id": 17,
+                    "direction": "in",
+                    "position": 0.2059,
+                    "matched": false,
+                    "fp_cause": "double count"
+                  },
+                  {
+                    "frame": 924,
+                    "track_id": 44,
+                    "direction": "out",
+                    "position": 0.9121,
+                    "matched": true
+                  },
+                  {
+                    "frame": 938,
+                    "track_id": 45,
+                    "direction": "out",
+                    "position": 0.7836,
+                    "matched": true
+                  },
+                  {
+                    "frame": 940,
+                    "track_id": 17,
+                    "direction": "out",
+                    "position": 0.2039,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  },
+                  {
+                    "frame": 962,
+                    "track_id": 62,
+                    "direction": "out",
+                    "position": 0.8694,
+                    "matched": true
+                  },
+                  {
+                    "frame": 979,
+                    "track_id": 60,
+                    "direction": "out",
+                    "position": 0.6254,
+                    "matched": true
+                  }
+                ]
+              },
+              "vert": {
+                "line": [
+                  [
+                    480,
+                    0
+                  ],
+                  [
+                    480,
+                    1080
+                  ]
+                ],
+                "gt_events": 32,
+                "pred_events": 17,
+                "tp": 14,
+                "fp": 3,
+                "fn": 18,
+                "precision": 0.8235294117647058,
+                "recall": 0.4375,
+                "f1": 0.5714285714285714,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -9,
+                "count_error_pct_in": 50.0,
+                "count_error_out": -6,
+                "count_error_pct_out": 42.857142857142854,
+                "count_error_total": -15,
+                "count_error_pct_total": 46.875,
+                "gt_event_list": [
+                  {
+                    "frame": 28,
+                    "track_id": 84,
+                    "direction": "out",
+                    "position": 0.2106,
+                    "visibility": 0.697,
+                    "matched": false
+                  },
+                  {
+                    "frame": 62,
+                    "track_id": 89,
+                    "direction": "in",
+                    "position": 0.2417,
+                    "visibility": 0.816,
+                    "matched": false
+                  },
+                  {
+                    "frame": 147,
+                    "track_id": 84,
+                    "direction": "in",
+                    "position": 0.1179,
+                    "visibility": 0.373,
+                    "matched": false
+                  },
+                  {
+                    "frame": 153,
+                    "track_id": 87,
+                    "direction": "out",
+                    "position": 0.1845,
+                    "visibility": 0.997,
+                    "matched": true
+                  },
+                  {
+                    "frame": 159,
+                    "track_id": 84,
+                    "direction": "out",
+                    "position": 0.1097,
+                    "visibility": 0.339,
+                    "matched": false
+                  },
+                  {
+                    "frame": 175,
+                    "track_id": 84,
+                    "direction": "in",
+                    "position": 0.1005,
+                    "visibility": 0.501,
+                    "matched": false
+                  },
+                  {
+                    "frame": 242,
+                    "track_id": 2,
+                    "direction": "in",
+                    "position": 0.3625,
+                    "visibility": 0.957,
+                    "matched": true
+                  },
+                  {
+                    "frame": 288,
+                    "track_id": 85,
+                    "direction": "in",
+                    "position": 0.0301,
+                    "visibility": 0.226,
+                    "matched": false
+                  },
+                  {
+                    "frame": 311,
+                    "track_id": 83,
+                    "direction": "out",
+                    "position": 0.6185,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 343,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.7625,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 350,
+                    "track_id": 2,
+                    "direction": "out",
+                    "position": 0.2718,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 373,
+                    "track_id": 99,
+                    "direction": "in",
+                    "position": 0.481,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 381,
+                    "track_id": 2,
+                    "direction": "in",
+                    "position": 0.2509,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 386,
+                    "track_id": 82,
+                    "direction": "out",
+                    "position": 0.7373,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 541,
+                    "track_id": 132,
+                    "direction": "out",
+                    "position": 0.0463,
+                    "visibility": 0.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 579,
+                    "track_id": 80,
+                    "direction": "in",
+                    "position": 0.256,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 586,
+                    "track_id": 134,
+                    "direction": "out",
+                    "position": 0.069,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 633,
+                    "track_id": 124,
+                    "direction": "in",
+                    "position": 0.244,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 662,
+                    "track_id": 3,
+                    "direction": "out",
+                    "position": 0.7185,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 677,
+                    "track_id": 2,
+                    "direction": "out",
+                    "position": 0.0662,
+                    "visibility": 0.012,
+                    "matched": false
+                  },
+                  {
+                    "frame": 739,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.7458,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 745,
+                    "track_id": 99,
+                    "direction": "out",
+                    "position": 0.0574,
+                    "visibility": 0.09,
+                    "matched": false
+                  },
+                  {
+                    "frame": 757,
+                    "track_id": 134,
+                    "direction": "in",
+                    "position": 0.1875,
+                    "visibility": 0.104,
+                    "matched": false
+                  },
+                  {
+                    "frame": 758,
+                    "track_id": 132,
+                    "direction": "in",
+                    "position": 0.215,
+                    "visibility": 0.743,
+                    "matched": false
+                  },
+                  {
+                    "frame": 772,
+                    "track_id": 124,
+                    "direction": "out",
+                    "position": 0.3625,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 777,
+                    "track_id": 80,
+                    "direction": "out",
+                    "position": 0.0972,
+                    "visibility": 0.486,
+                    "matched": false
+                  },
+                  {
+                    "frame": 838,
+                    "track_id": 80,
+                    "direction": "in",
+                    "position": 0.0602,
+                    "visibility": 0.464,
+                    "matched": false
+                  },
+                  {
+                    "frame": 936,
+                    "track_id": 132,
+                    "direction": "out",
+                    "position": 0.3787,
+                    "visibility": 0.963,
+                    "matched": false
+                  },
+                  {
+                    "frame": 1001,
+                    "track_id": 127,
+                    "direction": "in",
+                    "position": 0.169,
+                    "visibility": 0.371,
+                    "matched": false
+                  },
+                  {
+                    "frame": 1017,
+                    "track_id": 69,
+                    "direction": "in",
+                    "position": 0.3324,
+                    "visibility": 0.826,
+                    "matched": false
+                  },
+                  {
+                    "frame": 1042,
+                    "track_id": 68,
+                    "direction": "in",
+                    "position": 0.3148,
+                    "visibility": 0.78,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1045,
+                    "track_id": 129,
+                    "direction": "in",
+                    "position": 0.1639,
+                    "visibility": 0.255,
+                    "matched": false
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 155,
+                    "track_id": 12,
+                    "direction": "out",
+                    "position": 0.1775,
+                    "matched": true
+                  },
+                  {
+                    "frame": 246,
+                    "track_id": 0,
+                    "direction": "in",
+                    "position": 0.3553,
+                    "matched": true
+                  },
+                  {
+                    "frame": 312,
+                    "track_id": 8,
+                    "direction": "out",
+                    "position": 0.6123,
+                    "matched": true
+                  },
+                  {
+                    "frame": 337,
+                    "track_id": 35,
+                    "direction": "in",
+                    "position": 0.9852,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  },
+                  {
+                    "frame": 345,
+                    "track_id": 2,
+                    "direction": "in",
+                    "position": 0.7664,
+                    "matched": true
+                  },
+                  {
+                    "frame": 349,
+                    "track_id": 0,
+                    "direction": "out",
+                    "position": 0.2722,
+                    "matched": true
+                  },
+                  {
+                    "frame": 382,
+                    "track_id": 0,
+                    "direction": "in",
+                    "position": 0.2444,
+                    "matched": true
+                  },
+                  {
+                    "frame": 380,
+                    "track_id": 24,
+                    "direction": "in",
+                    "position": 0.4768,
+                    "matched": true
+                  },
+                  {
+                    "frame": 388,
+                    "track_id": 32,
+                    "direction": "out",
+                    "position": 0.7351,
+                    "matched": true
+                  },
+                  {
+                    "frame": 460,
+                    "track_id": 0,
+                    "direction": "out",
+                    "position": 0.2075,
+                    "matched": false,
+                    "fp_cause": "timing off"
+                  },
+                  {
+                    "frame": 514,
+                    "track_id": 0,
+                    "direction": "in",
+                    "position": 0.1696,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 555,
+                    "track_id": 0,
+                    "direction": "out",
+                    "position": 0.1329,
+                    "matched": true
+                  },
+                  {
+                    "frame": 634,
+                    "track_id": 0,
+                    "direction": "in",
+                    "position": 0.2403,
+                    "matched": true
+                  },
+                  {
+                    "frame": 663,
+                    "track_id": 53,
+                    "direction": "out",
+                    "position": 0.714,
+                    "matched": true
+                  },
+                  {
+                    "frame": 742,
+                    "track_id": 53,
+                    "direction": "in",
+                    "position": 0.7456,
+                    "matched": true
+                  },
+                  {
+                    "frame": 783,
+                    "track_id": 0,
+                    "direction": "out",
+                    "position": 0.3647,
+                    "matched": true
+                  },
+                  {
+                    "frame": 1040,
+                    "track_id": 17,
+                    "direction": "in",
+                    "position": 0.3112,
+                    "matched": true
+                  }
+                ]
+              }
+            },
+            "context_metrics": {
+              "HOTA": 0.4485102666689777,
+              "IDF1": 0.5438053278409013,
+              "MOTA": 0.4516474966881847,
+              "IDSW": 37
+            }
+          },
+          "MOT17-09-FRCNN": {
+            "fps": 30.0,
+            "frames": 525,
+            "lines": {
+              "lower": {
+                "line": [
+                  [
+                    0,
+                    648
+                  ],
+                  [
+                    1920,
+                    648
+                  ]
+                ],
+                "gt_events": 20,
+                "pred_events": 13,
+                "tp": 6,
+                "fp": 7,
+                "fn": 14,
+                "precision": 0.46153846153846156,
+                "recall": 0.3,
+                "f1": 0.3636363636363637,
+                "double_count": 1,
+                "double_count_rate": 0.07692307692307693,
+                "count_error_in": -7,
+                "count_error_pct_in": 50.0,
+                "count_error_out": 0,
+                "count_error_pct_out": 0.0,
+                "count_error_total": -7,
+                "count_error_pct_total": 35.0,
+                "gt_event_list": [
+                  {
+                    "frame": 205,
+                    "track_id": 23,
+                    "direction": "in",
+                    "position": 0.8835,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 229,
+                    "track_id": 18,
+                    "direction": "in",
+                    "position": 0.8848,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 366,
+                    "track_id": 8,
+                    "direction": "in",
+                    "position": 0.9673,
+                    "visibility": 0.268,
+                    "matched": false
+                  },
+                  {
+                    "frame": 374,
+                    "track_id": 8,
+                    "direction": "out",
+                    "position": 0.9721,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 376,
+                    "track_id": 8,
+                    "direction": "in",
+                    "position": 0.9747,
+                    "visibility": 0.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 380,
+                    "track_id": 10,
+                    "direction": "in",
+                    "position": 0.9405,
+                    "visibility": 0.347,
+                    "matched": true
+                  },
+                  {
+                    "frame": 395,
+                    "track_id": 7,
+                    "direction": "in",
+                    "position": 0.9347,
+                    "visibility": 0.335,
+                    "matched": true
+                  },
+                  {
+                    "frame": 397,
+                    "track_id": 7,
+                    "direction": "out",
+                    "position": 0.9344,
+                    "visibility": 0.333,
+                    "matched": false
+                  },
+                  {
+                    "frame": 406,
+                    "track_id": 1,
+                    "direction": "in",
+                    "position": 0.9181,
+                    "visibility": 0.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 422,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.6565,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 433,
+                    "track_id": 29,
+                    "direction": "in",
+                    "position": 0.9815,
+                    "visibility": 0.205,
+                    "matched": false
+                  },
+                  {
+                    "frame": 450,
+                    "track_id": 13,
+                    "direction": "in",
+                    "position": 0.9456,
+                    "visibility": 0.234,
+                    "matched": false
+                  },
+                  {
+                    "frame": 453,
+                    "track_id": 11,
+                    "direction": "in",
+                    "position": 0.9197,
+                    "visibility": 0.333,
+                    "matched": false
+                  },
+                  {
+                    "frame": 468,
+                    "track_id": 9,
+                    "direction": "out",
+                    "position": 0.6004,
+                    "visibility": 0.499,
+                    "matched": false
+                  },
+                  {
+                    "frame": 476,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.6195,
+                    "visibility": 0.839,
+                    "matched": false
+                  },
+                  {
+                    "frame": 490,
+                    "track_id": 9,
+                    "direction": "out",
+                    "position": 0.6594,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 494,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.6723,
+                    "visibility": 1.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 503,
+                    "track_id": 9,
+                    "direction": "out",
+                    "position": 0.6974,
+                    "visibility": 0.871,
+                    "matched": false
+                  },
+                  {
+                    "frame": 509,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.7135,
+                    "visibility": 0.357,
+                    "matched": false
+                  },
+                  {
+                    "frame": 512,
+                    "track_id": 9,
+                    "direction": "out",
+                    "position": 0.7237,
+                    "visibility": 0.125,
+                    "matched": false
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 15,
+                    "track_id": 6,
+                    "direction": "out",
+                    "position": 0.9854,
+                    "matched": false,
+                    "fp_cause": "no ground-truth person under the track"
+                  },
+                  {
+                    "frame": 66,
+                    "track_id": 11,
+                    "direction": "out",
+                    "position": 0.1415,
+                    "matched": false,
+                    "fp_cause": "person without a ground-truth crossing here"
+                  },
+                  {
+                    "frame": 201,
+                    "track_id": 7,
+                    "direction": "out",
+                    "position": 0.4802,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 215,
+                    "track_id": 4,
+                    "direction": "in",
+                    "position": 0.8889,
+                    "matched": true
+                  },
+                  {
+                    "frame": 340,
+                    "track_id": 15,
+                    "direction": "out",
+                    "position": 0.8828,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 368,
+                    "track_id": 48,
+                    "direction": "in",
+                    "position": 0.8556,
+                    "matched": false,
+                    "fp_cause": "double count"
+                  },
+                  {
+                    "frame": 376,
+                    "track_id": 32,
+                    "direction": "in",
+                    "position": 0.9405,
+                    "matched": true
+                  },
+                  {
+                    "frame": 389,
+                    "track_id": 0,
+                    "direction": "in",
+                    "position": 0.9863,
+                    "matched": true
+                  },
+                  {
+                    "frame": 389,
+                    "track_id": 47,
+                    "direction": "in",
+                    "position": 0.9252,
+                    "matched": true
+                  },
+                  {
+                    "frame": 407,
+                    "track_id": 51,
+                    "direction": "in",
+                    "position": 0.6398,
+                    "matched": true
+                  },
+                  {
+                    "frame": 419,
+                    "track_id": 50,
+                    "direction": "in",
+                    "position": 0.8535,
+                    "matched": true
+                  },
+                  {
+                    "frame": 436,
+                    "track_id": 47,
+                    "direction": "out",
+                    "position": 0.9858,
+                    "matched": false,
+                    "fp_cause": "wrong direction"
+                  },
+                  {
+                    "frame": 449,
+                    "track_id": 48,
+                    "direction": "out",
+                    "position": 0.9845,
+                    "matched": false,
+                    "fp_cause": "position off"
+                  }
+                ]
+              },
+              "vert": {
+                "line": [
+                  [
+                    1440,
+                    0
+                  ],
+                  [
+                    1440,
+                    1080
+                  ]
+                ],
+                "gt_events": 20,
+                "pred_events": 15,
+                "tp": 15,
+                "fp": 0,
+                "fn": 5,
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1": 0.8571428571428571,
+                "double_count": 0,
+                "double_count_rate": 0.0,
+                "count_error_in": -5,
+                "count_error_pct_in": 31.25,
+                "count_error_out": 0,
+                "count_error_pct_out": 0.0,
+                "count_error_total": -5,
+                "count_error_pct_total": 25.0,
+                "gt_event_list": [
+                  {
+                    "frame": 107,
+                    "track_id": 19,
+                    "direction": "out",
+                    "position": 0.8363,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 140,
+                    "track_id": 23,
+                    "direction": "in",
+                    "position": 0.6522,
+                    "visibility": 0.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 143,
+                    "track_id": 20,
+                    "direction": "out",
+                    "position": 0.943,
+                    "visibility": 0.979,
+                    "matched": true
+                  },
+                  {
+                    "frame": 180,
+                    "track_id": 18,
+                    "direction": "in",
+                    "position": 0.6074,
+                    "visibility": 0.175,
+                    "matched": false
+                  },
+                  {
+                    "frame": 182,
+                    "track_id": 22,
+                    "direction": "in",
+                    "position": 0.6315,
+                    "visibility": 0.883,
+                    "matched": true
+                  },
+                  {
+                    "frame": 206,
+                    "track_id": 21,
+                    "direction": "in",
+                    "position": 0.6435,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 262,
+                    "track_id": 8,
+                    "direction": "in",
+                    "position": 0.6776,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 280,
+                    "track_id": 10,
+                    "direction": "in",
+                    "position": 0.6413,
+                    "visibility": 0.071,
+                    "matched": true
+                  },
+                  {
+                    "frame": 297,
+                    "track_id": 29,
+                    "direction": "in",
+                    "position": 0.6938,
+                    "visibility": 0.118,
+                    "matched": false
+                  },
+                  {
+                    "frame": 300,
+                    "track_id": 12,
+                    "direction": "in",
+                    "position": 0.7325,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 304,
+                    "track_id": 7,
+                    "direction": "in",
+                    "position": 0.6551,
+                    "visibility": 0.0,
+                    "matched": false
+                  },
+                  {
+                    "frame": 320,
+                    "track_id": 1,
+                    "direction": "in",
+                    "position": 0.6412,
+                    "visibility": 0.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 352,
+                    "track_id": 11,
+                    "direction": "in",
+                    "position": 0.6486,
+                    "visibility": 0.054,
+                    "matched": true
+                  },
+                  {
+                    "frame": 356,
+                    "track_id": 13,
+                    "direction": "in",
+                    "position": 0.6577,
+                    "visibility": 0.792,
+                    "matched": true
+                  },
+                  {
+                    "frame": 453,
+                    "track_id": 3,
+                    "direction": "in",
+                    "position": 0.5976,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 480,
+                    "track_id": 6,
+                    "direction": "in",
+                    "position": 0.6581,
+                    "visibility": 1.0,
+                    "matched": true
+                  },
+                  {
+                    "frame": 486,
+                    "track_id": 17,
+                    "direction": "in",
+                    "position": 0.5971,
+                    "visibility": 0.13,
+                    "matched": false
+                  },
+                  {
+                    "frame": 504,
+                    "track_id": 14,
+                    "direction": "out",
+                    "position": 0.6217,
+                    "visibility": 0.867,
+                    "matched": true
+                  },
+                  {
+                    "frame": 514,
+                    "track_id": 15,
+                    "direction": "out",
+                    "position": 0.6148,
+                    "visibility": 0.745,
+                    "matched": true
+                  },
+                  {
+                    "frame": 520,
+                    "track_id": 9,
+                    "direction": "in",
+                    "position": 0.6079,
+                    "visibility": 0.459,
+                    "matched": false
+                  }
+                ],
+                "pred_event_list": [
+                  {
+                    "frame": 107,
+                    "track_id": 1,
+                    "direction": "out",
+                    "position": 0.8248,
+                    "matched": true
+                  },
+                  {
+                    "frame": 143,
+                    "track_id": 6,
+                    "direction": "out",
+                    "position": 0.9323,
+                    "matched": true
+                  },
+                  {
+                    "frame": 151,
+                    "track_id": 4,
+                    "direction": "in",
+                    "position": 0.6339,
+                    "matched": true
+                  },
+                  {
+                    "frame": 184,
+                    "track_id": 20,
+                    "direction": "in",
+                    "position": 0.6291,
+                    "matched": true
+                  },
+                  {
+                    "frame": 205,
+                    "track_id": 16,
+                    "direction": "in",
+                    "position": 0.6407,
+                    "matched": true
+                  },
+                  {
+                    "frame": 260,
+                    "track_id": 0,
+                    "direction": "in",
+                    "position": 0.6637,
+                    "matched": true
+                  },
+                  {
+                    "frame": 282,
+                    "track_id": 7,
+                    "direction": "in",
+                    "position": 0.6433,
+                    "matched": true
+                  },
+                  {
+                    "frame": 300,
+                    "track_id": 35,
+                    "direction": "in",
+                    "position": 0.7239,
+                    "matched": true
+                  },
+                  {
+                    "frame": 321,
+                    "track_id": 46,
+                    "direction": "in",
+                    "position": 0.6385,
+                    "matched": true
+                  },
+                  {
+                    "frame": 357,
+                    "track_id": 37,
+                    "direction": "in",
+                    "position": 0.6588,
+                    "matched": true
+                  },
+                  {
+                    "frame": 366,
+                    "track_id": 50,
+                    "direction": "in",
+                    "position": 0.6001,
+                    "matched": true
+                  },
+                  {
+                    "frame": 453,
+                    "track_id": 51,
+                    "direction": "in",
+                    "position": 0.5996,
+                    "matched": true
+                  },
+                  {
+                    "frame": 481,
+                    "track_id": 54,
+                    "direction": "in",
+                    "position": 0.6557,
+                    "matched": true
+                  },
+                  {
+                    "frame": 504,
+                    "track_id": 66,
+                    "direction": "out",
+                    "position": 0.6173,
+                    "matched": true
+                  },
+                  {
+                    "frame": 515,
+                    "track_id": 68,
+                    "direction": "out",
+                    "position": 0.6121,
+                    "matched": true
+                  }
+                ]
+              }
+            },
+            "context_metrics": {
+              "HOTA": 0.4511487214337077,
+              "IDF1": 0.5336355207582157,
+              "MOTA": 0.5757746478873239,
+              "IDSW": 52
+            }
+          }
+        }
+      },
+      "vs_baseline": {
+        "baseline": "public FRCNN",
+        "recall_difference": {
+          "difference": 0.00684931506849315,
+          "ci": [
+            -0.08800588235294117,
+            0.10276863547411476
+          ],
+          "events": 146
+        },
+        "precision": 0.6857142857142857,
+        "recall_gain_excludes_zero": false,
+        "precision_at_least_0.80": false
+      }
+    }
+  }
+}
