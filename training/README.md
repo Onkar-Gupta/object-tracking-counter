@@ -40,3 +40,14 @@ first. Only if the official `yolox_s.pth` fails to load for that reason, set
 
 The exported model has one class, so its output is 6 columns (box, objectness, person). The
 adapter in `track_counter/detectors.py` already reads that layout.
+
+## Notes from the reference run (PyTorch 2.11, YOLOX 0.3.0 source)
+
+- The trainer runs a validation pass after every epoch once mosaic augmentation stops (the last 3
+  epochs), whatever `eval_interval` says. Its fast COCO scorer needs `ninja` and a C++ compiler.
+  We changed `yolox/evaluators/coco_evaluator.py` to import `pycocotools.cocoeval.COCOeval`
+  directly instead. If training stops at the end of epoch 17, resume with `--resume -c <latest_ckpt.pth>`.
+- `tools/export_onnx.py` calls `torch.onnx._export`, which new PyTorch removed. We changed it to
+  `torch.onnx.export(..., dynamo=False)`.
+- Loading our own final checkpoint needed `TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1` for the export only,
+  because it stores a NumPy number. Use it only on a checkpoint you trained yourself.
