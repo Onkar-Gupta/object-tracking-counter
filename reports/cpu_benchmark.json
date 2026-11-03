@@ -1,0 +1,97 @@
+{
+  "video": "DiagonalCrosswalkYongeDundas.webm",
+  "provider": "CPUExecutionProvider",
+  "onnxruntime": "1.24.4",
+  "machine": "Intel64 Family 6 Model 170 Stepping 4, GenuineIntel",
+  "logical_cpus": 22,
+  "os": "Windows-10-10.0.26200-SP0",
+  "results": [
+    {
+      "model": "yolox_s.onnx",
+      "timed_frames": 150,
+      "frame_size": [
+        1920,
+        1080
+      ],
+      "fps": 19.148577646210978,
+      "chain": {
+        "median_ms": 52.22319999302272,
+        "p90_ms": 54.04846999444999
+      },
+      "decode": {
+        "median_ms": 4.312100005336106,
+        "p90_ms": 5.540520010981709
+      },
+      "detect": {
+        "median_ms": 51.39050001162104,
+        "p90_ms": 53.04557000345085
+      },
+      "track": {
+        "median_ms": 0.6646500114584342,
+        "p90_ms": 1.0178800002904607
+      },
+      "count": {
+        "median_ms": 0.035250006476417184,
+        "p90_ms": 0.05751000135205686
+      }
+    },
+    {
+      "model": "yolox_m.onnx",
+      "timed_frames": 150,
+      "frame_size": [
+        1920,
+        1080
+      ],
+      "fps": 8.575182051387468,
+      "chain": {
+        "median_ms": 116.6155999962939,
+        "p90_ms": 120.25222000665963
+      },
+      "decode": {
+        "median_ms": 4.262799993739463,
+        "p90_ms": 4.917699983343482
+      },
+      "detect": {
+        "median_ms": 115.9538999927463,
+        "p90_ms": 119.46046998200472
+      },
+      "track": {
+        "median_ms": 0.6904500041855499,
+        "p90_ms": 1.0119399899849668
+      },
+      "count": {
+        "median_ms": 0.03429999924264848,
+        "p90_ms": 0.05717999883927404
+      }
+    },
+    {
+      "model": "yolox_l.onnx",
+      "timed_frames": 150,
+      "frame_size": [
+        1920,
+        1080
+      ],
+      "fps": 4.410363118653322,
+      "chain": {
+        "median_ms": 226.73869998834562,
+        "p90_ms": 229.577109994716
+      },
+      "decode": {
+        "median_ms": 4.001299996161833,
+        "p90_ms": 4.508479984360747
+      },
+      "detect": {
+        "median_ms": 225.9242999862181,
+        "p90_ms": 228.9063300122507
+      },
+      "track": {
+        "median_ms": 0.6327500013867393,
+        "p90_ms": 0.9615000046323984
+      },
+      "count": {
+        "median_ms": 0.032100011594593525,
+        "p90_ms": 0.05089000624138861
+      }
+    }
+  ]
+}

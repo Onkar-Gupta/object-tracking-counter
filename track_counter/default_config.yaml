@@ -1,7 +1,7 @@
 source: data/sample.mp4            # file, webcam index (0) or rtsp:// URL
 detector:
   name: onnx                       # onnx | mot_file | ultralytics
-  model: TBC                       # chosen by the CPU benchmark
+  model: models/yolox_s.onnx      # YOLOX-s: the only one near real time on CPU (reports/cpu_benchmark.json)
   models_dir: models
   confidence: 0.4
   classes: [person]
