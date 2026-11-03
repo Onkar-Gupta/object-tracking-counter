@@ -88,8 +88,8 @@ def test_save_video_writes_every_frame(tmp_path, monkeypatch):
 
     monkeypatch.setattr(cli, "OnnxYoloxDetector", Walker)
     cli.main(["run", "--video", str(tmp_path / "v.avi"), "--model", "x.onnx", "--line", "0,120,320,120",
-              "--start", "5", "--save-video", str(tmp_path / "o.mp4"), "--out", str(tmp_path / "out")])
-    _, _, total = cli.open_video(tmp_path / "o.mp4")
+              "--start", "5", "--save-video", str(tmp_path / "new_dir" / "o.mp4"), "--out", str(tmp_path / "out")])
+    _, _, total = cli.open_video(tmp_path / "new_dir" / "o.mp4")
     assert total == 25  # 30 frames minus the 5 skipped
 
 

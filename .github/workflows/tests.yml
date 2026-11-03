@@ -15,3 +15,12 @@ jobs:
       - run: pip install -r requirements.txt
       - run: ruff check .
       - run: pytest -v
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t track-counter .
+      - run: docker run --rm track-counter --version
+      - run: docker run --rm track-counter run --help
+      - run: docker run --rm --entrypoint python track-counter -c "import cv2, onnxruntime, trackers; print('imports ok')"

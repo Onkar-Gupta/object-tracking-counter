@@ -145,13 +145,23 @@ MOT17 is licensed CC BY-NC-SA 3.0, so it is not in this repository. Download it 
 
 ## Docker
 
-TBC (next step).
+A CPU image. The model and your videos are mounted when you run it, not stored in the image.
+
+```bash
+docker build -t track-counter .
+# run from a folder that holds models/yolox_s.onnx and your video
+docker run --rm -v "$PWD:/data" track-counter run --video my_video.mp4 --line X1,Y1,X2,Y2 --save-video counted.mp4
+```
+
+In PowerShell use `${PWD}` instead of `$PWD`. Output (`runs/latest/` and the annotated video) appears in the mounted folder. `draw-line` needs a window, so run it on your machine, not in Docker.
+
+The image is 1.48 GB (measured), mostly OpenCV and SciPy pulled in by the tracking library. CI builds it and runs a smoke test on every push, and a 60-frame run of the demo clip was checked inside the container on Windows (12.8 frames per second including start-up).
 
 ## Roadmap
 
 - [x] Counter with synthetic-track tests, MOT17 evaluation with intervals, pre-registered ablations
 - [x] Video input, `draw-line`, annotated video, CPU benchmark, demo GIF
-- [ ] Docker image
+- [x] Docker image
 - [ ] Count other classes (cars, buses), the counter already does not care
 - [ ] Try crowd-aware box filtering (Soft-NMS, Set-NMS)
 - [ ] Fine-tune and test on a new, labelled scene, as a true held-out check

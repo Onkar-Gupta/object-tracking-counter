@@ -55,7 +55,10 @@ def render_video(src, out_path, start, line, track_sink, events, fps, limit=0):
     for i, image in video_frames(cap, limit):
         if writer is None:
             h, w = image.shape[:2]
+            Path(out_path).parent.mkdir(parents=True, exist_ok=True)
             writer = cv2.VideoWriter(str(out_path), cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
+            if not writer.isOpened():
+                raise SystemExit(f"Cannot write the video to {out_path}")
         t = max(2, round(image.shape[0] / 540))  # drawing sizes scale with the frame size
         for x1, y1, x2, y2, tid, *_ in track_sink.get(i, np.zeros((0, 7))):
             cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 200, 0), 2 * t)
