@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>track-counter</title>
+<meta name="description" content="Count people crossing a line in a video, with accuracy measured against ground truth.">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1b1f24;--mut:#59636e;--line:#e1e5ea;--acc:#0b6bcb;--ok:#127a3d;--warn:#9a5b00;--code:#eef1f4}
+@media (prefers-color-scheme:dark){:root{--bg:#12161b;--card:#1b2128;--ink:#e8ecf0;--mut:#9aa6b2;--line:#2c353f;--acc:#6db1ff;--ok:#4cc27f;--warn:#f0b35a;--code:#252d36}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,"Segoe UI",Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:32px 16px 56px}
+h1{font-size:2rem;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-size:1.2rem;margin:36px 0 12px}
+p{margin:0 0 12px}.lead{font-size:1.1rem;color:var(--mut);max-width:720px}
+a{color:var(--acc)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px}
+.btn{display:inline-block;padding:9px 16px;border-radius:8px;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-weight:600}
+.btn.primary{background:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){.btn.primary{color:#0b1220}}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:820px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.card img{width:100%;height:auto;border-radius:8px;display:block;border:1px solid var(--line)}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 10px;margin-bottom:8px}
+.tag.ok{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.tag.warn{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.cap{color:var(--mut);font-size:.9rem;margin:8px 0 0}
+.stat b{display:block;font-size:2rem;line-height:1.1}.stat span{color:var(--mut);font-size:.9rem}
+table{width:100%;border-collapse:collapse;font-size:.95rem;display:block;overflow-x:auto}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{color:var(--mut);font-weight:600}tr.base td{font-weight:700}
+pre{background:var(--code);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:.85rem;margin:8px 0}
+code{font-family:ui-monospace,Consolas,monospace}
+ul{margin:0 0 12px;padding-left:20px}li{margin:4px 0}
+footer{margin-top:40px;color:var(--mut);font-size:.9rem;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body><main>
+<h1>track-counter</h1>
+<p class="lead">Count people crossing a line in a video, and see how accurate the count really is. Every accuracy number comes from MOT17 ground truth, with the pass marks written down before each run.</p>
+<div class="btns">
+  <a class="btn primary" href="https://github.com/Onkar-Gupta/object-tracking-counter">Code and README</a>
+  <a class="btn" href="https://github.com/Onkar-Gupta/object-tracking-counter/releases/tag/v1.1.0">Release v1.1.0</a>
+</div>
+
+<h2>What it does</h2>
+<div class="grid two">
+  <div class="card">
+    <span class="tag ok">Clean scene</span>
+    <img src="assets/gradio_demo.png" alt="The browser demo: a frame with the counting line, the annotated result and the counts" loading="lazy">
+    <p class="cap">Two students who never overlap: counted in 2, out 0. You click two points to draw the line, and the tool gives the annotated video, the counts and an events file.</p>
+  </div>
+  <div class="card">
+    <span class="tag warn">Crowded scene</span>
+    <img src="assets/demo.gif" alt="A busy crosswalk with boxes, track IDs, a counting line and a running count" loading="lazy">
+    <p class="cap">The hard case. Boxes overlap in about 64% of the frames and many people in the crowd get no box. This count is not checked against ground truth.</p>
+  </div>
+</div>
+
+<h2>How well does it count?</h2>
+<p>Measured on MOT17 sequences 02, 04 and 09 (static cameras), 146 true crossings, feet anchor, with settings tuned on 02 and 04 only.</p>
+<div class="card">
+<table>
+<tr><th>Detector</th><th>Precision</th><th>Recall</th><th>F1</th></tr>
+<tr class="base"><td>Public FRCNN detections (baseline)</td><td>0.907</td><td>0.466</td><td>0.615</td></tr>
+<tr><td>YOLOX-s single pass (the default, 19 fps on CPU)</td><td>0.655</td><td>0.493</td><td>0.562</td></tr>
+<tr><td>YOLOX-s fine-tuned on other MOT17 scenes (weights not published)</td><td>0.752</td><td>0.582</td><td>0.656</td></tr>
+</table>
+<p class="cap">The pass mark, fixed in advance: a clear recall gain over the baseline and precision of at least 0.80. No detector passes at either anchor, and the README says so.</p>
+</div>
+
+<h2>Who gets missed</h2>
+<div class="grid three">
+  <div class="card stat"><b>82%</b><span>of crossings by clearly visible people (70% or more) are counted: 58 of 71</span></div>
+  <div class="card stat"><b>9%</b><span>of crossings by people under half visible are counted: 6 of 67</span></div>
+  <div class="card stat"><b>19 fps</b><span>on a laptop CPU at 1080p (2.1 fps with the slower tiled mode)</span></div>
+</div>
+<p class="cap" style="margin-top:12px">The counter works when people are visible and separate. Counting is mostly a detection problem, and part of the gap is that MOT17 labels whole bodies even when most of a person is hidden.</p>
+
+<h2>Small check on unseen scenes</h2>
+<p>On four stock clips with the shipped defaults: on the crowded crosswalk, 33 of 41 predicted crossings looked correct and 8 were doubtful; on the clean scene, both students were counted and nothing else. The reviewer is the author, the samples are tiny, and this is a sanity check, not a benchmark.</p>
+
+<h2>Try it yourself</h2>
+<pre><code>git clone https://github.com/Onkar-Gupta/object-tracking-counter &amp;&amp; cd object-tracking-counter
+pip install -e ".[onnx]"
+curl -L --create-dirs -o models/yolox_s.onnx https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.onnx
+track-counter draw-line --video my_video.mp4
+track-counter run --video my_video.mp4 --line X1,Y1,X2,Y2 --save-video counted.mp4</code></pre>
+<p>For the browser demo shown above: <code>pip install gradio==6.31.0</code> then <code>python demo/app.py</code>. A Docker image is in the repository too.</p>
+
+<footer>
+<p>MIT licence. Built by <a href="https://linkedin.com/in/onkar-gupta-ai">Onkar Gupta</a>.</p>
+<p>Footage credits: the crowded scene is "Busy street in the city" from <a href="https://mixkit.co/free-stock-video/busy-street-in-the-city-4000/">Mixkit</a> (Mixkit Stock Video Free License). The clean scene is "Students Walking in the Campus" by George Pak on <a href="https://www.pexels.com/video/students-walking-in-the-campus-7969488/">Pexels</a> (Pexels License). Only annotated results are shown here, never the original clips. MOT17 is licensed CC BY-NC-SA 3.0 and is not redistributed.</p>
+</footer>
+</main></body></html>

@@ -1,7 +1,8 @@
 """Build the Hugging Face Space folder for the Gradio demo, and upload it.
 
   python scripts/deploy_space.py --dry-run            # only build runs/space_staging and list it
-  python scripts/deploy_space.py                      # build, then create or update the Space
+  python scripts/deploy_space.py                      # build, then create or update a free static Space
+  python scripts/deploy_space.py --kind gradio        # the live demo (Hugging Face wants PRO for this)
 
 Needs `hf auth login` once (a token that can write to Spaces) and huggingface_hub (installed with Gradio).
 The Space gets the demo app, its requirements, the two example images and a card. It never gets raw
@@ -40,17 +41,37 @@ screenshots come from stock footage credited in the repository (docs/demo_credit
 """
 
 
-def build(out: Path):
+STATIC_CARD = """---
+title: track-counter
+emoji: 🚶
+colorFrom: blue
+colorTo: green
+sdk: static
+pinned: false
+license: mit
+short_description: Count people crossing a line, with measured accuracy
+---
+
+Static page for track-counter: results, screenshots and how to run it. The code and the full README are at
+https://github.com/Onkar-Gupta/object-tracking-counter
+"""
+
+
+def build(out: Path, kind: str = "static"):
     if out.exists():
         shutil.rmtree(out)
     (out / "assets").mkdir(parents=True)
-    shutil.copy(ROOT / "demo" / "app.py", out / "app.py")
-    shutil.copy(ROOT / "demo" / "requirements.txt", out / "requirements.txt")
-    shutil.copy(ROOT / "demo" / "packages.txt", out / "packages.txt")
     shutil.copy(ROOT / "LICENSE", out / "LICENSE")
     for name in ("gradio_demo.png", "demo.gif"):
         shutil.copy(ROOT / "docs" / name, out / "assets" / name)
-    (out / "README.md").write_text(CARD, encoding="utf-8")
+    if kind == "static":  # free on Hugging Face: a page with saved results, no live model
+        shutil.copy(ROOT / "demo" / "static" / "index.html", out / "index.html")
+        (out / "README.md").write_text(STATIC_CARD, encoding="utf-8")
+    else:  # a live Gradio app: Hugging Face asks for a PRO subscription to run it on the free CPU tier
+        shutil.copy(ROOT / "demo" / "app.py", out / "app.py")
+        shutil.copy(ROOT / "demo" / "requirements.txt", out / "requirements.txt")
+        shutil.copy(ROOT / "demo" / "packages.txt", out / "packages.txt")
+        (out / "README.md").write_text(CARD, encoding="utf-8")
     return sorted(str(p.relative_to(out)) for p in out.rglob("*") if p.is_file())
 
 
@@ -58,9 +79,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--repo-id", default="Onkar-Gupta-HF/track-counter")
     ap.add_argument("--staging", default=str(ROOT / "runs" / "space_staging"))
+    ap.add_argument("--kind", choices=["static", "gradio"], default="static")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
-    files = build(Path(args.staging))
+    files = build(Path(args.staging), args.kind)
     print("Space folder:", args.staging)
     for f in files:
         print("  ", f, f"({(Path(args.staging) / f).stat().st_size // 1024} KB)")
@@ -69,7 +91,7 @@ def main():
     from huggingface_hub import HfApi
 
     api = HfApi()
-    api.create_repo(args.repo_id, repo_type="space", space_sdk="gradio", exist_ok=True)
+    api.create_repo(args.repo_id, repo_type="space", space_sdk=args.kind, exist_ok=True)
     api.upload_folder(repo_id=args.repo_id, repo_type="space", folder_path=args.staging,
                       commit_message="Deploy track-counter demo")
     print(f"Uploaded. Build log and app: https://huggingface.co/spaces/{args.repo_id}")

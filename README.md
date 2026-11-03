@@ -6,6 +6,8 @@
 
 Count people crossing a line in a video, and see how accurate the count really is. Every accuracy number below is measured against ground truth, with the pass marks written down before each run.
 
+**Results page:** https://huggingface.co/spaces/Onkar-Gupta-HF/track-counter (a free static page with the screenshots, the key numbers and how to run it).
+
 ## Quick Start
 
 ```bash
@@ -29,7 +31,7 @@ python demo/app.py        # then open http://127.0.0.1:7860
 
 ![The Gradio demo: a frame with the counting line, the annotated result and the counts](docs/gradio_demo.png)
 
-Upload a short clip (first 10 seconds, up to 50 MB), click two points to draw the line, press Count. You get the annotated video, the in and out counts and `events.csv`. It runs on the CPU: 300 frames took 24 s on the test laptop. This screenshot is the easy case, two students who never overlap, counted in 2, out 0. It works best when people are separate. When they overlap, the detector misses more of them, as in the crowded GIF above (many people in the left crowd have no box). These counts show what the tool does, not how accurate it is. Footage credit: [docs/demo_credit.md](docs/demo_credit.md). More in [demo/README.md](demo/README.md).
+Upload a short clip (first 10 seconds, up to 50 MB), click two points to draw the line, press Count. You get the annotated video, the in and out counts and `events.csv`. It runs on the CPU: 300 frames took 24 s on the test laptop. This screenshot is the easy case, two students who never overlap, counted in 2, out 0. It works best when people are separate. When they overlap, the detector misses more of them, as in the crowded GIF above (many people in the left crowd have no box). These counts show what the tool does, not how accurate it is. Footage credit: [docs/demo_credit.md](docs/demo_credit.md). More in [demo/README.md](demo/README.md). A live hosted version is not available: Hugging Face now asks for a paid PRO subscription to run Gradio Spaces on its free CPU tier, so the Space above is a static page with saved results, and the live demo runs locally.
 
 ## What it does
 
@@ -189,7 +191,8 @@ The image is 1.48 GB (measured), mostly OpenCV and SciPy pulled in by the tracki
 - [x] Video input, `draw-line`, annotated video, CPU benchmark, demo GIF
 - [x] Docker image
 - [x] Browser demo (Gradio), runs locally
-- [ ] Host the browser demo on a Hugging Face Space
+- [x] Static results page on a Hugging Face Space (free)
+- [ ] A live hosted demo (needs paid hosting or another free host)
 - [ ] Count other classes (cars, buses), the counter already does not care
 - [ ] Try crowd-aware box filtering (Soft-NMS, Set-NMS)
 - [ ] Test on a new scene labelled by someone else, as a true held-out check (the small hand check above is not one)
