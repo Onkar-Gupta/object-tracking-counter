@@ -52,16 +52,19 @@ def render_video(src, out_path, start, line, track_sink, events, fps, limit=0):
         if writer is None:
             h, w = image.shape[:2]
             writer = cv2.VideoWriter(str(out_path), cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
-        t = max(2, round(image.shape[0] / 540))  # line and text scale with the frame size
+        t = max(2, round(image.shape[0] / 540))  # drawing sizes scale with the frame size
         for x1, y1, x2, y2, tid, *_ in track_sink.get(i, np.zeros((0, 7))):
-            cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 200, 0), t)
-            cv2.putText(image, str(int(tid)), (int(x1), max(int(y1) - 6, 12)),
-                        cv2.FONT_HERSHEY_SIMPLEX, t * 0.5, (0, 255, 0), t)
-        cv2.line(image, a, b, (0, 255, 255), t + 1)
+            cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 200, 0), 2 * t)
+            cv2.putText(image, str(int(tid)), (int(x1), max(int(y1) - 8, 20 * t)),
+                        cv2.FONT_HERSHEY_SIMPLEX, t * 0.8, (0, 255, 0), t + 1)
+        cv2.line(image, a, b, (0, 255, 255), 3 * t)
         n_in = sum(e.direction == "in" and e.confirmed_frame <= i for e in events)
         n_out = sum(e.direction == "out" and e.confirmed_frame <= i for e in events)
-        cv2.putText(image, f"in {n_in}   out {n_out}", (24, 24 + 20 * t), cv2.FONT_HERSHEY_SIMPLEX,
-                    t * 0.6, (0, 255, 255), t + 1)
+        label = f"in {n_in}   out {n_out}"
+        scale, th = t * 1.4, 2 * t
+        (tw, tx), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, scale, th)
+        cv2.rectangle(image, (0, 0), (tw + 40 * t, tx + 30 * t), (0, 0, 0), -1)
+        cv2.putText(image, label, (20 * t, tx + 15 * t), cv2.FONT_HERSHEY_SIMPLEX, scale, (0, 255, 255), th)
         writer.write(image)
     if writer:
         writer.release()
