@@ -40,6 +40,33 @@ def video_frames(cap, limit=0):
         yield i, image
 
 
+def render_video(src, out_path, start, line, track_sink, events, fps, limit=0):
+    """Second pass over the source: draw tracks, the line and the running count, write a video."""
+    import cv2
+    import numpy as np
+
+    cap, _, _ = open_video(src, start)
+    writer = None
+    a, b = (tuple(int(v) for v in p) for p in line)
+    for i, image in video_frames(cap, limit):
+        if writer is None:
+            h, w = image.shape[:2]
+            writer = cv2.VideoWriter(str(out_path), cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
+        t = max(2, round(image.shape[0] / 540))  # line and text scale with the frame size
+        for x1, y1, x2, y2, tid, *_ in track_sink.get(i, np.zeros((0, 7))):
+            cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 200, 0), t)
+            cv2.putText(image, str(int(tid)), (int(x1), max(int(y1) - 6, 12)),
+                        cv2.FONT_HERSHEY_SIMPLEX, t * 0.5, (0, 255, 0), t)
+        cv2.line(image, a, b, (0, 255, 255), t + 1)
+        n_in = sum(e.direction == "in" and e.confirmed_frame <= i for e in events)
+        n_out = sum(e.direction == "out" and e.confirmed_frame <= i for e in events)
+        cv2.putText(image, f"in {n_in}   out {n_out}", (24, 24 + 20 * t), cv2.FONT_HERSHEY_SIMPLEX,
+                    t * 0.6, (0, 255, 255), t + 1)
+        writer.write(image)
+    if writer:
+        writer.release()
+
+
 def run(args):
     cfg = yaml.safe_load(Path(args.config or DEFAULT_CONFIG).read_text())
     line = args.line or cfg["counter"]["line"]
@@ -50,15 +77,17 @@ def run(args):
         model = args.model or cfg["detector"]["model"]
         if model == "TBC":
             raise SystemExit("Give --model <yolox .onnx file> or set detector.model in the config")
-        cap, video_fps, total = open_video(args.video)
+        cap, video_fps, total = open_video(args.video, args.start)
         fps = args.fps or video_fps
         if not fps:
             raise SystemExit("The video has no frame rate; pass --fps")
         detect = OnnxYoloxDetector(model, score_floor=min_conf, device=args.device)
         limit = args.frames or 0
         from tqdm import tqdm
-        frames = tqdm(video_frames(cap, limit), total=limit or total or None, unit="frame")
+        frames = tqdm(video_frames(cap, limit), total=limit or max(total - args.start, 0) or None, unit="frame")
     else:
+        if args.save_video or args.start:
+            raise SystemExit("--save-video and --start only work with --video")
         if not args.fps:
             raise SystemExit("--fps is required with --detections")
         fps = args.fps
@@ -67,8 +96,11 @@ def run(args):
         frames = ((i, None) for i in range(1, n + 1))  # MOT frames are 1-based
     counter_params = {k: v for k, v in cfg["counter"].items() if k != "line"}
     tracker_params = cfg["tracker"].get("params") or {}
+    sink = {} if args.save_video else None
     events, n_frames = run_pipeline(frames, detect, {"line": line}, fps,
-                                    tracker_params, counter_params)
+                                    tracker_params, counter_params, track_sink=sink)
+    if args.save_video:
+        render_video(args.video, args.save_video, args.start, line, sink, events["line"], fps, limit)
     out_dir = args.out or cfg["output"]["dir"]
     summary = write_outputs(out_dir, events, n_frames, fps, {"line": line},
                             {"min_conf": min_conf, "counter": counter_params,
@@ -161,6 +193,8 @@ def main(argv=None):
     p.add_argument("--config", help="default: the packaged default_config.yaml")
     p.add_argument("--min-conf", type=float, help="score floor (default: detector.confidence)")
     p.add_argument("--frames", type=int, help="stop after this many frames (default: all)")
+    p.add_argument("--start", type=int, default=0, help="with --video: skip this many frames first")
+    p.add_argument("--save-video", help="with --video: also write a video with tracks, line and counts")
     p.add_argument("--out", help="default: output.dir in the config")
     d = sub.add_parser("draw-line", help="click two points on a video frame to get the --line value")
     d.add_argument("--video", required=True)

@@ -69,3 +69,25 @@ def test_run_needs_exactly_one_source():
 
     with pytest.raises(SystemExit):
         main(["run", "--fps", "30"])
+
+
+def test_save_video_writes_every_frame(tmp_path, monkeypatch):
+    import numpy as np
+
+    from track_counter import cli
+
+    _make_video(tmp_path / "v.avi", n=30)
+
+    class Walker:
+        def __init__(self, *a, **k):
+            pass
+
+        def __call__(self, idx, image):
+            y = 220 - 5 * idx
+            return np.array([[150.0, y - 60, 170.0, y, 0.9]])
+
+    monkeypatch.setattr(cli, "OnnxYoloxDetector", Walker)
+    cli.main(["run", "--video", str(tmp_path / "v.avi"), "--model", "x.onnx", "--line", "0,120,320,120",
+              "--start", "5", "--save-video", str(tmp_path / "o.mp4"), "--out", str(tmp_path / "out")])
+    _, _, total = cli.open_video(tmp_path / "o.mp4")
+    assert total == 25  # 30 frames minus the 5 skipped
