@@ -5,7 +5,11 @@ from pathlib import Path
 import yaml
 
 from track_counter import __version__
-from track_counter.detectors import MotFileDetector, OnnxYoloxDetector
+from track_counter.detectors import (
+    MotFileDetector,
+    OnnxYoloxDetector,
+    TiledOnnxYoloxDetector,
+)
 from track_counter.evaluate import evaluate_sequences
 from track_counter.pipeline import run_pipeline, write_outputs
 
@@ -84,7 +88,8 @@ def run(args):
         fps = args.fps or video_fps
         if not fps:
             raise SystemExit("The video has no frame rate; pass --fps")
-        detect = OnnxYoloxDetector(model, score_floor=min_conf, device=args.device)
+        detector_class = TiledOnnxYoloxDetector if args.tiled else OnnxYoloxDetector
+        detect = detector_class(model, score_floor=min_conf, device=args.device)
         limit = args.frames or 0
         from tqdm import tqdm
         frames = tqdm(video_frames(cap, limit), total=limit or max(total - args.start, 0) or None, unit="frame")
@@ -189,6 +194,9 @@ def main(argv=None):
     p = sub.add_parser("run", help="track and count from a video, or from a MOT-format detections file")
     p.add_argument("--video", help="video file or webcam index")
     p.add_argument("--model", help="YOLOX .onnx file for --video (default: detector.model in the config)")
+    p.add_argument("--tiled", action="store_true",
+                   help="with --video: detect on overlapping 640 px tiles plus a whole-frame pass "
+                        "(finds small people, about 9 times slower)")
     p.add_argument("--device", choices=["cpu", "gpu"], default="cpu", help="gpu needs onnxruntime-directml")
     p.add_argument("--detections", help="MOT det.txt (instead of --video)")
     p.add_argument("--fps", type=float, help="required with --detections; default: the video's own rate")
